@@ -1,13 +1,8 @@
-import './App.css'
-import { Sidebar } from './components/sidebar/Sidebar'
-import { Button } from './components/ui/Button'
+import "./styles/App.css";
+import { AppRouter } from "@/app/router/appRouter.tsx";
 
 function App() {
-  return (
-    <>
-      <Sidebar />
-    </>
-  )
+  return <AppRouter />;
 }
 
-export default App
+export default App;
