@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Compass, Feather, Heart, Home, Plus } from "lucide-react";
+import { Compass, Heart, Home, Plus } from "lucide-react";
 import { UserAvatar } from "@/entities/user";
 
 interface ILink {

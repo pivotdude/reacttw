@@ -1,4 +1,4 @@
-import { UserCard } from "@/entities/user";
+import { UserCardWithButton } from "@/entities/user";
 import { StartDialogButton } from "@/features/startDialog";
 
 interface IFriend {
@@ -21,7 +21,7 @@ export function FriendsList() {
       <p className="text-xl font-bold">Friends</p>
       <div className="mt-4">
         {friends.map((friend) => (
-          <UserCard {...friend} button={<StartDialogButton />} />
+          <UserCardWithButton {...friend} button={<StartDialogButton />} />
         ))}
       </div>
     </>
