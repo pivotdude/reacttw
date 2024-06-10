@@ -1,10 +1,25 @@
 {
-  "name": "my-project",
+  "name": "web3",
   "version": "1.0.0",
-  "workspaces": ["apps/*"],
+  "description": "",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build:server": "pnpm --filter server build",
+    "build:web": "pnpm --filter web build",
+    "build": "pnpm run --parallel build",
+    "start": "pnpm run --parallel start",
+    "start:server": "pnpm --filter server start:prod",
+    "start:web": "pnpm --filter web start",
+    "deploy": "pnpm run --filter server deploy",
+    "format": "prettier apps",
+    "format:fix": "prettier --write apps",
+    "lint": "lerna run lint --stream"
+  },
+  "keywords": [],
   "private": true,
-  "license": "MIT",
-  "dependencies": {
-    "client": "workspace:apps/client"
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^7.4.2"
   }
 }
