@@ -4,9 +4,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
 import { GraphqlModule } from '../imports/grpahql.module';
+import { ConfigModule } from '../imports/config.module';
 
 @Module({
-  imports: [TypeOrmModule, GraphqlModule, UserModule],
+  imports: [TypeOrmModule, GraphqlModule, ConfigModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
