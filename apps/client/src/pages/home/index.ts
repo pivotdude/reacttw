@@ -1,1 +1,2 @@
-export {HomePage} from "./ui/home.tsx"
+export { HomePage } from './ui/HomePage';
+export { HomePageLazy } from './ui/HomePageLazy';

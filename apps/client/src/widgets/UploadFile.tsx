@@ -8,6 +8,7 @@ const props: UploadProps = {
   headers: {
     authorization: 'authorization-text',
   },
+  // @ts-ignore
   onChange(info) {
     if (info.file.status !== 'uploading') {
       console.log(info.file, info.fileList);

@@ -1,22 +1,30 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { HomePage } from '@/pages/home';
-import { ProfilePage } from '@/pages/profile/ui/ProfilePage';
-import UploadFile from '@/widgets/UploadFile';
+import { ProfilePageLazy } from '@/pages/profile';
+import { HomePageLazy } from '@/pages/home';
+import { SignInPageLazy } from '@/pages/signin';
 
 export function AppRouter() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <HomePage />,
+      element: <HomePageLazy />,
     },
     {
       path: '/profile/:name',
-      element: <ProfilePage />,
+      element: <ProfilePageLazy />,
     },
     {
-      path: 'upload',
-      element: <UploadFile />,
+      path: '/signup',
+      element: <SignInPageLazy />,
     },
+    {
+      path: '/signin',
+      element: <SignInPageLazy />,
+    },
+    // {
+    //   path: 'upload',
+    //   element: <UploadFile />,
+    // },
   ]);
 
   return <RouterProvider router={router} />;
