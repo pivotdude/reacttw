@@ -14,11 +14,6 @@ export class MediaController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return this.mediaService.uploadFile(file.buffer, {
-      name: file.originalname,
-      size: file.size,
-      mimetype: file.mimetype,
-      encoding: file.encoding,
-    });
+    return this.mediaService.uploadFile(file);
   }
 }

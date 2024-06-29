@@ -1,5 +1,7 @@
 import { TypeOrmModule as TypeOrm } from '@nestjs/typeorm';
 import { User } from '../user/user.entity';
+import { Media } from '../media/media.entity';
+import { Photo } from '../photo/photo.entity';
 
 export const TypeOrmModule = TypeOrm.forRoot({
   type: 'postgres',
@@ -8,6 +10,6 @@ export const TypeOrmModule = TypeOrm.forRoot({
   username: 'postgres',
   password: 'postgres',
   database: 'test',
-  entities: [User],
+  entities: [User, Media, Photo],
   synchronize: true,
 });

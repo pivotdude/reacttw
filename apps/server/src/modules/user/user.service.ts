@@ -9,11 +9,15 @@ export class UserService {
     return this.userRepository.getAll();
   }
 
-  async findById(id: number): Promise<User|null> {
+  async findById(id: number): Promise<User | null> {
     return this.userRepository.findById(id);
   }
 
-  async create(data: any): Promise<User> {
+  async create(data: any): Promise<any> {
     return this.userRepository.create(data);
+  }
+
+  async delete(id: number): Promise<void> {
+    await this.userRepository.delete(id);
   }
 }

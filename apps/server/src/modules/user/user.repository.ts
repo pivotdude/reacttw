@@ -7,7 +7,7 @@ import { BaseRepository } from '../../core/BaseRepository';
 type IUserRepository = Repository<User>;
 
 @Injectable()
-export class UserRepository extends BaseRepository<IUserRepository> {
+export class UserRepository extends BaseRepository<IUserRepository, User> {
   constructor(@InjectRepository(User) public model: IUserRepository) {
     super(model);
   }

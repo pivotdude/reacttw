@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 
-export abstract class BaseRepository<T extends Repository<any>> {
+export abstract class BaseRepository<T extends Repository<any>, G> {
   public model: T;
 
   constructor(model: T) {
@@ -15,7 +15,7 @@ export abstract class BaseRepository<T extends Repository<any>> {
     return this.model.findOneBy({ id });
   }
 
-  async create(data: any): Promise<any> {
+  async create(data: G): Promise<T> {
     return this.model.save(data);
   }
 
@@ -24,7 +24,7 @@ export abstract class BaseRepository<T extends Repository<any>> {
     return this.findById(id);
   }
 
-  async remove(id: number): Promise<void> {
+  async delete(id: number): Promise<void> {
     await this.model.delete(id);
   }
 }

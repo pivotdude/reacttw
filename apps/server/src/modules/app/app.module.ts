@@ -5,9 +5,16 @@ import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
 import { GraphqlModule } from '../imports/grpahql.module';
 import { ConfigModule } from '../imports/config.module';
+import { MediaModule } from '../media/media.module';
 
 @Module({
-  imports: [TypeOrmModule, GraphqlModule, ConfigModule, UserModule],
+  imports: [
+    TypeOrmModule,
+    GraphqlModule,
+    ConfigModule,
+    MediaModule,
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

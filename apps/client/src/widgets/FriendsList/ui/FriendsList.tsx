@@ -1,25 +1,14 @@
 import { UserCardWithButton } from "@/entities/user";
 import { StartDialogButton } from "@/features/startDialog";
-
-interface IFriend {
-  name: string;
-  description: string;
-  src: string;
-}
+import { useFriendsList } from "../store/useFriendsList";
 
 export function FriendsList() {
-  const friends = [
-    {
-      name: "terylucas",
-      description: "Hello my friend",
-      src: "https://github.com/shadcn.png"
-    }
-  ] as IFriend[];
+  const friends = useFriendsList(state => state.friends)
 
   return (
     <>
       <p className="text-xl font-bold">Friends</p>
-      <div className="mt-4">
+      <div className="mt-4 space-y-4">
         {friends.map((friend) => (
           <UserCardWithButton {...friend} button={<StartDialogButton />} />
         ))}

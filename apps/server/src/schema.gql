@@ -22,6 +22,7 @@ type Query {
 
 type Mutation {
   createUser(input: UserCreateInput!): UserModel!
+  delete(id: Float!): UserModel!
 }
 
 input UserCreateInput {
