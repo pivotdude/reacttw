@@ -2,24 +2,42 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ProfilePageLazy } from '@/pages/profile';
 import { HomePageLazy } from '@/pages/home';
 import { SignInPageLazy } from '@/pages/signin';
+import { SuspenseLoader } from '@/widgets/Loader';
+import { SignUpPageLazy } from '@/pages/signup';
 
 export function AppRouter() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <HomePageLazy />,
+      element: (
+        <SuspenseLoader>
+          <HomePageLazy />
+        </SuspenseLoader>
+      ),
     },
     {
       path: '/profile/:name',
-      element: <ProfilePageLazy />,
+      element: (
+        <SuspenseLoader>
+          <ProfilePageLazy />
+        </SuspenseLoader>
+      ),
     },
     {
       path: '/signup',
-      element: <SignInPageLazy />,
+      element: (
+        <SuspenseLoader>
+          <SignUpPageLazy />
+        </SuspenseLoader>
+      ),
     },
     {
       path: '/signin',
-      element: <SignInPageLazy />,
+      element: (
+        <SuspenseLoader>
+          <SignInPageLazy />
+        </SuspenseLoader>
+      ),
     },
     // {
     //   path: 'upload',

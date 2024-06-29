@@ -1,5 +1,5 @@
-import { CircleUserRound, Compass, Heart, Home, Plus } from "lucide-react";
-import { ReactNode } from "react";
+import { CircleUserRound, Compass, Heart, Home, Plus } from 'lucide-react';
+import { ReactNode } from 'react';
 
 export interface ILink {
   href: string;
@@ -8,23 +8,23 @@ export interface ILink {
 
 export const links = [
   {
-    href: "/",
-    child: <Home />
+    href: '/',
+    child: <Home />,
   },
   {
-    href: "/photo/add",
-    child: <Plus />
+    href: '/photo/add',
+    child: <Plus />,
   },
   {
-    href: "/compass",
-    child: <Compass />
+    href: '/compass',
+    child: <Compass />,
   },
   {
-    href: "/likes",
-    child: <Heart />
+    href: '/likes',
+    child: <Heart />,
   },
   {
-    href: "/profile",
-    child: <CircleUserRound />
-  }
+    href: '/profile',
+    child: <CircleUserRound />,
+  },
 ] as ILink[];
