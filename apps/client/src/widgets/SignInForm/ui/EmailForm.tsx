@@ -1,8 +1,7 @@
-import { Button } from '@/shared/ui/Button';
+import { Button } from '@/shared/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -12,16 +11,17 @@ import { Input } from '@/shared/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-interface EmailFormProps {
-  nextStep: () => void;
-}
+import { useSignInFormStore } from '../store/useSignInFormStore';
+import { sendLoginCode } from '../api/sendLoginCode';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter correct email' }),
 });
 
-export function EmailForm({ nextStep }: EmailFormProps) {
+export function EmailForm() {
+  const nextStep = useSignInFormStore((store) => store.nextStep);
+  const setData = useSignInFormStore((store) => store.setData);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,8 +29,18 @@ export function EmailForm({ nextStep }: EmailFormProps) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const result = await sendLoginCode(values.email);
+    setData({ email: values.email });
+
+    if (result?.errors && result.errors.length > 0) {
+      return form.setError(
+        'email',
+        { message: result.errors[0].message },
+        { shouldFocus: true },
+      );
+    }
+
     nextStep();
   }
 

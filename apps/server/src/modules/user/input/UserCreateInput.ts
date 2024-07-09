@@ -7,6 +7,9 @@ export class UserCreateInput implements User {
   name: string;
 
   @Field()
+  email: string;
+
+  @Field()
   isActive: boolean;
 
   @Field()

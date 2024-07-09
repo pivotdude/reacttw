@@ -5,18 +5,23 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/ui/card';
-import { useState } from 'react';
 import { EmailForm } from './EmailForm';
 import { CodeForm } from './CodeForm';
+import { useSignInFormStore } from '../store/useSignInFormStore';
+import { usersFetch } from '../api/usersFetch';
+import { useEffect } from 'react';
 
 export function SignInForm() {
-  const [step, setStep] = useState(1);
-  const nextStep = () => setStep((prev) => prev + 1);
+  const step = useSignInFormStore((state) => state.step);
+
+  useEffect(() => {
+    usersFetch().then(console.log);
+  }, []);
 
   const getForm = () => {
     switch (step) {
       case 1:
-        return <EmailForm nextStep={nextStep} />;
+        return <EmailForm />;
       case 2:
         return <CodeForm />;
       default:
@@ -27,12 +32,10 @@ export function SignInForm() {
   const form = getForm();
 
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[360px]">
       <CardHeader>
         <CardTitle>Sign in</CardTitle>
-        <CardDescription>
-          Sign in in your account. Use your email
-        </CardDescription>
+        <CardDescription>Sign in in your account.</CardDescription>
       </CardHeader>
       <CardContent>{form}</CardContent>
     </Card>

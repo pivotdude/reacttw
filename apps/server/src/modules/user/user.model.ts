@@ -10,6 +10,9 @@ export class UserModel implements User {
   name: string;
 
   @Field()
+  email: string;
+
+  @Field()
   isActive: boolean;
 
   @Field()

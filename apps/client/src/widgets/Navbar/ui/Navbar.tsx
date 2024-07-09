@@ -1,5 +1,5 @@
+import { Button } from '@/shared/ui/button';
 import { ILink, links } from '../data/links';
-import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/input';
 import { Search } from 'lucide-react';
 import { Link } from 'react-router-dom';

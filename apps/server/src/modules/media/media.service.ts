@@ -26,7 +26,7 @@ export class MediaService {
     data: { name: string; mimeType: string },
   ) {
     return uploadFileCard(buffer, {
-      publicKey: process.env.S3,
+      publicKey: process.env.S3_PUBLIC_KEY,
       store: 'auto',
       fileName: data.name,
       contentType: data.mimeType,

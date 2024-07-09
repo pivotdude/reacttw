@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 
 export abstract class BaseRepository<T extends Repository<any>, G> {
   public model: T;
@@ -15,7 +15,7 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     return this.model.findOneBy({ id });
   }
 
-  async create(data: G): Promise<T> {
+  async create(data: G): Promise<G> {
     return this.model.save(data);
   }
 

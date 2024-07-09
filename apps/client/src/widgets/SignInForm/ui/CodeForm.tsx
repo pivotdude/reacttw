@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui/Button';
+import { Button } from '@/shared/ui/button';
 import {
   Form,
   FormControl,
@@ -12,6 +12,9 @@ import { Input } from '@/shared/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useNavigate } from 'react-router-dom';
+import { useSignInFormStore } from '../store/useSignInFormStore';
+import { сonfirmLoginCode } from '../api/confirmLoginCode';
 
 const formSchema = z.object({
   code: z
@@ -20,6 +23,8 @@ const formSchema = z.object({
 });
 
 export function CodeForm() {
+  const navigate = useNavigate();
+  const data = useSignInFormStore((store) => store.data);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,8 +32,30 @@ export function CodeForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!data) {
+      return form.setError(
+        'code',
+        { message: 'Data not found!' },
+        { shouldFocus: true },
+      );
+    }
+
+    const result = await сonfirmLoginCode(data?.email, values.code);
+
+    if (result?.errors && result.errors.length > 0) {
+      return form.setError(
+        'code',
+        { message: result.errors[0].message },
+        { shouldFocus: true },
+      );
+    }
+    if (!result.confirmLogin) {
+      throw new Error('Empty');
+    }
+
+    localStorage.setItem('accessToken', result.confirmLogin.accessToken);
+    navigate('/');
   }
 
   return (
