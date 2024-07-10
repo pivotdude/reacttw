@@ -8,15 +8,9 @@ import {
 import { EmailForm } from './EmailForm';
 import { CodeForm } from './CodeForm';
 import { useSignInFormStore } from '../store/useSignInFormStore';
-import { usersFetch } from '../api/usersFetch';
-import { useEffect } from 'react';
 
 export function SignInForm() {
   const step = useSignInFormStore((state) => state.step);
-
-  useEffect(() => {
-    usersFetch().then(console.log);
-  }, []);
 
   const getForm = () => {
     switch (step) {

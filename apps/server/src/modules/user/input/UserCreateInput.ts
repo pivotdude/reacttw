@@ -4,7 +4,10 @@ import { User } from '../user.entity';
 @InputType()
 export class UserCreateInput implements User {
   @Field()
-  name: string;
+  name?: string;
+
+  @Field()
+  login: string;
 
   @Field()
   email: string;

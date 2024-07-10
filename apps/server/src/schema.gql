@@ -5,6 +5,7 @@
 type UserModel {
   id: Int!
   name: String!
+  login: String!
   email: String!
   isActive: Boolean!
   createdAt: DateTime!
@@ -62,6 +63,7 @@ input ConfirmRegisterCodeInput {
 
 input UserCreateInput {
   name: String!
+  login: String!
   email: String!
   isActive: Boolean!
   createdAt: DateTime!

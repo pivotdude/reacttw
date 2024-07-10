@@ -1,19 +1,29 @@
 import { Button } from '@/shared/ui/button';
 import { ILink, links } from '../data/links';
 import { Input } from '@/shared/ui/input';
-import { Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { CircleUserRound, Search } from 'lucide-react';
+import { useEffect } from 'react';
+import { useNavigationStore } from '../store/useNavigationStore';
+import { IconLink } from './IconLink';
+import { fetchProfile } from '../api/fetchProfile';
 
 export function Navbar() {
-  const linksElements = links.map((link: ILink) => (
-    <Link
-      to={link.href}
-      key={link.href}
-      className="w-12 h-12 cursor-pointer hover:text-gray-500 flex items-center justify-center"
-    >
-      {link.child}
-    </Link>
-  ));
+  const profile = useNavigationStore((store) => store.profile);
+  const setProfile = useNavigationStore((store) => store.setProfile);
+
+  const linksElements = links.map((link: ILink) => <IconLink link={link} />);
+
+  useEffect(() => {
+    fetchProfile()
+      .then((profile) => {
+        setProfile(profile.profile);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  }, []);
+
+  console.log('profile', profile);
 
   return (
     <div className="flex f-full justify-between items-center">
@@ -24,7 +34,15 @@ export function Navbar() {
           <Search />
         </Button>
       </div>
-      <div className="flex">{linksElements}</div>
+      <div className="flex">
+        {linksElements}
+        <IconLink
+          link={{
+            child: <CircleUserRound />,
+            href: `/profile/${profile?.login}`,
+          }}
+        />
+      </div>
     </div>
   );
 }

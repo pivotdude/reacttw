@@ -58,7 +58,11 @@ export class AuthService {
 
   async confirmRegister(input: ConfirmRegisterCodeInput): Promise<AuthAnswer> {
     await this.checkCode(input.email, input.code);
-    await this.userService.create({ name: 'Alex', email: input.email });
+    await this.userService.create({
+      name: 'Alex',
+      email: input.email,
+      login: 'wasdddd', // todo
+    });
 
     return {
       ok: true,

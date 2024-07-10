@@ -12,9 +12,12 @@ export class User {
   id?: number;
 
   @Column()
-  name: string;
+  name?: string;
 
-  @Column()
+  @Column({ unique: true })
+  login: string;
+
+  @Column({ unique: true })
   email: string;
 
   @Column({ default: true })

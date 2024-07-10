@@ -23,8 +23,4 @@ export const links = [
     href: '/likes',
     child: <Heart />,
   },
-  {
-    href: '/profile',
-    child: <CircleUserRound />,
-  },
 ] as ILink[];
