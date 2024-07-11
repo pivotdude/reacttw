@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
 
 const client = new GraphQLClient(
-  'http://localhost:3000/graphql',
+  'http://192.168.0.120:3005/graphql',
   // {
   //   headers: () => ({ Authorization: 'Bearer ' + (await getServerSession(authOptions)) }),
   // }

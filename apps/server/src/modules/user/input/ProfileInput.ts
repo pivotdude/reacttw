@@ -1,8 +1,8 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { User } from './user.entity';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { User } from '../user.entity';
 
 @ObjectType()
-export class UserModel implements User {
+export class ProfileInput implements User {
   @Field((type) => Int)
   id: number;
 
@@ -17,6 +17,9 @@ export class UserModel implements User {
 
   @Field()
   isActive: boolean;
+
+  @Field()
+  isUserProfile: boolean;
 
   @Field()
   createdAt: Date;

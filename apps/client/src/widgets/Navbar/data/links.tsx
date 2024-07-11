@@ -1,4 +1,4 @@
-import { CircleUserRound, Compass, Heart, Home, Plus } from 'lucide-react';
+import { Compass, Heart, Home, Plus } from 'lucide-react';
 import { ReactNode } from 'react';
 
 export interface ILink {

@@ -1,6 +1,11 @@
+import { UserInput } from '../auth/input/user.input';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { Injectable } from '@nestjs/common';
+
+export interface IUserProfile extends User {
+  isUserProfile?: boolean;
+}
 
 @Injectable()
 export class UserService {
@@ -9,7 +14,25 @@ export class UserService {
     return this.userRepository.getAll();
   }
 
-  async findById(id: number): Promise<User | null> {
+  // async findByInput(
+  //   input: UserInput,
+  //   userId: number,
+  // ): Promise<IUserProfile | null> {
+  //   if (input?.id) {
+  //     return this.userRepository.findById(input.id);
+  //   }
+  //   if (input?.login) {
+  //   }
+  //   throw new Error('wasd');
+  // }
+
+  async findByLogin(login: string, userId: number): Promise<IUserProfile> {
+    const user = await this.userRepository.findByLogin(login);
+    const isUserProfile = userId === user.id;
+    return { ...user, isUserProfile };
+  }
+
+  async findById(id: number) {
     return this.userRepository.findById(id);
   }
 

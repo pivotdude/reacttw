@@ -14,16 +14,14 @@ export function Navbar() {
   const linksElements = links.map((link: ILink) => <IconLink link={link} />);
 
   useEffect(() => {
-    fetchProfile()
-      .then((profile) => {
-        setProfile(profile.profile);
-      })
-      .catch((error) => {
-        console.log('error', error);
-      });
+    // fetchProfile()
+    //   .then((profile) => {
+    //     setProfile(profile.profile);
+    //   })
+    //   .catch((error) => {
+    //     console.log('error', error);
+    //   });
   }, []);
-
-  console.log('profile', profile);
 
   return (
     <div className="flex f-full justify-between items-center">

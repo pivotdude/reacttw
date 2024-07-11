@@ -1,4 +1,5 @@
-import { FindOneOptions, Repository } from 'typeorm';
+import { User } from 'src/modules/user/user.entity';
+import { Repository } from 'typeorm';
 
 export abstract class BaseRepository<T extends Repository<any>, G> {
   public model: T;
@@ -11,8 +12,12 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     return this.model.find();
   }
 
-  async findById(id: number): Promise<any | null> {
+  async findById(id: number): Promise<User | null> {
     return this.model.findOneBy({ id });
+  }
+
+  async findByLogin(login: string): Promise<User | null> {
+    return this.model.findOne({ where: { login } });
   }
 
   async create(data: G): Promise<G> {

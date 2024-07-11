@@ -10,12 +10,12 @@ export async function sendRequest<T>(
 ): Promise<T | any> {
   const token = localStorage.getItem('accessToken');
 
-  try {
-    return await client.request<T>(query, vars, {
-      Authorization: token || '',
-    });
-  } catch (error) {
-    // @ts-ignore
-    return error.response;
-  }
+  // try {
+  return client.request<T>(query, vars, {
+    Authorization: token || '',
+  });
+  // } catch (error) {
+  //   // @ts-ignore
+  //   return error.response;
+  // }
 }
