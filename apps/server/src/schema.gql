@@ -42,6 +42,7 @@ type LoginAnswerModel {
 type Query {
   users: [UserModel!]!
   profile(login: String!): ProfileInput!
+  account: UserModel!
 }
 
 type Mutation {

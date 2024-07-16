@@ -5,22 +5,24 @@ import { CircleUserRound, Search } from 'lucide-react';
 import { useEffect } from 'react';
 import { useNavigationStore } from '../store/useNavigationStore';
 import { IconLink } from './IconLink';
-import { fetchProfile } from '../api/fetchProfile';
+import { fetchAccount } from '../api/fetchAccount';
 
 export function Navbar() {
-  const profile = useNavigationStore((store) => store.profile);
-  const setProfile = useNavigationStore((store) => store.setProfile);
+  const account = useNavigationStore((store) => store.account);
+  const setAccount = useNavigationStore((store) => store.setAccount);
 
   const linksElements = links.map((link: ILink) => <IconLink link={link} />);
 
   useEffect(() => {
-    // fetchProfile()
-    //   .then((profile) => {
-    //     setProfile(profile.profile);
-    //   })
-    //   .catch((error) => {
-    //     console.log('error', error);
-    //   });
+    fetchAccount()
+      .then((response) => {
+        console.log('response', response.account);
+        setAccount(response.account);
+      })
+      .catch((e) => {
+        console.log('ee', e.response.errors[0].message);
+        // setErrorMessage(e.response.errors[0].message);
+      });
   }, []);
 
   return (
@@ -37,7 +39,7 @@ export function Navbar() {
         <IconLink
           link={{
             child: <CircleUserRound />,
-            href: `/profile/${profile?.login}`,
+            href: account ? `/profile/${account.login}` : '/signin',
           }}
         />
       </div>

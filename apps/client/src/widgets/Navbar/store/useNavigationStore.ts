@@ -1,14 +1,14 @@
 import { create } from 'zustand';
-import { FetchProfileResponse } from '../api/fetchProfile';
+import { FetchAccoutResponse } from '../api/fetchAccount';
 
-type ProfileT = FetchProfileResponse['profile'];
+type AccountT = FetchAccoutResponse['account'];
 
 interface INavigationState {
-  profile?: ProfileT;
-  setProfile: (profile: ProfileT) => void;
+  account?: AccountT;
+  setAccount: (account: AccountT) => void;
 }
 
 export const useNavigationStore = create<INavigationState>((set) => ({
-  profile: undefined,
-  setProfile: (profile: ProfileT) => set({ profile }),
+  account: undefined,
+  setAccount: (account: AccountT) => set({ account }),
 }));

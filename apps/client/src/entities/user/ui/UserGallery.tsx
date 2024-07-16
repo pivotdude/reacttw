@@ -34,7 +34,7 @@ export function UserGallery({ photos }: UserGalleryProps) {
 
   return (
     <Tabs defaultValue="account" className="w-full mx-auto mt-10">
-      <TabsList className="grid grid-cols-2 mx-40">
+      <TabsList className="grid grid-cols-2 mx-10">
         <TabsTrigger value="account">Posts</TabsTrigger>
         <TabsTrigger value="password">Saved</TabsTrigger>
       </TabsList>

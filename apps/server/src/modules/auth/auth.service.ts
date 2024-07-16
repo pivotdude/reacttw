@@ -14,7 +14,6 @@ import { AuthAnswer } from './input/authAnswer.model';
 import { LoginAnswerModel } from './input/loginAnswer.model';
 
 @Injectable()
-// @UseInterceptors(AuthInterceptor)
 export class AuthService {
   constructor(
     private userService: UserService,

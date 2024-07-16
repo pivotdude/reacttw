@@ -2,16 +2,16 @@ import { UserService } from './user.service';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserModel } from './user.model';
 import { UserCreateInput } from './input/UserCreateInput';
-import { AuthGuard } from '../auth/auth.guard';
 import { UseGuards } from '@nestjs/common';
-import { UserInput } from '../auth/input/user.input';
 import { ProfileInput } from './input/ProfileInput';
+import { TokenGuard } from '../auth/guard/TokenGuard';
+import { RequiredAuthGuard } from '../auth/guard/RequiredAuthGuard';
 
 @Resolver((of) => UserModel)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(AuthGuard)
+  @UseGuards()
   @Query((returns) => [UserModel])
   async users() {
     return this.userService.getAll();
@@ -23,10 +23,16 @@ export class UserResolver {
   //   return this.userService.findByInput(input, req.user.id);
   // }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(TokenGuard)
   @Query((returns) => ProfileInput)
   async profile(@Args('login') login: string, @Context('req') req: any) {
-    return this.userService.findByLogin(login, req.user.id);
+    return this.userService.findByLogin(login, req?.user?.id);
+  }
+
+  @UseGuards(RequiredAuthGuard)
+  @Query((returns) => UserModel)
+  async account(@Context('req') req: any) {
+    return this.userService.findById(req?.user?.id);
   }
 
   @Mutation((returns) => UserModel)

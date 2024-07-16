@@ -4,6 +4,8 @@ import { HomePageLazy } from '@/pages/home';
 import { SignInPageLazy } from '@/pages/signin';
 import { SuspenseLoader } from '@/widgets/Loader';
 import { SignUpPageLazy } from '@/pages/signup';
+import { ErrorBoundary } from '@/shared/components/errorBoundary/ui/ErrorBoundary';
+import { SettingsPageLazy } from '@/pages/settings/ui/SettingsPageLazy';
 
 export function AppRouter() {
   const router = createBrowserRouter([
@@ -14,6 +16,7 @@ export function AppRouter() {
           <HomePageLazy />
         </SuspenseLoader>
       ),
+      errorElement: <ErrorBoundary />,
     },
     {
       path: '/profile/:name',
@@ -36,6 +39,14 @@ export function AppRouter() {
       element: (
         <SuspenseLoader>
           <SignInPageLazy />
+        </SuspenseLoader>
+      ),
+    },
+    {
+      path: '/settings',
+      element: (
+        <SuspenseLoader>
+          <SettingsPageLazy />
         </SuspenseLoader>
       ),
     },

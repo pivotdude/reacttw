@@ -4,20 +4,20 @@ import {
 } from '@/shared/lib/utils/graphql/sendRequest';
 import gql from 'graphql-tag';
 
-export interface FetchProfileResponse {
-  profile?: {
+export interface FetchAccoutResponse {
+  account?: {
     login: string;
   };
   errors?: IGraphqlError[];
 }
 
-export const fetchProfile = async (): Promise<FetchProfileResponse> => {
+export const fetchAccount = async (): Promise<FetchAccoutResponse> => {
   const query = gql`
     query {
-      profile {
+      account {
         login
       }
     }
   `;
-  return sendRequest<FetchProfileResponse>(query);
+  return sendRequest<FetchAccoutResponse>(query);
 };

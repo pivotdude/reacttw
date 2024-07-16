@@ -4,7 +4,6 @@ import { JwtModule } from '../imports/jwt.module';
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { EmailModule } from '../email/email.module';
-import { AuthGuard } from './auth.guard';
 
 @Module({
   imports: [

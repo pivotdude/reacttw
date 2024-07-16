@@ -1,7 +1,8 @@
+import { exceptionCodes } from 'src/data/exceptionCodes';
 import { UserInput } from '../auth/input/user.input';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 export interface IUserProfile extends User {
   isUserProfile?: boolean;
@@ -28,7 +29,12 @@ export class UserService {
 
   async findByLogin(login: string, userId: number): Promise<IUserProfile> {
     const user = await this.userRepository.findByLogin(login);
-    const isUserProfile = userId === user.id;
+
+    if (!user) {
+      throw new NotFoundException(exceptionCodes.notFound);
+    }
+
+    const isUserProfile = userId ? userId === user.id : false;
     return { ...user, isUserProfile };
   }
 
