@@ -18,7 +18,12 @@ export class MediaService {
   }
 
   private async createFile(file: UploadcareFile) {
-    // return this.mediaRepository.create({ name });
+    return this.mediaRepository.create({
+      name: file.name,
+      mimeType: file.mimeType,
+      size: file.size,
+      url: file.cdnUrl,
+    });
   }
 
   private async uploadFileOnS3(

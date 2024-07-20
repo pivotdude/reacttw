@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from 'typeorm';
-import { Photo } from '../photo/photo.entity';
 
 @Entity()
 export class Media {
@@ -25,12 +24,9 @@ export class Media {
   @Column()
   size: number;
 
-  @ManyToOne(() => Photo)
-  photos: Photo[];
-
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
 }

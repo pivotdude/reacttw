@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { UserPhotoDetails } from './UserPhotoDetails';
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
+import { UploadZone } from '@/shared/components/UploadZone/ui/UploadZone';
 
 interface UserGalleryProps {
   photos: {
@@ -26,9 +27,8 @@ export function UserGallery({ photos }: UserGalleryProps) {
         </Dialog>
       ))
     ) : (
-      <div className="w-full flex flex-col justify-center items-center bg-gray-300 col-span-3 rounded-md">
-        <p className="font-medium text-lg">Photo dont exists!</p>
-        <a>Click here to upload a new photo</a>
+      <div className="col-span-3">
+        <UploadZone />
       </div>
     );
 

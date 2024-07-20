@@ -5,5 +5,9 @@ interface TypographySmallProps {
 }
 
 export function TypographySmall({ children }: TypographySmallProps) {
-  return <small className="text-sm font-medium leading-none">{children}</small>;
+  return (
+    <small className="text-sm font-medium leading-none opacity-45">
+      {children}
+    </small>
+  );
 }
