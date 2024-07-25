@@ -17,8 +17,27 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type MediaModel {
+  id: Int!
+  url: String!
+  size: Float!
+  name: String!
+  mimeType: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PhotoModel {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  media: MediaModel
+  user: UserModel!
+}
+
 type ProfileInput {
   id: Int!
+  photos: [PhotoModel!]
   name: String
   login: String!
   email: String!
@@ -46,12 +65,18 @@ type Query {
 }
 
 type Mutation {
+  createUserPhotos(input: CreateUserPhotoInput!): [PhotoModel!]!
   sendLoginCode(input: SendLoginCodeInput!): AuthAnswer!
   sendRegisterCode(input: SendRegisterCodeInput!): AuthAnswer!
   confirmLogin(input: ConfirmLoginCodeInput!): LoginAnswerModel!
   confirmRegister(input: ConfirmRegisterCodeInput!): AuthAnswer!
   createUser(input: UserCreateInput!): UserModel!
   delete(id: Float!): UserModel!
+}
+
+input CreateUserPhotoInput {
+  """Array of photo IDs"""
+  photoIds: [Float!]!
 }
 
 input SendLoginCodeInput {

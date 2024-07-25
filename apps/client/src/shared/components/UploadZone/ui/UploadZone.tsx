@@ -41,12 +41,7 @@ export function UploadZone() {
     handleFiles(selectedFiles);
   };
 
-  useEffect(() => {
-    console.log('Обновленные файлы:', files);
-  }, [files]);
-
   const handleFiles = async (newFiles: IFile[]) => {
-    console.log('new', newFiles);
     const updatedFiles = newFiles.map((file) => ({
       id: new Date().getTime(),
       ...fileToObject(file),
@@ -79,14 +74,14 @@ export function UploadZone() {
         className="
           w-full flex flex-col justify-center items-center py-6
           border-2 rounded-md bg-gray-100 border-gray-200 hover:border-gray-300
-          cursor-pointer
+          cursor-pointer p-4 text-center
         "
         onDrop={onDrop}
         onDragOver={onDragOver}
         onClick={handleUploadZoneClick}
       >
         <ImageUp className="w-8 h-8 mb-4" />
-        <p className="font-semibold mb-2">
+        <p className="font-semibold mb-2 leading-6">
           Press or drag files here for download
         </p>
         <TypographySmall>

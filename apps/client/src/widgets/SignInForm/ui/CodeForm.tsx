@@ -41,21 +41,21 @@ export function CodeForm() {
       );
     }
 
-    const result = await сonfirmLoginCode(data?.email, values.code);
-
-    if (result?.errors && result.errors.length > 0) {
-      return form.setError(
-        'code',
-        { message: result.errors[0].message },
-        { shouldFocus: true },
-      );
-    }
-    if (!result.confirmLogin) {
-      throw new Error('Empty');
-    }
-
-    localStorage.setItem('accessToken', result.confirmLogin.accessToken);
-    navigate('/');
+    сonfirmLoginCode(data?.email, values.code)
+      .then((result) => {
+        if (!result.confirmLogin) {
+          throw new Error('Empty');
+        }
+        localStorage.setItem('accessToken', result.confirmLogin.accessToken);
+        navigate('/');
+      })
+      .catch((e) => {
+        return form.setError(
+          'code',
+          { message: e.response.errors[0].message },
+          { shouldFocus: true },
+        );
+      });
   }
 
   return (

@@ -8,6 +8,7 @@ import { ConfigModule } from '../imports/config.module';
 import { MediaModule } from '../media/media.module';
 import { AuthModule } from '../auth/auth.module';
 import { EmailModule } from '../email/email.module';
+import { PhotoModule } from '../photos/photo.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { EmailModule } from '../email/email.module';
     AuthModule,
     MediaModule,
     UserModule,
+    PhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

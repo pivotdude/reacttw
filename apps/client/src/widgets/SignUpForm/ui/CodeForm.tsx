@@ -51,7 +51,6 @@ export function CodeForm() {
       );
     }
 
-    console.log('redirect');
     navigate('/');
   }
 

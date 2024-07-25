@@ -8,12 +8,16 @@ import { MediaRepository } from './media.repository';
 @Injectable()
 export class MediaService {
   constructor(private readonly mediaRepository: MediaRepository) {}
+
+  public async findById(id: number) {
+    return this.mediaRepository.findById(id);
+  }
+
   public async uploadFile(file: Express.Multer.File) {
     const createdFile = await this.uploadFileOnS3(file.buffer, {
       name: file.originalname,
       mimeType: file.mimetype,
     });
-    console.log(createdFile);
     return this.createFile(createdFile);
   }
 

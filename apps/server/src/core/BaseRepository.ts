@@ -1,4 +1,3 @@
-import { User } from 'src/modules/user/user.entity';
 import { Repository } from 'typeorm';
 
 export abstract class BaseRepository<T extends Repository<any>, G> {
@@ -8,16 +7,19 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     this.model = model;
   }
 
-  async getAll(): Promise<any[]> {
+  async getAll(): Promise<G[]> {
     return this.model.find();
   }
 
-  async findById(id: number): Promise<User | null> {
+  async findById(id: number): Promise<G | null> {
     return this.model.findOneBy({ id });
   }
 
-  async findByLogin(login: string): Promise<User | null> {
-    return this.model.findOne({ where: { login } });
+  async findByLogin(login: string, relations?: any): Promise<G | null> {
+    return this.model.findOne({
+      where: { login },
+      relations,
+    });
   }
 
   async create(data: G): Promise<G> {

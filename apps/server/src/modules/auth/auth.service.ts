@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { SendLoginCodeInput } from './input/SendLoginCodeInput';
@@ -12,6 +8,7 @@ import { ConfirmLoginCodeInput } from './input/ConfirmLoginCodeInput';
 import { ConfirmRegisterCodeInput } from './input/ConfirmRegisterCodeInput';
 import { AuthAnswer } from './input/authAnswer.model';
 import { LoginAnswerModel } from './input/loginAnswer.model';
+import { ErrorEnum } from 'src/constants/errors';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +22,7 @@ export class AuthService {
     const code = '0000';
     const user = await this.userService.findByEmail(input.email);
     if (!user) {
-      throw new UnauthorizedException('User not found');
+      throw new UnauthorizedException(ErrorEnum.USER_NOT_FOUND);
     }
     await this.emailService.send({
       email: input.email,
@@ -86,16 +83,16 @@ export class AuthService {
     const email = await this.emailService.findLast(emailAdress);
 
     if (!email) {
-      throw new UnauthorizedException('Code not found!');
+      throw new UnauthorizedException(ErrorEnum.CODE_NOT_FOUND);
     }
 
     if (false) {
       // TODO
-      throw new UnauthorizedException('Code has expired!');
+      throw new UnauthorizedException(ErrorEnum.CODE_EXPIRED);
     }
 
     if (code !== email.data.code) {
-      throw new UnauthorizedException('Code not correct!');
+      throw new UnauthorizedException(ErrorEnum.CODE_INCORRECT);
     }
   }
 

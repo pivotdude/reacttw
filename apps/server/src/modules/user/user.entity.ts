@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Photo } from '../photos/photo.entity';
 
 @Entity()
 export class User {
@@ -19,6 +21,9 @@ export class User {
 
   @Column({ unique: true })
   email: string;
+
+  @OneToMany(() => Photo, (photo) => photo.user, { nullable: true })
+  photos?: Photo[];
 
   @Column({ default: true })
   isActive?: boolean;

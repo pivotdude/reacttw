@@ -12,15 +12,7 @@ export const links = [
     child: <Home />,
   },
   {
-    href: '/photo/add',
-    child: <Plus />,
-  },
-  {
     href: '/compass',
     child: <Compass />,
-  },
-  {
-    href: '/likes',
-    child: <Heart />,
   },
 ] as ILink[];

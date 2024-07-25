@@ -9,5 +9,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([Media])],
   controllers: [MediaController],
   providers: [MediaService, MediaRepository],
+  exports: [MediaService],
 })
 export class MediaModule {}

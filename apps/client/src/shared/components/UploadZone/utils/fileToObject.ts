@@ -1,6 +1,4 @@
-import { IFile } from '../model';
-
-export function fileToObject(file: File): IFile {
+export function fileToObject(file: File) {
   return {
     name: file.name,
     size: file.size,

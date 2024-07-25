@@ -50,10 +50,6 @@ export function AppRouter() {
         </SuspenseLoader>
       ),
     },
-    // {
-    //   path: 'upload',
-    //   element: <UploadFile />,
-    // },
   ]);
 
   return <RouterProvider router={router} />;

@@ -9,6 +9,14 @@ export interface FetchProfileResponse {
     name?: string;
     isUserProfile: boolean;
     login: string;
+
+    photos: {
+      id: number;
+      media: {
+        url: string;
+        name: string;
+      };
+    };
   };
   errors?: IGraphqlError[];
 }
@@ -22,6 +30,13 @@ export const fetchProfile = async (
         name
         isUserProfile
         login
+        photos {
+          id
+          media {
+            url
+            name
+          }
+        }
       }
     }
   `;

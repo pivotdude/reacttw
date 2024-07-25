@@ -1,27 +1,26 @@
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Media } from '../media/media.entity';
+import { User } from '../user/user.entity';
 
 @Entity()
-export class Media {
+export class Photo {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
-  url: string;
+  @OneToOne(() => Media)
+  @JoinColumn()
+  media: Media;
 
-  @Column()
-  name: string;
-
-  @Column()
-  mimeType: string;
-
-  @Column()
-  size: number;
+  @ManyToOne(() => User)
+  user: User;
 
   @CreateDateColumn()
   createdAt?: Date;

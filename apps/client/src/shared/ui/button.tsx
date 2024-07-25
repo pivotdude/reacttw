@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib/utils/cn';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
@@ -18,17 +18,44 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        success: 'bg-green-500 text-white hover:bg-green-600',
+        warning: 'bg-yellow-500 text-white hover:bg-yellow-600',
+        info: 'bg-blue-500 text-white hover:bg-blue-600',
       },
       size: {
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
+        xl: 'h-12 rounded-md px-10 text-lg',
         icon: 'h-10 w-10',
+        'icon-sm': 'h-8 w-8',
+        'icon-lg': 'h-12 w-12',
+      },
+      fullWidth: {
+        true: 'w-full',
+      },
+      rounded: {
+        default: 'rounded-md',
+        full: 'rounded-full',
+        none: 'rounded-none',
       },
     },
+    compoundVariants: [
+      {
+        variant: 'outline',
+        size: 'default',
+        class: 'border-2',
+      },
+      {
+        variant: ['success', 'warning', 'info'],
+        size: 'lg',
+        class: 'font-semibold',
+      },
+    ],
     defaultVariants: {
       variant: 'default',
       size: 'default',
+      rounded: 'default',
     },
   },
 );

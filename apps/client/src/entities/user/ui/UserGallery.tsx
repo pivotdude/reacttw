@@ -1,7 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { UserPhotoDetails } from './UserPhotoDetails';
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
-import { UploadZone } from '@/shared/components/UploadZone/ui/UploadZone';
 
 interface UserGalleryProps {
   photos: {
@@ -11,39 +10,32 @@ interface UserGalleryProps {
 }
 
 export function UserGallery({ photos }: UserGalleryProps) {
-  const gallery =
-    photos.length > 0 ? (
-      photos.map((photo, index) => (
-        <Dialog>
-          <DialogTrigger>
-            <img
-              key={photo.src}
-              src={photo.src}
-              alt={photo.alt}
-              className={`h-44 sm:h-96 w-full object-cover ${index === 3 ? 'col-span-2' : ''} ${index === 6 ? 'col-span-2' : ''}`}
-            />
-          </DialogTrigger>
-          <UserPhotoDetails src={photo.src} />
-        </Dialog>
-      ))
-    ) : (
-      <div className="col-span-3">
-        <UploadZone />
-      </div>
-    );
+  const gallery = photos.map((photo, index) => (
+    <Dialog>
+      <DialogTrigger>
+        <img
+          key={photo.src}
+          src={photo.src + '-/preview/'}
+          alt={photo.alt}
+          className={`md:h-96 w-full object-cover ${index === 3 ? 'col-span-2' : ''} ${index === 6 ? 'col-span-2' : ''}`}
+        />
+      </DialogTrigger>
+      <UserPhotoDetails src={photo.src} />
+    </Dialog>
+  ));
 
   return (
-    <Tabs defaultValue="account" className="w-full mx-auto mt-10">
+    <Tabs defaultValue="posts" className="w-full mx-auto mt-10">
       <TabsList className="grid grid-cols-2 mx-10">
-        <TabsTrigger value="account">Posts</TabsTrigger>
-        <TabsTrigger value="password">Saved</TabsTrigger>
+        <TabsTrigger value="posts">Posts</TabsTrigger>
+        <TabsTrigger value="saved">Saved</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
+      <TabsContent value="posts">
         <div className="py-4">
-          <div className="grid grid-cols-3 gap-2">{gallery}</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">{gallery}</div>
         </div>
       </TabsContent>
-      <TabsContent value="password">
+      <TabsContent value="saved">
         <div className="py-4">
           <div className="grid grid-cols-3 gap-2">{gallery}</div>
         </div>

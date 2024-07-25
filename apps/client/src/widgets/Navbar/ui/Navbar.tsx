@@ -16,7 +16,6 @@ export function Navbar() {
   useEffect(() => {
     fetchAccount()
       .then((response) => {
-        console.log('response', response.account);
         setAccount(response.account);
       })
       .catch((e) => {

@@ -1,8 +1,9 @@
 import { exceptionCodes } from 'src/data/exceptionCodes';
-import { UserInput } from '../auth/input/user.input';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { GraphQLResolveInfo } from 'graphql';
+import { getRelations } from './user.relations';
 
 export interface IUserProfile extends User {
   isUserProfile?: boolean;
@@ -27,8 +28,13 @@ export class UserService {
   //   throw new Error('wasd');
   // }
 
-  async findByLogin(login: string, userId: number): Promise<IUserProfile> {
-    const user = await this.userRepository.findByLogin(login);
+  async findByLogin(
+    login: string,
+    userId: number,
+    info: GraphQLResolveInfo,
+  ): Promise<IUserProfile> {
+    const relations = getRelations(info);
+    const user = await this.userRepository.findByLogin(login, relations);
 
     if (!user) {
       throw new NotFoundException(exceptionCodes.notFound);

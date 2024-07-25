@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from '@/shared/components/Loader';
 import { useShallow } from 'zustand/react/shallow';
+import { UploadPhoto } from '@/widgets/UploadPhoto/ui/UploadPhoto';
 
 export function ProfilePage() {
   const params = useParams();
@@ -23,11 +24,16 @@ export function ProfilePage() {
       })),
     );
 
+  // @ts-ignore
+  const photos = profile?.photos?.map((photo) => ({
+    src: photo.media.url,
+    alt: photo.media.name,
+  })) as { src: string; alt: string }[];
+
   useEffect(() => {
     setLoading(true);
     fetchProfile(params.name as string)
       .then((result) => {
-        console.log('current profile', profile);
         setProfile(result.profile);
       })
       .catch((e) => {
@@ -51,8 +57,9 @@ export function ProfilePage() {
       <div className="px-0 md:px-10 xl:px-48 2xl:px-96">
         {/* @ts-ignore */}
         <ProfileHeader profile={profile} />
-        <div className="w-full m-auto py-2">
-          <UserGallery photos={[]} />
+        <div className="mt-10">
+          <UploadPhoto />
+          <UserGallery photos={photos} />
         </div>
       </div>
     </div>
