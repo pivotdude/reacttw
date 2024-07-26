@@ -1,6 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
-import { UserPhotoDetails } from './UserPhotoDetails';
-import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
+import { UserGalleryItem } from './UserGalleryItem';
 
 interface UserGalleryProps {
   photos: {
@@ -10,19 +9,7 @@ interface UserGalleryProps {
 }
 
 export function UserGallery({ photos }: UserGalleryProps) {
-  const gallery = photos.map((photo, index) => (
-    <Dialog>
-      <DialogTrigger>
-        <img
-          key={photo.src}
-          src={photo.src + '-/preview/'}
-          alt={photo.alt}
-          className={`md:h-96 w-full object-cover ${index === 3 ? 'col-span-2' : ''} ${index === 6 ? 'col-span-2' : ''}`}
-        />
-      </DialogTrigger>
-      <UserPhotoDetails src={photo.src} />
-    </Dialog>
-  ));
+  const gallery = photos.map((photo) => <UserGalleryItem photo={photo} />);
 
   return (
     <Tabs defaultValue="posts" className="w-full mx-auto mt-10">

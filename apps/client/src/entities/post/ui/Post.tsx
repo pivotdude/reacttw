@@ -1,6 +1,8 @@
-import { IPost } from "../types/IPost";
-import { Heart, MessageCircle, Send } from "lucide-react";
-import { ReactNode } from "react";
+import { IPost } from '../types/IPost';
+import { Heart, MessageCircle, Send } from 'lucide-react';
+import { ReactNode, useEffect, useRef } from 'react';
+import Viewer from 'viewerjs';
+import 'viewerjs/dist/viewer.css';
 
 interface PostProps {
   post: IPost;
@@ -8,10 +10,25 @@ interface PostProps {
 }
 
 export function Post({ post, header }: PostProps) {
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    if (imageRef && imageRef.current) {
+      const viewer = new Viewer(imageRef.current, {
+        fullscreen: true,
+      });
+    }
+  }, [imageRef]);
+
   return (
     <div>
       {header}
-      <img src={post.image} alt="" className="w-full" />
+      <img
+        ref={imageRef}
+        src={post.image}
+        alt=""
+        className="w-full cursor-zoom-in"
+      />
       <div className="flex space-x-4 py-3">
         <Heart className="cursor-pointer" />
         <MessageCircle className="cursor-pointer" />
