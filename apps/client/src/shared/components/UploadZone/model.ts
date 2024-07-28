@@ -4,6 +4,7 @@ export interface IFile extends File {
 }
 
 export interface IUploadedFile extends IFile {
+  url(url: any): unknown;
   id: number;
   status: 'loading' | 'success' | 'error';
   result?: IFileResult;

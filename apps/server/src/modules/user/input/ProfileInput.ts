@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { MediaModel } from 'src/modules/media/media.model';
 import { PhotoModel } from 'src/modules/photos/input/photo.model';
 
 @ObjectType()
@@ -11,6 +12,9 @@ export class ProfileInput {
 
   @Field({ nullable: true })
   name?: string;
+
+  @Field((type) => MediaModel, { nullable: true })
+  avatar?: MediaModel;
 
   @Field()
   login: string;

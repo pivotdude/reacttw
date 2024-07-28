@@ -12,8 +12,9 @@ import { UserCreateInput } from './input/UserCreateInput';
 import { UseGuards } from '@nestjs/common';
 import { ProfileInput } from './input/ProfileInput';
 import { TokenGuard } from '../auth/guard/TokenGuard';
-import { RequiredAuthGuard } from '../auth/guard/RequiredAuthGuard';
+import { AuthGuard } from '../auth/guard/AuthGuard';
 import { GraphQLResolveInfo } from 'graphql';
+import { UpdateUserInput } from './input/UpdateUserInput';
 
 @Resolver((of) => UserModel)
 export class UserResolver {
@@ -41,7 +42,7 @@ export class UserResolver {
     return this.userService.findByLogin(login, req?.user?.id, info);
   }
 
-  @UseGuards(RequiredAuthGuard)
+  @UseGuards(AuthGuard)
   @Query((returns) => UserModel)
   async account(@Context('req') req: any) {
     return this.userService.findById(req?.user?.id);
@@ -50,6 +51,15 @@ export class UserResolver {
   @Mutation((returns) => UserModel)
   async createUser(@Args('input') input: UserCreateInput) {
     return this.userService.create(input);
+  }
+
+  @UseGuards(AuthGuard)
+  @Mutation((returns) => UserModel)
+  async updateUser(
+    @Args('input') input: UpdateUserInput,
+    @Context('req') req: any,
+  ) {
+    return this.userService.update(req.user.id, input);
   }
 
   @Mutation((returns) => UserModel)

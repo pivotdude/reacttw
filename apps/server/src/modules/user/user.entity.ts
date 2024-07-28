@@ -5,8 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Photo } from '../photos/photo.entity';
+import { Media } from '../media/media.entity';
 
 @Entity()
 export class User {
@@ -21,6 +24,10 @@ export class User {
 
   @Column({ unique: true })
   email: string;
+
+  @OneToOne(() => Media)
+  @JoinColumn()
+  avatar?: Media;
 
   @OneToMany(() => Photo, (photo) => photo.user, { nullable: true })
   photos?: Photo[];

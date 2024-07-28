@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { UserGalleryItem } from './UserGalleryItem';
+import { useProfileStore } from '@/pages/profile/store/useProfileStore';
 
 interface UserGalleryProps {
   photos: {
@@ -9,7 +10,10 @@ interface UserGalleryProps {
 }
 
 export function UserGallery({ photos }: UserGalleryProps) {
-  const gallery = photos.map((photo) => <UserGalleryItem photo={photo} />);
+  const profile = useProfileStore((store) => store.profile);
+  const gallery = photos.map((photo) => (
+    <UserGalleryItem photo={photo} user={profile} />
+  ));
 
   return (
     <Tabs defaultValue="posts" className="w-full mx-auto mt-10">

@@ -1,22 +1,23 @@
-import { TypeOrmModule } from '../imports/typeorm.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
-import { GraphqlModule } from '../imports/grpahql.module';
-import { ConfigModule } from '../imports/config.module';
 import { MediaModule } from '../media/media.module';
-import { AuthModule } from '../auth/auth.module';
 import { EmailModule } from '../email/email.module';
 import { PhotoModule } from '../photos/photo.module';
+import { ConfigModule } from '@nestjs/config';
+import { getConfigMConfig } from '../config/configM.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { getTypeOrmConfig } from '../config/typeOrm.config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { getGraphqlConfig } from '../config/graphql.config';
 
 @Module({
   imports: [
-    ConfigModule,
-    TypeOrmModule,
-    GraphqlModule,
+    ConfigModule.forRoot(getConfigMConfig()),
+    TypeOrmModule.forRoot(getTypeOrmConfig()),
+    GraphQLModule.forRoot(getGraphqlConfig()),
     EmailModule,
-    AuthModule,
     MediaModule,
     UserModule,
     PhotoModule,

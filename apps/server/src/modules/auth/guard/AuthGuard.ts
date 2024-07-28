@@ -8,7 +8,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthService } from '../auth.service';
 
 @Injectable()
-export class RequiredAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

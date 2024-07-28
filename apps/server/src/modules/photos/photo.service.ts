@@ -15,9 +15,11 @@ export class PhotoService {
   async createUserPhotos(photoIds: number[], userId: number): Promise<Photo[]> {
     const user = await this.userService.findById(userId);
     const result = [];
+    console.log(photoIds);
 
     for (const photoId of photoIds) {
       const media = await this.mediaService.findById(photoId);
+      console.log(user, media);
       const photo = await this.photoRepository.create({ user, media });
       result.push(photo);
     }

@@ -39,6 +39,7 @@ type ProfileInput {
   id: Int!
   photos: [PhotoModel!]
   name: String
+  avatar: MediaModel
   login: String!
   email: String!
   isActive: Boolean!
@@ -71,6 +72,7 @@ type Mutation {
   confirmLogin(input: ConfirmLoginCodeInput!): LoginAnswerModel!
   confirmRegister(input: ConfirmRegisterCodeInput!): AuthAnswer!
   createUser(input: UserCreateInput!): UserModel!
+  updateUser(input: UpdateUserInput!): UserModel!
   delete(id: Float!): UserModel!
 }
 
@@ -104,4 +106,14 @@ input UserCreateInput {
   isActive: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+input UpdateUserInput {
+  name: String
+  login: String
+  avatarId: Int
+  email: String
+  isActive: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
 }

@@ -24,7 +24,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
       user={{
         name: profile.login,
         fullName: profile?.name || '',
-        avatar: '',
+        avatar: profile.avatar.url,
         posts: 0,
         followers: 0,
         following: 0,

@@ -31,6 +31,11 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     return this.findById(id);
   }
 
+  async save(id: number, data: any): Promise<any> {
+    await this.model.save({ id, data });
+    return this.findById(id);
+  }
+
   async delete(id: number): Promise<void> {
     await this.model.delete(id);
   }

@@ -10,6 +10,9 @@ import { Input } from '@/shared/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { AvatarEdit } from '@/widgets/AvatarEdit/ui/AvatarEdit';
+import { UserAvatar } from '@/entities/user';
+import { Button } from '@/shared/ui/button';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter correct email' }),
@@ -32,6 +35,10 @@ export function AccountForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <UserAvatar src="" className="w-60 h-60" fallback="fw" />
+          <Button>Edit avatar</Button>
+        </div>
         <FormField
           control={form.control}
           name="email"
@@ -58,6 +65,7 @@ export function AccountForm() {
             </FormItem>
           )}
         />
+        <AvatarEdit />
         {/* <Button type="submit">Submit</Button> */}
       </form>
     </Form>

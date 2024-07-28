@@ -54,7 +54,7 @@ export function ProfilePage() {
   return (
     <div className="px-4 md:px-8 lg:px-10 w-full">
       <Navbar />
-      <div className="px-0 md:px-10 xl:px-48 2xl:px-96">
+      <div className="px-0 md:px-10 xl:px-48 2xl:px-[500px]">
         {/* @ts-ignore */}
         <ProfileHeader profile={profile} />
         <div className="mt-10">

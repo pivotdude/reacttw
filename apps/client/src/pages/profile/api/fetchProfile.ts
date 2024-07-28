@@ -9,7 +9,9 @@ export interface FetchProfileResponse {
     name?: string;
     isUserProfile: boolean;
     login: string;
-
+    avatar: {
+      url: string;
+    };
     photos: {
       id: number;
       media: {
@@ -30,6 +32,9 @@ export const fetchProfile = async (
         name
         isUserProfile
         login
+        avatar {
+          url
+        }
         photos {
           id
           media {

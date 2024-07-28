@@ -16,6 +16,11 @@ export class UserService {
     return this.userRepository.getAll();
   }
 
+  async update(id: number, data: any) {
+    console.log(id, data);
+    return this.userRepository.update(id, { avatar: data.avatarId });
+  }
+
   // async findByInput(
   //   input: UserInput,
   //   userId: number,
