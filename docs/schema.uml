@@ -1,0 +1,32 @@
+@startuml
+' Define components
+rectangle "App module" as AppModule
+rectangle "Service modules" {
+    rectangle ConfigModule
+    rectangle TypeOrmModule
+    rectangle GraphqlModule
+}
+rectangle "Globals" {
+    rectangle AuthModule
+}
+rectangle MediaModule
+rectangle PhotoModule
+rectangle UserModule
+rectangle EmailModule
+rectangle EmailTypeModule
+rectangle MailerModule
+' Define relationships
+AppModule --> MediaModule
+AppModule --> PhotoModule
+AppModule --> UserModule
+AppModule --> EmailModule
+AppModule --> AuthModule
+AppModule --> "Service modules"
+PhotoModule --> MediaModule
+EmailModule --> EmailTypeModule
+EmailModule --> MailerModule
+' Forward references (red arrows)
+EmailModule .[#red]> UserModule : forwardRef
+AuthModule .[#red]> UserModule : forwardRef
+AuthModule .[#red]> EmailModule : forwardRef
+@enduml

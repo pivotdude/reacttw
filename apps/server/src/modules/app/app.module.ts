@@ -11,12 +11,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { getTypeOrmConfig } from '../config/typeOrm.config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { getGraphqlConfig } from '../config/graphql.config';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(getConfigMConfig()),
     TypeOrmModule.forRoot(getTypeOrmConfig()),
     GraphQLModule.forRoot(getGraphqlConfig()),
+    AuthModule,
     EmailModule,
     MediaModule,
     UserModule,
