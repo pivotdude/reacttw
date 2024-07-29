@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { EmptyUploadZone } from '@/shared/components/UploadZone';
-import { useUploadStore } from '@/shared/components/UploadZone/store/useUploadStore';
 import { Button } from '@/shared/ui/button';
 import { uploadFile } from '@/shared/components/UploadZone/utils/uploadFile';
 import { IFile, IUploadedFile } from '@/shared/components/UploadZone/model';
@@ -10,27 +9,14 @@ import { updateAvatar } from '../api/UpdateAvatar';
 interface AvatarEditProps {}
 
 export function AvatarEdit(props: AvatarEditProps) {
-  const files = useUploadStore((store) => store.files);
   const [image, setImage] = useState(null);
   const [scale, setScale] = useState(1);
   const editorRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleScaleChange = (newScale) => {
+  const handleScaleChange = (newScale: number) => {
     setScale(newScale);
   };
-
-  useEffect(() => {
-    if (files[0]?.result?.url) {
-      fetch(files[0].result.url)
-        .then((res) => res.blob())
-        .then((blob) => {
-          const objectURL = URL.createObjectURL(blob);
-          setImage(objectURL);
-        })
-        .catch((error) => console.error('Error fetching image:', error));
-    }
-  }, [files]);
 
   const handleSave = async () => {
     if (editorRef.current) {
@@ -64,9 +50,19 @@ export function AvatarEdit(props: AvatarEditProps) {
     }
   };
 
+  const handleFileUpload = (files: IFile[]) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImage(e.target.result);
+    };
+    reader.readAsDataURL(files[0]);
+  };
+
   return (
     <div className="w-[300px]">
-      <EmptyUploadZone withClear={true} before={<Button>Add photo</Button>} />
+      <EmptyUploadZone handleFiles={handleFileUpload}>
+        <Button>Pick photo</Button>
+      </EmptyUploadZone>
       <div className="flex flex-col">
         <AvatarEditor
           ref={editorRef}

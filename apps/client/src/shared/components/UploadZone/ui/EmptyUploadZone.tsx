@@ -1,36 +1,21 @@
 import React, { ReactNode, useCallback, useRef } from 'react';
-import { uploadFileToServer } from '../api/uploadFileToServer';
-import { IFile, IUploadedFile } from '../model';
-import { fileToObject } from '../utils/fileToObject';
-import { useUploadStore } from '../store/useUploadStore';
+import { IFile } from '../model';
+import { twMerge } from 'tailwind-merge';
 
 interface EmptyUploadZoneProps {
-  before?: ReactNode;
+  children?: ReactNode;
   after?: ReactNode;
-  withClear?: Boolean;
+  handleFiles: (newFiles: IFile[]) => void;
+  className?: string;
 }
 
 export function EmptyUploadZone({
-  before,
+  children,
   after,
-  withClear,
+  handleFiles,
+  className,
 }: EmptyUploadZoneProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { files, setFiles, updateFile } = useUploadStore();
-
-  const uploadFile = async (file: IFile): Promise<IUploadedFile> => {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const result = await uploadFileToServer(formData);
-      return result;
-    } catch (error) {
-      console.error('Ошибка при загрузке файла:', error);
-      // @ts-ignore
-      return { ...file, status: 'error', error: (error as Error).message };
-    }
-  };
 
   const onDrop = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -47,32 +32,6 @@ export function EmptyUploadZone({
     handleFiles(selectedFiles);
   };
 
-  const handleFiles = async (newFiles: IFile[]) => {
-    const updatedFiles = newFiles.map((file) => ({
-      id: new Date().getTime(),
-      ...fileToObject(file),
-      status: 'loading',
-    }));
-
-    if (withClear) {
-      // @ts-ignore
-      setFiles([...updatedFiles]);
-    } else {
-      // @ts-ignore
-      setFiles([...files, ...updatedFiles]);
-    }
-
-    for (let i = 0; i < updatedFiles.length; i++) {
-      const result = await uploadFile(newFiles[i]);
-      updateFile(updatedFiles[i].id, {
-        ...updatedFiles[i],
-        // @ts-ignore
-        result,
-        status: 'success',
-      });
-    }
-  };
-
   const handleUploadZoneClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -81,14 +40,14 @@ export function EmptyUploadZone({
   };
 
   return (
-    <div
-      className="w-full"
-      onDrop={onDrop}
-      onDragOver={onDragOver}
-      onClick={handleUploadZoneClick}
-    >
-      <div>
-        {before}
+    <>
+      <div
+        className={twMerge('w-full', className)}
+        onDrop={onDrop}
+        onDragOver={onDragOver}
+        onClick={handleUploadZoneClick}
+      >
+        {children}
         <input
           ref={fileInputRef}
           type="file"
@@ -96,8 +55,8 @@ export function EmptyUploadZone({
           className="hidden"
           multiple
         />
-        {after}
       </div>
-    </div>
+      {after}
+    </>
   );
 }
