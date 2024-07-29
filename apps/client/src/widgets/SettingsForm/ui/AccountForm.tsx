@@ -11,9 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { AvatarEdit } from '@/widgets/AvatarEdit/ui/AvatarEdit';
-import { UserAvatar } from '@/entities/user';
-import { Button } from '@/shared/ui/button';
-import { AccountAvatar } from './AccountAvatar';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter correct email' }),
@@ -35,7 +32,7 @@ export function AccountForm() {
 
   return (
     <div className="space-y-8">
-      <AccountAvatar />
+      <AvatarEdit />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space--4">

@@ -41,7 +41,7 @@ export function ProfilePage() {
         setErrorMessage(e.response.errors[0].message);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [params]);
 
   if (error === 'NOT_FOUND') {
     return <NotFoundPage />;
@@ -54,7 +54,7 @@ export function ProfilePage() {
   return (
     <div className="px-4 md:px-8 lg:px-10 w-full">
       <Navbar />
-      <div className="px-0 md:px-10 xl:px-48 2xl:px-[500px]">
+      <div className="px-0 md:px-10 xl:px-48 2xl:px-[23%]">
         {/* @ts-ignore */}
         <ProfileHeader profile={profile} />
         <div className="mt-10">
