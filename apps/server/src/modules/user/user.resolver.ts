@@ -44,8 +44,8 @@ export class UserResolver {
 
   @UseGuards(AuthGuard)
   @Query((returns) => UserModel)
-  async account(@Context('req') req: any) {
-    return this.userService.findById(req?.user?.id);
+  async account(@Context('req') req: any, @Info() info: GraphQLResolveInfo) {
+    return this.userService.findById(req?.user?.id, info);
   }
 
   @Mutation((returns) => UserModel)

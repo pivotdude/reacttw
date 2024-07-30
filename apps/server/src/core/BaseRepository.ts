@@ -11,8 +11,8 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     return this.model.find();
   }
 
-  async findById(id: number): Promise<G | null> {
-    return this.model.findOneBy({ id });
+  async findById(id: number, relations?): Promise<G | null> {
+    return this.model.findOne({ where: { id }, relations });
   }
 
   async findByLogin(login: string, relations?: any): Promise<G | null> {

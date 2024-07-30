@@ -2,12 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type UserModel {
+type MediaModel {
   id: Int!
-  name: String
-  login: String!
-  email: String!
-  isActive: Boolean!
+  url: String!
+  size: Float!
+  name: String!
+  mimeType: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -17,12 +17,13 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type MediaModel {
+type UserModel {
   id: Int!
-  url: String!
-  size: Float!
-  name: String!
-  mimeType: String!
+  name: String
+  avatar: MediaModel
+  login: String!
+  email: String!
+  isActive: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

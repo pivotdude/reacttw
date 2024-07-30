@@ -4,8 +4,10 @@ import { IFile, IUploadedFile } from '@/shared/components/UploadZone/model';
 import { uploadFile } from '@/shared/components/UploadZone/utils/uploadFile';
 import { useAvatarEditStore } from '../store/useAvatarEditStore';
 import { useShallow } from 'zustand/react/shallow';
+import { useToast } from '@/shared/ui/use-toast';
 
 export function AvatarConfirm({ editorRef }: { editorRef: any }) {
+  const { toast } = useToast();
   const { setIsLoading, clear } = useAvatarEditStore(
     useShallow((store) => ({
       setIsLoading: store.setIsLoading,
@@ -35,7 +37,11 @@ export function AvatarConfirm({ editorRef }: { editorRef: any }) {
           throw new Error(result.error || 'Unknown error occurred');
         }
 
-        console.log('Upload result:', result);
+        toast({
+          variant: 'success',
+          title: 'Avatar updated',
+          description: 'Your avatar has been updated',
+        });
         clear();
       } catch (error) {
         console.error('Error saving avatar:', error);

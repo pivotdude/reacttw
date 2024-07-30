@@ -1,7 +1,6 @@
 import { AvatarPreview } from './AvatarPreview';
 import { AvatarUploadZone } from './AvatarUploadZone';
 import { useAvatarEditStore } from '../store/useAvatarEditStore';
-import { AvatarConfirm } from './AvatarConfirm';
 
 export function AvatarEdit() {
   const step = useAvatarEditStore((store) => store.step);

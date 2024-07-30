@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Loader } from '@/shared/components/Loader';
 import { useShallow } from 'zustand/react/shallow';
 import { UploadPhoto } from '@/widgets/UploadPhoto/ui/UploadPhoto';
+import { Layout } from '@/widgets/Layout/ui/Layout';
 
 export function ProfilePage() {
   const params = useParams();
@@ -52,16 +53,18 @@ export function ProfilePage() {
   }
 
   return (
-    <div className="px-4 md:px-8 lg:px-10 w-full">
-      <Navbar />
-      <div className="px-0 md:px-10 xl:px-48 2xl:px-[23%]">
-        {/* @ts-ignore */}
-        <ProfileHeader profile={profile} />
-        <div className="mt-10">
-          <UploadPhoto />
-          <UserGallery photos={photos} />
+    <Layout>
+      <div className="px-4 md:px-8 lg:px-10 w-full">
+        <Navbar />
+        <div className="px-0 md:px-10 xl:px-48 2xl:px-[23%]">
+          {/* @ts-ignore */}
+          <ProfileHeader profile={profile} />
+          <div className="mt-10">
+            <UploadPhoto />
+            <UserGallery photos={photos} />
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }

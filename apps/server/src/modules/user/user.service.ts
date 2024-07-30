@@ -49,8 +49,10 @@ export class UserService {
     return { ...user, isUserProfile };
   }
 
-  async findById(id: number) {
-    return this.userRepository.findById(id);
+  async findById(id: number, info?: GraphQLResolveInfo) {
+    const relations = getRelations(info);
+    console.log(relations);
+    return this.userRepository.findById(id, relations);
   }
 
   async findByEmail(email: string) {

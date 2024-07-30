@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { User } from './user.entity';
+import { MediaModel } from '../media/media.model';
 
 @ObjectType()
 export class UserModel implements User {
@@ -8,6 +9,9 @@ export class UserModel implements User {
 
   @Field({ nullable: true })
   name?: string;
+
+  @Field((type) => MediaModel, { nullable: true })
+  avatar?: MediaModel;
 
   @Field()
   login: string;
