@@ -1,16 +1,16 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { UserGalleryItem } from './UserGalleryItem';
-import { useProfileStore } from '@/pages/profile/store/useProfileStore';
+import { ProfileT } from '@/pages/profile/store/useProfileStore';
 
 interface UserGalleryProps {
   photos: {
     src: string;
     alt: string;
   }[];
+  profile: ProfileT;
 }
 
-export function UserGallery({ photos }: UserGalleryProps) {
-  const profile = useProfileStore((store) => store.profile);
+export function UserGallery({ photos, profile }: UserGalleryProps) {
   const gallery = photos.map((photo) => (
     <UserGalleryItem photo={photo} user={profile} />
   ));

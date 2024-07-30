@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 import { useSettingsStore } from '../store/useSettingsStore';
 import { useShallow } from 'zustand/react/shallow';
 import { fetchSettingsInfo } from '../api/fetchSettingsInfo';
-import { Loader } from '@/shared/components/Loader';
 import { Layout } from '@/widgets/Layout/ui/Layout';
+import { LoadingScreen } from '@/shared/components/Loader';
 
 export function SettingsPage() {
   const { loading, setLoading, setData, setError } = useSettingsStore(
@@ -33,7 +33,7 @@ export function SettingsPage() {
   }, []);
 
   if (loading) {
-    return <Loader />;
+    return <LoadingScreen />;
   }
 
   return (

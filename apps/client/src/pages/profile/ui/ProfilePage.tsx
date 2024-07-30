@@ -1,15 +1,15 @@
 import { Navbar } from '@/widgets/Navbar/ui/Navbar';
-import { UserGallery } from '@/entities/user';
 import { useProfileStore } from '../store/useProfileStore';
 import { NotFoundPage } from '@/pages/notFound/ui/NotFoundPage';
 import { ProfileHeader } from '@/widgets/ProfileHeader';
 import { fetchProfile } from '../api/fetchProfile';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Loader } from '@/shared/components/Loader';
 import { useShallow } from 'zustand/react/shallow';
 import { UploadPhoto } from '@/widgets/UploadPhoto/ui/UploadPhoto';
 import { Layout } from '@/widgets/Layout/ui/Layout';
+import { UserGallery } from '@/widgets/UserGallery';
+import { LoadingScreen } from '@/shared/components/Loader';
 
 export function ProfilePage() {
   const params = useParams();
@@ -49,7 +49,7 @@ export function ProfilePage() {
   }
 
   if (loading) {
-    return <Loader />;
+    return <LoadingScreen />;
   }
 
   return (
@@ -61,7 +61,7 @@ export function ProfilePage() {
           <ProfileHeader profile={profile} />
           <div className="mt-10">
             <UploadPhoto />
-            <UserGallery photos={photos} />
+            <UserGallery photos={photos} profile={profile} />
           </div>
         </div>
       </div>

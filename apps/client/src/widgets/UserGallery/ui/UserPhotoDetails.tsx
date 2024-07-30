@@ -4,10 +4,10 @@ import 'viewerjs/dist/viewer.css';
 import { DialogContent, DialogHeader } from '@/shared/ui/dialog';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
-import { UserCard } from './UserCard';
+import { UserCard } from '../../../entities/user/ui/UserCard';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
-import { Loading } from '@/shared/components/Loading';
+import { LoadingSpinner } from '@/shared/components/Loader';
 
 interface UserPhotoDetailsProps {
   src: string;
@@ -24,6 +24,7 @@ export function UserPhotoDetails({
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  console.log('user', user);
 
   useEffect(() => {
     if (imageRef.current) {
@@ -75,11 +76,13 @@ export function UserPhotoDetails({
       <DialogHeader>
         <div className="flex h-full">
           <div className="w-2/3 h-[90vh] flex items-center justify-center bg-gray-100">
-            {isLoading && <Loading />}
+            {isLoading && <LoadingSpinner />}
             {image}
           </div>
           <div className="w-1/3 h-[90vh] p-4 flex flex-col bg-white">
-            <UserCard src="" user={{ name: user.login, avatar: '' }} />
+            <UserCard
+              user={{ name: user.login, avatar: user?.avatar?.url || '' }}
+            />
             <div className="flex-grow overflow-y-auto mb-4">
               {comments.map((comment) => (
                 <div key={comment.id} className="mb-2">

@@ -2,52 +2,52 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ProfilePageLazy } from '@/pages/profile';
 import { HomePageLazy } from '@/pages/home';
 import { SignInPageLazy } from '@/pages/signin';
-import { SuspenseLoader } from '@/widgets/Loader';
 import { SignUpPageLazy } from '@/pages/signup';
 import { ErrorBoundary } from '@/shared/components/errorBoundary/ui/ErrorBoundary';
 import { SettingsPageLazy } from '@/pages/settings/ui/SettingsPageLazy';
+import { SuspenseLoadingScreen } from '@/shared/components/Loader';
 
 export function AppRouter() {
   const router = createBrowserRouter([
     {
       path: '/',
       element: (
-        <SuspenseLoader>
+        <SuspenseLoadingScreen>
           <HomePageLazy />
-        </SuspenseLoader>
+        </SuspenseLoadingScreen>
       ),
       errorElement: <ErrorBoundary />,
     },
     {
       path: '/profile/:name',
       element: (
-        <SuspenseLoader>
+        <SuspenseLoadingScreen>
           <ProfilePageLazy />
-        </SuspenseLoader>
+        </SuspenseLoadingScreen>
       ),
     },
     {
       path: '/signup',
       element: (
-        <SuspenseLoader>
+        <SuspenseLoadingScreen>
           <SignUpPageLazy />
-        </SuspenseLoader>
+        </SuspenseLoadingScreen>
       ),
     },
     {
       path: '/signin',
       element: (
-        <SuspenseLoader>
+        <SuspenseLoadingScreen>
           <SignInPageLazy />
-        </SuspenseLoader>
+        </SuspenseLoadingScreen>
       ),
     },
     {
       path: '/settings',
       element: (
-        <SuspenseLoader>
+        <SuspenseLoadingScreen>
           <SettingsPageLazy />
-        </SuspenseLoader>
+        </SuspenseLoadingScreen>
       ),
     },
   ]);

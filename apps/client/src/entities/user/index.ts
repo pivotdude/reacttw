@@ -1,4 +1,3 @@
-export { UserCardWithButton } from "./ui/UserCardWithButton";
-export { UserAvatar } from "./ui/UserAvatar";
-export { UserGallery } from "./ui/UserGallery";
-export { UserProfileHeader } from "./ui/UserProfileHeader";
+export { UserCardWithButton } from './ui/UserCardWithButton';
+export { UserAvatar } from './ui/UserAvatar';
+export { UserProfileHeader } from './ui/UserProfileHeader';
