@@ -10,6 +10,7 @@ interface SavePostButtonProps {
 
 export function SavePostButton({ postId }: SavePostButtonProps) {
   const [isActive, setIsActive] = useState(false);
+  console.log(postId);
 
   return (
     <div>

@@ -10,6 +10,7 @@ interface LikePostButtonProps {
 
 export function LikePostButton({ postId }: LikePostButtonProps) {
   const [isActive, setIsActive] = useState(false);
+  console.log(postId);
 
   return (
     <div>

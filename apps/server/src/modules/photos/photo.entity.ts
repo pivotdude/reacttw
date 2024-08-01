@@ -6,9 +6,11 @@ import {
   ManyToOne,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Media } from '../media/media.entity';
 import { User } from '../user/user.entity';
+import { Comment } from './comment/comment.entity';
 
 @Entity()
 export class Photo {
@@ -18,6 +20,9 @@ export class Photo {
   @OneToOne(() => Media)
   @JoinColumn()
   media: Media;
+
+  @OneToMany(() => Comment, (comment) => comment.photo)
+  comments?: Comment[];
 
   @ManyToOne(() => User)
   user: User;

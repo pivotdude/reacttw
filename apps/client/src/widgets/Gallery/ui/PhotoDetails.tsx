@@ -34,7 +34,7 @@ export function PhotoDetails({ src, hideModal, user }: PhotoDetailsProps) {
 
   useEffect(() => {
     if (imageRef.current) {
-      const viewer = new Viewer(imageRef.current, {
+      new Viewer(imageRef.current, {
         inline: false,
         viewed() {
           hideModal();

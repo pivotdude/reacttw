@@ -4,6 +4,7 @@ import { Email } from '../email/email.entity';
 import { EmailType } from '../email/emailType/emailType.entity';
 import { Photo } from '../photos/photo.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Comment } from '../photos/comment/comment.entity';
 
 export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   return {
@@ -13,7 +14,7 @@ export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     username: 'postgres',
     password: 'postgres',
     database: 'test',
-    entities: [User, Media, EmailType, Email, Photo],
+    entities: [User, Media, EmailType, Email, Comment, Photo],
     synchronize: true,
   };
 };

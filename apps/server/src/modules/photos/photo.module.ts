@@ -6,9 +6,15 @@ import { Photo } from './photo.entity';
 import { UserModule } from '../user/user.module';
 import { MediaModule } from '../media/media.module';
 import { PhotoResover } from './photo.resolver';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Photo]), UserModule, MediaModule],
+  imports: [
+    TypeOrmModule.forFeature([Photo]),
+    UserModule,
+    MediaModule,
+    CommentModule,
+  ],
   providers: [PhotoRepository, PhotoService, PhotoResover],
 })
 export class PhotoModule {}

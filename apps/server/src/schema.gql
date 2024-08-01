@@ -49,6 +49,15 @@ type ProfileInput {
   updatedAt: DateTime!
 }
 
+type CommentModel {
+  id: Int!
+  text: String!
+  photo: PhotoModel
+  user: UserModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type AuthAnswer {
   message: String!
   ok: Boolean!
@@ -76,6 +85,7 @@ type Mutation {
   createUser(input: UserCreateInput!): UserModel!
   updateUser(input: UpdateUserInput!): UserModel!
   delete(id: Float!): UserModel!
+  createComment(input: CreateCommentInput!): CommentModel!
 }
 
 input CreateUserPhotoInput {
@@ -118,4 +128,9 @@ input UpdateUserInput {
   isActive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input CreateCommentInput {
+  text: String!
+  photo: Int!
 }

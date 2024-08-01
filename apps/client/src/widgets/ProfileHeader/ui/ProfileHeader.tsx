@@ -7,7 +7,9 @@ interface ProfileHeaderProps {
   profile: {
     login: string;
     name?: string;
-    avatar: string | null;
+    avatar?: {
+      url: string;
+    };
     counts: {
       posts: number;
       followers: number;
@@ -24,7 +26,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
       user={{
         name: profile.login,
         fullName: profile?.name || '',
-        avatar: profile.avatar.url,
+        avatar: profile?.avatar?.url || '',
         posts: 0,
         followers: 0,
         following: 0,
