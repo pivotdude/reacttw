@@ -15,6 +15,7 @@ import { TokenGuard } from '../auth/guard/TokenGuard';
 import { AuthGuard } from '../auth/guard/AuthGuard';
 import { GraphQLResolveInfo } from 'graphql';
 import { UpdateUserInput } from './input/UpdateUserInput';
+import { getRelations } from 'src/utils/getRelations';
 
 @Resolver((of) => UserModel)
 export class UserResolver {
@@ -45,7 +46,8 @@ export class UserResolver {
   @UseGuards(AuthGuard)
   @Query((returns) => UserModel)
   async account(@Context('req') req: any, @Info() info: GraphQLResolveInfo) {
-    return this.userService.findById(req?.user?.id, info);
+    const relations = getRelations(info);
+    return this.userService.findById(req?.user?.id, relations);
   }
 
   @Mutation((returns) => UserModel)

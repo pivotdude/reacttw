@@ -21,6 +21,5 @@ export const updateAvatar = async (
       }
     }
   `;
-  console.log(avatarId);
   return sendRequest<UpdateAvatarResponse>(query, { input: { avatarId } });
 };

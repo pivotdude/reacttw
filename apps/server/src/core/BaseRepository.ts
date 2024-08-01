@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 
 export abstract class BaseRepository<T extends Repository<any>, G> {
   public model: T;
@@ -7,8 +7,8 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     this.model = model;
   }
 
-  async getAll(): Promise<G[]> {
-    return this.model.find();
+  async getAll(params?: FindManyOptions<T>): Promise<G[]> {
+    return this.model.find(params);
   }
 
   async findById(id: number, relations?): Promise<G | null> {

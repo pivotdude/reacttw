@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
 import { UploadPhoto } from '@/widgets/UploadPhoto/ui/UploadPhoto';
 import { Layout } from '@/widgets/Layout/ui/Layout';
-import { UserGallery } from '@/widgets/UserGallery';
+import { UserGallery } from '@/widgets/Gallery';
 import { LoadingScreen } from '@/shared/components/Loader';
 
 export function ProfilePage() {

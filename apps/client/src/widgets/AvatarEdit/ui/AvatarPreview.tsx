@@ -12,6 +12,8 @@ export function AvatarPreview() {
       image: state.image,
       incrementScale: state.incrementScale,
       decrimentScale: state.decrimentScale,
+      isLoading: state.isLoading,
+      setIsLoading: state.setIsLoading,
     }),
   );
 

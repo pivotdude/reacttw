@@ -2,34 +2,16 @@ import { TypographyH2 } from '@/shared/ui/Typography';
 import { Navbar } from '@/widgets/Navbar/ui/Navbar';
 import { SettingsForm } from '@/widgets/SettingsForm';
 import { SettingsMenu } from '@/widgets/SettingsMenu/ui/SettingsMenu';
-import { useEffect } from 'react';
-import { useSettingsStore } from '../store/useSettingsStore';
-import { useShallow } from 'zustand/react/shallow';
-import { fetchSettingsInfo } from '../api/fetchSettingsInfo';
 import { Layout } from '@/widgets/Layout/ui/Layout';
 import { LoadingScreen } from '@/shared/components/Loader';
+import { useFetchSettingsData } from '@/pages/profile/api/useFetchSettingsData';
+import { useEffect } from 'react';
 
 export function SettingsPage() {
-  const { loading, setLoading, setData, setError } = useSettingsStore(
-    useShallow((store) => ({
-      loading: store.loading,
-      setLoading: store.setLoading,
-      data: store.data,
-      setData: store.setData,
-      setError: store.setError,
-    })),
-  );
+  const { loading, fetchData } = useFetchSettingsData();
 
   useEffect(() => {
-    setLoading(true);
-    fetchSettingsInfo()
-      .then((result) => {
-        setData(result.account);
-      })
-      .catch((e) => {
-        setError(e.response.errors[0].message);
-      })
-      .finally(() => setLoading(false));
+    fetchData();
   }, []);
 
   if (loading) {

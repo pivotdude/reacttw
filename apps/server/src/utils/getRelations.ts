@@ -1,6 +1,9 @@
 import { GraphQLResolveInfo } from 'graphql';
 
 export function getRelations(info: GraphQLResolveInfo) {
+  if (!info) {
+    return {};
+  }
   const initialSelections = info.fieldNodes[0].selectionSet.selections;
   // @ts-ignore
   const names = getSelectionNames(initialSelections);

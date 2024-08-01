@@ -1,7 +1,7 @@
 import { FriendsList } from '@/widgets/FriendsList/ui/FriendsList';
+import { ImageFeed } from '@/widgets/ImageFeed/ui/ImageFeed';
 import { Layout } from '@/widgets/Layout/ui/Layout';
 import { Navbar } from '@/widgets/Navbar/ui/Navbar';
-import { PostsFeed } from '@/widgets/PostsFeed';
 
 export function HomePage() {
   return (
@@ -10,7 +10,7 @@ export function HomePage() {
         <Navbar />
         <div className="grid grid-cols-3 h-full py-2 gap-x-10 gap-y-4 px-0 md:px-10 xl:px-48 2xl:px-64">
           <div className="h-full col-span-2">
-            <PostsFeed />
+            <ImageFeed />
           </div>
           <div className="h-full col-span-1">
             <FriendsList />

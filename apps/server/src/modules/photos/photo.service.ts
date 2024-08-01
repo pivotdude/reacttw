@@ -3,6 +3,8 @@ import { PhotoRepository } from './photo.repository';
 import { UserService } from '../user/user.service';
 import { MediaService } from '../media/media.service';
 import { Photo } from './photo.entity';
+import { getRelations } from '../../utils/getRelations';
+import { GraphQLResolveInfo } from 'graphql';
 
 @Injectable()
 export class PhotoService {
@@ -12,14 +14,27 @@ export class PhotoService {
     private readonly mediaService: MediaService,
   ) {}
 
+  async findAll({
+    info,
+    userId,
+  }: {
+    info: GraphQLResolveInfo;
+    userId: number;
+  }) {
+    const relations = getRelations(info);
+    const user = await this.userService.findById(userId);
+
+    return this.photoRepository.getAll({
+      relations,
+    });
+  }
+
   async createUserPhotos(photoIds: number[], userId: number): Promise<Photo[]> {
     const user = await this.userService.findById(userId);
     const result = [];
-    console.log(photoIds);
 
     for (const photoId of photoIds) {
       const media = await this.mediaService.findById(photoId);
-      console.log(user, media);
       const photo = await this.photoRepository.create({ user, media });
       result.push(photo);
     }

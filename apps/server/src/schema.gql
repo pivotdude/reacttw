@@ -61,6 +61,7 @@ type LoginAnswerModel {
 }
 
 type Query {
+  photos: [PhotoModel!]!
   users: [UserModel!]!
   profile(login: String!): ProfileInput!
   account: UserModel!

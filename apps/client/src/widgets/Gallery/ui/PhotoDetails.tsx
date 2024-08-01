@@ -8,23 +8,29 @@ import { UserCard } from '../../../entities/user/ui/UserCard';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { LoadingSpinner } from '@/shared/components/Loader';
+import { usePhotoDetails } from '../store/usePhotoDetails';
+import { CommentList } from './CommentList';
 
-interface UserPhotoDetailsProps {
+interface PhotoDetailsProps {
   src: string;
-  user: any;
+  user: {
+    login: string;
+    avatar: {
+      url: string;
+    };
+  };
   hideModal: () => void;
 }
 
-export function UserPhotoDetails({
-  src,
-  hideModal,
-  user,
-}: UserPhotoDetailsProps) {
+export function PhotoDetails({ src, hideModal, user }: PhotoDetailsProps) {
   const imageRef = useRef<HTMLImageElement>(null);
-  const [comments, setComments] = useState([]);
+  const { comments, setComments } = usePhotoDetails((store) => ({
+    comments: store.comments,
+    setComments: store.setComments,
+  }));
+
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  console.log('user', user);
 
   useEffect(() => {
     if (imageRef.current) {
@@ -83,17 +89,7 @@ export function UserPhotoDetails({
             <UserCard
               user={{ name: user.login, avatar: user?.avatar?.url || '' }}
             />
-            <div className="flex-grow overflow-y-auto mb-4">
-              {comments.map((comment) => (
-                <div key={comment.id} className="mb-2">
-                  <p className="font-semibold">{comment.user}</p>
-                  <p>{comment.text}</p>
-                  <p className="text-xs text-gray-500">
-                    {new Date(comment.date).toLocaleString()}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <CommentList comments={comments} />
             <div className="flex">
               <Input
                 type="text"

@@ -5,9 +5,11 @@ import { uploadFile } from '@/shared/components/UploadZone/utils/uploadFile';
 import { useAvatarEditStore } from '../store/useAvatarEditStore';
 import { useShallow } from 'zustand/react/shallow';
 import { useToast } from '@/shared/ui/use-toast';
+import { useFetchSettingsData } from '@/pages/profile/api/useFetchSettingsData';
 
 export function AvatarConfirm({ editorRef }: { editorRef: any }) {
   const { toast } = useToast();
+  const { fetchData } = useFetchSettingsData();
   const { setIsLoading, clear } = useAvatarEditStore(
     useShallow((store) => ({
       setIsLoading: store.setIsLoading,
@@ -30,12 +32,8 @@ export function AvatarConfirm({ editorRef }: { editorRef: any }) {
         });
 
         const result: IUploadedFile = await uploadFile(file);
-        console.log('result2', result);
         await updateAvatar(result.id);
-
-        if (result.status === 'error') {
-          throw new Error(result.error || 'Unknown error occurred');
-        }
+        fetchData();
 
         toast({
           variant: 'success',

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { UserPhotoDetails } from './UserPhotoDetails';
 import { Dialog, DialogTrigger } from '@/shared/ui/dialog';
+import { PhotoDetails } from './PhotoDetails';
 
 interface UserGalleryItemProps {
   photo: {
@@ -24,7 +24,7 @@ export function UserGalleryItem({ photo, user }: UserGalleryItemProps) {
         />
       </DialogTrigger>
       {isModalOpen && (
-        <UserPhotoDetails
+        <PhotoDetails
           src={photo.src}
           user={user}
           hideModal={() => setIsModalOpen(false)}

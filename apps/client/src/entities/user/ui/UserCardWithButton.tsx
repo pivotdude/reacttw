@@ -1,5 +1,5 @@
-import { UserAvatar } from "./UserAvatar";
-import { ReactNode } from "react";
+import { UserAvatar } from './UserAvatar';
+import { ReactNode } from 'react';
 
 interface UserCardWithButtonProps {
   name: string;
@@ -12,7 +12,7 @@ export function UserCardWithButton({
   description,
   name,
   src,
-  button
+  button,
 }: UserCardWithButtonProps) {
   return (
     <div className="grid grid-cols-5">

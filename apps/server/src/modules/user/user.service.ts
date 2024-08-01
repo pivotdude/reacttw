@@ -3,7 +3,7 @@ import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { GraphQLResolveInfo } from 'graphql';
-import { getRelations } from './user.relations';
+import { getRelations } from '../../utils/getRelations';
 
 export interface IUserProfile extends User {
   isUserProfile?: boolean;
@@ -17,7 +17,6 @@ export class UserService {
   }
 
   async update(id: number, data: any) {
-    console.log(id, data);
     return this.userRepository.update(id, { avatar: data.avatarId });
   }
 
@@ -49,9 +48,7 @@ export class UserService {
     return { ...user, isUserProfile };
   }
 
-  async findById(id: number, info?: GraphQLResolveInfo) {
-    const relations = getRelations(info);
-    console.log(relations);
+  async findById(id: number, relations?: any) {
     return this.userRepository.findById(id, relations);
   }
 

@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
-import { UserGalleryItem } from './UserGalleryItem';
+import { UserGalleryItem } from './GalleryItem';
 import { ProfileT } from '@/pages/profile/store/useProfileStore';
 
 interface UserGalleryProps {
