@@ -12,10 +12,12 @@ export interface FetchCommentsResponse {
 
 export const fetchComments = async (
   photoId: number,
+  pagination?: { page: number; limit: number },
 ): Promise<FetchCommentsResponse> => {
   const query = gql`
     query fetchComments($input: CommentsInput!) {
       comments(input: $input) {
+        id
         text
         createdAt
         user {
@@ -29,5 +31,7 @@ export const fetchComments = async (
     }
   `;
 
-  return sendRequest<FetchCommentsResponse>(query, { input: { photoId } });
+  return sendRequest<FetchCommentsResponse>(query, {
+    input: { photoId, pagination },
+  });
 };

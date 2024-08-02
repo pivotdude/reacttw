@@ -1,18 +1,20 @@
 import { Button } from '@/shared/ui/button';
-import { usePhotoDetails } from '../store/usePhotoDetails';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form } from '@/shared/ui/form';
 import { sendComment } from '../api/sendComment';
 import { TextAreaFormField } from '@/shared/components/FormField/ui/TextAreaFormField';
+import { useCommentsStore } from '../store/useCommentsStore';
+import { usePhotoDetailsStore } from '../api/usePhotoDetailsStore';
 
 const formSchema = z.object({
   text: z.string(),
 });
 
-export function CommentForm({ imageId }: { imageId: number }) {
-  const { comments, setComments } = usePhotoDetails((store) => ({
+export function CommentForm() {
+  const imageId = usePhotoDetailsStore((store) => store.imageId);
+  const { comments, setComments } = useCommentsStore((store) => ({
     comments: store.comments,
     setComments: store.setComments,
     loading: store.loading,

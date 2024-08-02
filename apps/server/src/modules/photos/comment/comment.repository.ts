@@ -15,12 +15,13 @@ export class CommentRepository extends BaseRepository<
     super(model);
   }
 
-  async getByPhotoId({ photoId, relations }) {
+  async getByPhotoId({ photoId, relations, pagination }) {
     return this.model.find({
       where: {
         photo: { id: photoId },
       },
       relations,
+      ...this.getPagination(pagination),
     });
   }
 }

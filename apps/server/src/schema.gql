@@ -79,6 +79,12 @@ type Query {
 
 input CommentsInput {
   photoId: Int!
+  pagination: PaginationInput
+}
+
+input PaginationInput {
+  page: Int
+  limit: Int
 }
 
 type Mutation {

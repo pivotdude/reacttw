@@ -7,7 +7,9 @@ import { LoadingSpinner } from '@/shared/components/Loader';
 import { UserCard } from '@/entities/user/ui/UserCard';
 import { CommentsBlock } from './CommentsBlock';
 import { useFetchComments } from '../api/useFetchComments';
-import { usePhotoDetails } from '../store/usePhotoDetails';
+import { useCommentsStore } from '../store/useCommentsStore';
+import { useShallow } from 'zustand/react/shallow';
+import { usePhotoDetailsStore } from '../api/usePhotoDetailsStore';
 
 interface PhotoDetailsProps {
   src: string;
@@ -23,9 +25,20 @@ interface PhotoDetailsProps {
 
 export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   const imageRef = useRef<HTMLImageElement>(null);
+
+  const { imageId, setImageId } = usePhotoDetailsStore((store) => ({
+    imageId: store.imageId,
+    setImageId: store.setImageId,
+  }));
+
+  useEffect(() => {
+    setImageId(id);
+  }, [id]);
+
   const [isLoadingImage, setIsLoadingImage] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const loading = usePhotoDetails((store) => store.loading);
+  const loading = useCommentsStore((store) => store.loading);
+
   const { fetchData } = useFetchComments();
 
   useEffect(() => {
@@ -34,8 +47,7 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   }, [isLoadingImage, loading]);
 
   useEffect(() => {
-    console.log(id);
-    fetchData(id);
+    fetchData(id, 1);
   }, [id]);
 
   useEffect(() => {
@@ -84,7 +96,7 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
               <UserCard
                 user={{ name: user.login, avatar: user?.avatar?.url || '' }}
               />
-              <CommentsBlock imageId={id} />
+              <CommentsBlock />
             </div>
           </div>
         )}

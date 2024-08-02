@@ -40,4 +40,17 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
   async delete(id: number): Promise<void> {
     await this.model.delete(id);
   }
+
+  getPagination(pagination: { page: number; limit: number }) {
+    const { page, limit } = pagination;
+
+    if (!page || !limit) {
+      return {};
+    }
+    const skip = (page - 1) * limit;
+    return {
+      take: limit,
+      skip,
+    };
+  }
 }

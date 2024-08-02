@@ -13,7 +13,6 @@ interface GalleryItemProps {
 
 export function GalleryItem({ photo, user }: GalleryItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(photo);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>

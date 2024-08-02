@@ -1,10 +1,10 @@
 import { CommentList } from './CommentList';
-import { usePhotoDetails } from '../store/usePhotoDetails';
 import { LoadingSpinner } from '@/shared/components/Loader';
 import { CommentForm } from './CommentForm';
+import { useCommentsStore } from '../store/useCommentsStore';
 
-export function CommentsBlock({ imageId }: { imageId: number }) {
-  const { comments, loading } = usePhotoDetails((store) => ({
+export function CommentsBlock() {
+  const { comments, loading } = useCommentsStore((store) => ({
     comments: store.comments,
     setComments: store.setComments,
     loading: store.loading,
@@ -15,7 +15,7 @@ export function CommentsBlock({ imageId }: { imageId: number }) {
   return (
     <>
       <CommentList comments={comments} />
-      <CommentForm imageId={imageId} />
+      <CommentForm />
     </>
   );
 }
