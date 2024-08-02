@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
 interface IAvatarEditState {
-  image?: ArrayBuffer;
-  setImage: (image: ArrayBuffer) => void;
+  image?: string;
+  setImage: (image: string) => void;
 
   step: number;
   setStep: (step: number) => void;
@@ -22,7 +22,7 @@ const DEFAULT_SCALE = 1;
 
 export const useAvatarEditStore = create<IAvatarEditState>((set) => ({
   image: undefined,
-  setImage: (image: ArrayBuffer) => set({ image }),
+  setImage: (image: string) => set({ image }),
 
   step: 1,
   setStep: (step: number) => set({ step }),

@@ -15,7 +15,8 @@ export function AvatarUploadZone() {
   const handleFileUpload = (files: IFile[]) => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      setImage(e.target.result);
+      if (!e.target || !e.target?.result) return;
+      setImage(e.target.result as string);
       setStep(2);
     };
     reader.readAsDataURL(files[0]);

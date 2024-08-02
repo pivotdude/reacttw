@@ -29,6 +29,7 @@ export function ProfilePage() {
   const photos = profile?.photos?.map((photo) => ({
     src: photo.media.url,
     alt: photo.media.name,
+    ...photo,
   })) as { src: string; alt: string }[];
 
   useEffect(() => {
@@ -44,12 +45,12 @@ export function ProfilePage() {
       .finally(() => setLoading(false));
   }, [params]);
 
-  if (error === 'NOT_FOUND') {
-    return <NotFoundPage />;
-  }
-
   if (loading) {
     return <LoadingScreen />;
+  }
+
+  if (error === 'NOT_FOUND' || !profile) {
+    return <NotFoundPage />;
   }
 
   return (

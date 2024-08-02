@@ -14,4 +14,13 @@ export class CommentRepository extends BaseRepository<
   constructor(@InjectRepository(Comment) public model: ICommentRepository) {
     super(model);
   }
+
+  async getByPhotoId({ photoId, relations }) {
+    return this.model.find({
+      where: {
+        photo: { id: photoId },
+      },
+      relations,
+    });
+  }
 }

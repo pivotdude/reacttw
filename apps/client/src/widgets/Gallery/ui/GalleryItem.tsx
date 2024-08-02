@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { Dialog, DialogTrigger } from '@/shared/ui/dialog';
-import { PhotoDetails } from './PhotoDetails';
+import { PhotoDetails } from '@/widgets/PhotoDetails/ui/PhotoDetails';
 
-interface UserGalleryItemProps {
+interface GalleryItemProps {
   photo: {
+    id: number;
     src: string;
     alt: string;
   };
   user: any;
 }
 
-export function UserGalleryItem({ photo, user }: UserGalleryItemProps) {
+export function GalleryItem({ photo, user }: GalleryItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(photo);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -25,6 +27,7 @@ export function UserGalleryItem({ photo, user }: UserGalleryItemProps) {
       </DialogTrigger>
       {isModalOpen && (
         <PhotoDetails
+          id={photo.id}
           src={photo.src}
           user={user}
           hideModal={() => setIsModalOpen(false)}

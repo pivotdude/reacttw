@@ -1,9 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
-import { UserGalleryItem } from './GalleryItem';
 import { ProfileT } from '@/pages/profile/store/useProfileStore';
+import { GalleryItem } from './GalleryItem';
 
 interface UserGalleryProps {
   photos: {
+    id: number;
     src: string;
     alt: string;
   }[];
@@ -12,7 +13,7 @@ interface UserGalleryProps {
 
 export function UserGallery({ photos, profile }: UserGalleryProps) {
   const gallery = photos.map((photo) => (
-    <UserGalleryItem photo={photo} user={profile} />
+    <GalleryItem key={photo.src} photo={photo} user={profile} />
   ));
 
   return (

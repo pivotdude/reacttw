@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { AvatarEdit } from '@/widgets/AvatarEdit/ui/AvatarEdit';
 import { useSettingsStore } from '@/pages/settings/store/useSettingsStore';
-import { FormField } from './FormField';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { InputFormField } from '@/shared/components/FormField/ui/InputFormField';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter correct email' }),
@@ -39,15 +39,19 @@ export function AccountForm() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
+              <InputFormField
                 name="email"
                 control={form.control}
-                placeholder="Your email adress"
+                HOCProps={{
+                  placeholder: 'Your email adress',
+                }}
               />
-              <FormField
+              <InputFormField
                 name="name"
                 control={form.control}
-                placeholder="Your name"
+                HOCProps={{
+                  placeholder: 'Your name',
+                }}
               />
               <Button type="submit">Submit</Button>
             </form>

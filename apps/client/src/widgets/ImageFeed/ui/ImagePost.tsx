@@ -1,7 +1,7 @@
-import { PhotoDetails } from '@/widgets/Gallery/ui/PhotoDetails';
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import { IPhoto } from '../model';
+import { PhotoDetails } from '@/widgets/PhotoDetails/ui/PhotoDetails';
 
 interface PostImageProps {
   photo: IPhoto;
@@ -9,7 +9,6 @@ interface PostImageProps {
 
 export function PostImage({ photo }: PostImageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(photo);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -23,6 +22,7 @@ export function PostImage({ photo }: PostImageProps) {
       </DialogTrigger>
       {isModalOpen && (
         <PhotoDetails
+          id={photo.id}
           src={photo.media.url}
           user={{
             login: photo.user.login,

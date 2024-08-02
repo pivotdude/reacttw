@@ -22,8 +22,9 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     });
   }
 
-  async create(data: G): Promise<G> {
-    return this.model.save(data);
+  async create(data: G, relations?: any): Promise<G> {
+    const result = await this.model.save(data);
+    return this.findById(result.id, relations);
   }
 
   async update(id: number, data: any): Promise<any> {

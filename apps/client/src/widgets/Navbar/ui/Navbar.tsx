@@ -11,7 +11,9 @@ export function Navbar() {
   const account = useNavigationStore((store) => store.account);
   const setAccount = useNavigationStore((store) => store.setAccount);
 
-  const linksElements = links.map((link: ILink) => <IconLink link={link} />);
+  const linksElements = links.map((link: ILink) => (
+    <IconLink key={link.href} link={link} />
+  ));
 
   useEffect(() => {
     fetchAccount()
