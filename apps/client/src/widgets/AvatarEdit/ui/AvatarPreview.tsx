@@ -23,6 +23,7 @@ export function AvatarPreview() {
         ref={editorRef}
         width={250}
         height={250}
+        // @ts-ignore
         image={image}
         borderRadius={1000}
         scale={scale}

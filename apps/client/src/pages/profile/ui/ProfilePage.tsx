@@ -3,7 +3,7 @@ import { useProfileStore } from '../store/useProfileStore';
 import { NotFoundPage } from '@/pages/notFound/ui/NotFoundPage';
 import { ProfileHeader } from '@/widgets/ProfileHeader';
 import { fetchProfile } from '../api/fetchProfile';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
 import { UploadPhoto } from '@/widgets/UploadPhoto/ui/UploadPhoto';
@@ -25,12 +25,14 @@ export function ProfilePage() {
       })),
     );
 
-  // @ts-ignore
-  const photos = profile?.photos?.map((photo) => ({
-    src: photo.media.url,
-    alt: photo.media.name,
-    ...photo,
-  })) as { src: string; alt: string }[];
+  const photos = useMemo(() => {
+    // @ts-ignore
+    return profile?.photos?.map((photo) => ({
+      src: photo.media.url,
+      alt: photo.media.name,
+      id: photo.id,
+    }));
+  }, [profile?.photos]);
 
   useEffect(() => {
     setLoading(true);

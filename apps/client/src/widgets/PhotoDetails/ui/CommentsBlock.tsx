@@ -4,17 +4,12 @@ import { CommentForm } from './CommentForm';
 import { useCommentsStore } from '../store/useCommentsStore';
 
 export function CommentsBlock() {
-  const { comments, loading } = useCommentsStore((store) => ({
-    comments: store.comments,
-    setComments: store.setComments,
-    loading: store.loading,
-  }));
-
+  const loading = useCommentsStore((store) => store.loading);
   if (loading) return <LoadingSpinner />;
 
   return (
     <>
-      <CommentList comments={comments} />
+      <CommentList />
       <CommentForm />
     </>
   );

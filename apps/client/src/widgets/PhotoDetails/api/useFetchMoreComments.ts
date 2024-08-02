@@ -19,7 +19,7 @@ export function useFetchMoreComments(limit = 20): useFetchMoreCommentsReturn {
   );
 
   const fetchData = () => {
-    fetchComments(imageId, { page, limit: 20 }).then((result) => {
+    fetchComments(imageId, { page, limit }).then((result) => {
       setComments([...comments, ...result.comments]);
     });
   };

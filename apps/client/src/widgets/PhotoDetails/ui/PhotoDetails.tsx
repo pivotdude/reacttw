@@ -8,7 +8,6 @@ import { UserCard } from '@/entities/user/ui/UserCard';
 import { CommentsBlock } from './CommentsBlock';
 import { useFetchComments } from '../api/useFetchComments';
 import { useCommentsStore } from '../store/useCommentsStore';
-import { useShallow } from 'zustand/react/shallow';
 import { usePhotoDetailsStore } from '../api/usePhotoDetailsStore';
 
 interface PhotoDetailsProps {
@@ -26,8 +25,7 @@ interface PhotoDetailsProps {
 export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const { imageId, setImageId } = usePhotoDetailsStore((store) => ({
-    imageId: store.imageId,
+  const { setImageId } = usePhotoDetailsStore((store) => ({
     setImageId: store.setImageId,
   }));
 

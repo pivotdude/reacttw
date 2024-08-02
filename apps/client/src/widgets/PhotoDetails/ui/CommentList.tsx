@@ -2,7 +2,6 @@ import { UserAvatar } from '@/entities/user';
 import { TypographySmall } from '@/shared/ui/Typography';
 import { useCommentsStore } from '../store/useCommentsStore';
 import { InfiniteScroll } from '@/shared/components/InfinityScroll';
-import { LoadingSpinner } from '@/shared/components/Loader';
 import { useFetchMoreComments } from '../api/useFetchMoreComments';
 
 export function CommentList() {
@@ -11,12 +10,7 @@ export function CommentList() {
 
   return (
     <div className="flex-grow overflow-y-auto mb-2 mt-4">
-      <InfiniteScroll
-        dataLength={comments.length}
-        loadMore={fetchMoreData}
-        hasMore={true}
-        loader={<LoadingSpinner />}
-      >
+      <InfiniteScroll loadMore={fetchMoreData} hasMore={true}>
         {comments.map((comment) => (
           <div key={comment.id} className="mb-3">
             <div className="flex pr-3">
