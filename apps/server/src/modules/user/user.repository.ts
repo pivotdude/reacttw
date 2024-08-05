@@ -12,6 +12,13 @@ export class UserRepository extends BaseRepository<IUserRepository, User> {
     super(model);
   }
 
+  async findByLogin(login: string, relations?: any): Promise<User | null> {
+    return this.model.findOne({
+      where: { login },
+      relations,
+    });
+  }
+
   async findByEmail(email: string) {
     return this.model.findOne({ where: { email } });
   }

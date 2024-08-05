@@ -8,8 +8,9 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Photo } from '../photos/photo.entity';
+import { Photo } from '../photo/photo.entity';
 import { Media } from '../media/media.entity';
+import { PhotoLike } from '../photo/photoLike/photoLike.entity';
 
 @Entity()
 export class User {
@@ -31,6 +32,9 @@ export class User {
 
   @OneToMany(() => Photo, (photo) => photo.user, { nullable: true })
   photos?: Photo[];
+
+  @OneToMany(() => PhotoLike, (photoLike) => photoLike.user, { nullable: true })
+  photosLikes?: PhotoLike[];
 
   @Column({ default: true })
   isActive?: boolean;

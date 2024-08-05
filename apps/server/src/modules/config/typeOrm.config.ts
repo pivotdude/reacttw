@@ -2,9 +2,10 @@ import { User } from '../user/user.entity';
 import { Media } from '../media/media.entity';
 import { Email } from '../email/email.entity';
 import { EmailType } from '../email/emailType/emailType.entity';
-import { Photo } from '../photos/photo.entity';
+import { Photo } from '../photo/photo.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Comment } from '../photos/comment/comment.entity';
+import { Comment } from '../photo/comment/comment.entity';
+import { PhotoLike } from '../photo/photoLike/photoLike.entity';
 
 export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   return {
@@ -14,7 +15,7 @@ export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     username: 'postgres',
     password: 'postgres',
     database: 'test',
-    entities: [User, Media, EmailType, Email, Comment, Photo],
+    entities: [User, Media, EmailType, Email, Comment, Photo, PhotoLike],
     synchronize: true,
   };
 };

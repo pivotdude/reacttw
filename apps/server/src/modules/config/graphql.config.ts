@@ -3,7 +3,7 @@ import { join } from 'path';
 import { UserModule } from '../user/user.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { AuthModule } from '../auth/auth.module';
-import { PhotoModule } from '../photos/photo.module';
+import { PhotoModule } from '../photo/photo.module';
 
 export const getGraphqlConfig = (): ApolloDriverConfig => {
   return {

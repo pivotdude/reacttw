@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { PhotoModel } from 'src/modules/photos/input/photo.model';
+import { PhotoModel } from 'src/modules/photo/input/photo.model';
 import { UserModel } from 'src/modules/user/user.model';
 
 @ObjectType()

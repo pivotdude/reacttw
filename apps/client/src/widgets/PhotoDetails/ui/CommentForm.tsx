@@ -6,7 +6,7 @@ import { Form } from '@/shared/ui/form';
 import { sendComment } from '../api/sendComment';
 import { TextAreaFormField } from '@/shared/components/FormField/ui/TextAreaFormField';
 import { useCommentsStore } from '../store/useCommentsStore';
-import { usePhotoDetailsStore } from '../api/usePhotoDetailsStore';
+import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
 
 const formSchema = z.object({
   text: z.string(),

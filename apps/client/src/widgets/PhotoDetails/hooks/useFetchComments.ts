@@ -1,5 +1,5 @@
 import { useShallow } from 'zustand/react/shallow';
-import { fetchComments } from './fetchComments';
+import { fetchComments } from '../api/fetchComments';
 import { useCommentsStore } from '../store/useCommentsStore';
 
 interface useFetchImagesReturn {

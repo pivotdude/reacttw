@@ -1,20 +1,24 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { MediaModel } from 'src/modules/media/media.model';
-import { PhotoModel } from 'src/modules/photos/input/photo.model';
+import { PhotoModel } from 'src/modules/photo/input/photo.model';
+import { PhotoLikeModel } from 'src/modules/photo/photoLike/photoLike.model';
 
 @ObjectType()
 export class ProfileInput {
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
-  @Field((type) => [PhotoModel], { nullable: true })
+  @Field(() => [PhotoModel], { nullable: true })
   photos: PhotoModel[];
 
   @Field({ nullable: true })
   name?: string;
 
-  @Field((type) => MediaModel, { nullable: true })
+  @Field(() => MediaModel, { nullable: true })
   avatar?: MediaModel;
+
+  @Field(() => [PhotoLikeModel], { nullable: true })
+  photosLikes?: PhotoLikeModel[];
 
   @Field()
   login: string;

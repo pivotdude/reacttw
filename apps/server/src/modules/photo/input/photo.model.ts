@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { MediaModel } from 'src/modules/media/media.model';
 import { UserModel } from 'src/modules/user/user.model';
+import { PhotoLikeModel } from '../photoLike/photoLike.model';
 
 @ObjectType()
 export class PhotoModel {
@@ -13,9 +14,12 @@ export class PhotoModel {
   @Field()
   updatedAt: Date;
 
-  @Field((type) => MediaModel, { nullable: true })
+  @Field(() => MediaModel, { nullable: true })
   media: MediaModel;
 
-  @Field((type) => UserModel)
+  @Field(() => UserModel)
   user: UserModel;
+
+  @Field(() => [PhotoLikeModel], { nullable: true })
+  likes: PhotoLikeModel;
 }

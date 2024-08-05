@@ -1,4 +1,4 @@
-import { defineConfig, PluginOption } from 'vite';
+import { defineConfig, optimizeDeps, PluginOption } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -42,5 +42,8 @@ export default defineConfig({
     alias: {
       '@': resolve('src/'),
     },
+  },
+  optimizeDeps: {
+    exclude: ['react-infinite-scroll-component'],
   },
 });

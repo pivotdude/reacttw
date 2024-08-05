@@ -6,9 +6,15 @@ import clsx from 'clsx';
 import { LoadingSpinner } from '@/shared/components/Loader';
 import { UserCard } from '@/entities/user/ui/UserCard';
 import { CommentsBlock } from './CommentsBlock';
-import { useFetchComments } from '../api/useFetchComments';
+import { useFetchComments } from '../hooks/useFetchComments';
 import { useCommentsStore } from '../store/useCommentsStore';
-import { usePhotoDetailsStore } from '../api/usePhotoDetailsStore';
+import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
+import { LikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/LikeImageButton';
+import { DislikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/DislikeImageButton';
+import Viewer from 'viewerjs';
+import { SaveImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/SaveImageButton';
+import { useFetchPhotoDetails } from '../hooks/useFetchPhotoDetails';
+import { date } from 'zod';
 
 interface PhotoDetailsProps {
   src: string;
@@ -25,6 +31,17 @@ interface PhotoDetailsProps {
 export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   const imageRef = useRef<HTMLImageElement>(null);
 
+  const { fetchData } = useFetchPhotoDetails();
+  const data = usePhotoDetailsStore((store) => store.data);
+
+  useEffect(() => {
+    fetchData(id);
+  }, [id]);
+
+  useEffect(() => {
+    console.log('data', data);
+  }, [data]);
+
   const { setImageId } = usePhotoDetailsStore((store) => ({
     setImageId: store.setImageId,
   }));
@@ -37,16 +54,10 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   const [isLoading, setIsLoading] = useState(true);
   const loading = useCommentsStore((store) => store.loading);
 
-  const { fetchData } = useFetchComments();
-
   useEffect(() => {
     const isLoading = isLoadingImage && loading;
     setIsLoading(isLoading);
   }, [isLoadingImage, loading]);
-
-  useEffect(() => {
-    fetchData(id, 1);
-  }, [id]);
 
   useEffect(() => {
     if (imageRef.current) {
@@ -91,9 +102,17 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
               {image}
             </div>
             <div className="w-1/3 h-[90vh] p-4 flex flex-col bg-white">
-              <UserCard
-                user={{ name: user.login, avatar: user?.avatar?.url || '' }}
-              />
+              <div className="flex justify-between pr-10">
+                <UserCard
+                  user={{ name: user.login, avatar: user?.avatar?.url || '' }}
+                />
+                <div className="flex space-x-2">
+                  <SaveImageButton imageId={id} />
+                  <LikeImageButton imageId={id} likeCount={0} />
+                  <DislikeImageButton imageId={id} dislikeCount={0} />
+                </div>
+              </div>
+
               <CommentsBlock />
             </div>
           </div>

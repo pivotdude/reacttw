@@ -2,6 +2,7 @@ import {
   Args,
   Context,
   Info,
+  Int,
   Mutation,
   Query,
   Resolver,
@@ -13,26 +14,38 @@ import { Photo } from './photo.entity';
 import { UseGuards } from '@nestjs/common';
 import { TokenGuard } from '../auth/guard/TokenGuard';
 import { GraphQLResolveInfo } from 'graphql';
+import { AuthUserId } from 'src/core/decorators/AuthUserId';
+import { Relations } from 'src/core/decorators/Relations';
 
 @Resolver((of) => PhotoModel)
 export class PhotoResover {
   constructor(private readonly photoService: PhotoService) {}
 
   @UseGuards(TokenGuard)
-  @Query((returns) => [PhotoModel])
+  @Query(() => [PhotoModel])
   async photos(
-    @Context('req') req: any,
+    @AuthUserId() userId: number,
     @Info() info: GraphQLResolveInfo,
   ): Promise<Photo[]> {
-    return this.photoService.findAll({ userId: req?.user?.id, info });
+    return this.photoService.findAll({ userId, info });
   }
 
   @UseGuards(TokenGuard)
-  @Mutation((returns) => [PhotoModel])
+  @Query(() => PhotoModel)
+  async photo(
+    @Args('id', { type: () => Int }) id: number,
+    @Relations() relations: any,
+    @AuthUserId() userId: number,
+  ): Promise<Photo> {
+    return this.photoService.findById(id, relations, userId);
+  }
+
+  @UseGuards(TokenGuard)
+  @Mutation(() => [PhotoModel])
   async createUserPhotos(
     @Args('input') input: CreateUserPhotoInput,
-    @Context('req') req: any,
+    @AuthUserId() userId: number,
   ): Promise<Photo[]> {
-    return this.photoService.createUserPhotos(input.photoIds, req?.user?.id);
+    return this.photoService.createUserPhotos(input.photoIds, userId);
   }
 }

@@ -7,6 +7,7 @@ import { UserModule } from '../user/user.module';
 import { MediaModule } from '../media/media.module';
 import { PhotoResover } from './photo.resolver';
 import { CommentModule } from './comment/comment.module';
+import { PhotoLikeModule } from './photoLike/photoLike.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CommentModule } from './comment/comment.module';
     UserModule,
     MediaModule,
     CommentModule,
+    PhotoLikeModule,
   ],
   providers: [PhotoRepository, PhotoService, PhotoResover],
 })

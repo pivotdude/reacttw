@@ -28,12 +28,22 @@ type UserModel {
   updatedAt: DateTime!
 }
 
+type PhotoLikeModel {
+  id: Int!
+  isLike: Boolean!
+  photo: PhotoModel!
+  user: UserModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type PhotoModel {
   id: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
   media: MediaModel
   user: UserModel!
+  likes: [PhotoLikeModel!]
 }
 
 type ProfileInput {
@@ -41,6 +51,7 @@ type ProfileInput {
   photos: [PhotoModel!]
   name: String
   avatar: MediaModel
+  photosLikes: [PhotoLikeModel!]
   login: String!
   email: String!
   isActive: Boolean!
@@ -71,6 +82,7 @@ type LoginAnswerModel {
 
 type Query {
   photos: [PhotoModel!]!
+  photo(id: Int!): PhotoModel!
   users: [UserModel!]!
   profile(login: String!): ProfileInput!
   account: UserModel!
@@ -96,6 +108,9 @@ type Mutation {
   createUser(input: UserCreateInput!): UserModel!
   updateUser(input: UpdateUserInput!): UserModel!
   delete(id: Float!): UserModel!
+  addPhotoLike(input: addPhotoLikeInput!): PhotoLikeModel!
+  addPhotoDislike(input: addPhotoLikeInput!): PhotoLikeModel!
+  deletePhotoLike(input: addPhotoLikeInput!): PhotoLikeModel!
   createComment(input: CreateCommentInput!): CommentModel!
 }
 
@@ -139,6 +154,10 @@ input UpdateUserInput {
   isActive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input addPhotoLikeInput {
+  photoId: Int!
 }
 
 input CreateCommentInput {

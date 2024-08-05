@@ -14,6 +14,16 @@ export class PhotoService {
     private readonly mediaService: MediaService,
   ) {}
 
+  async findById(id: number, relations: any, userId: number) {
+    const photo = await this.photoRepository.findByIdAuthUser(
+      id,
+      relations,
+      userId,
+    );
+    console.log('photo', photo);
+    return photo;
+  }
+
   async findAll({
     info,
     userId,
@@ -22,7 +32,7 @@ export class PhotoService {
     userId: number;
   }) {
     const relations = getRelations(info);
-    const user = await this.userService.findById(userId);
+    // const user = await this.userService.findById(userId);
 
     return this.photoRepository.getAll({
       relations,

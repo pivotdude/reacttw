@@ -17,9 +17,6 @@ rectangle EmailModule
 rectangle EmailTypeModule
 rectangle MailerModule
 ' Comments
-note top of CommentModule
-    Not yet created
-end note
 ' Define relationships
 AppModule --> MediaModule
 AppModule --> PhotoModule

@@ -11,6 +11,7 @@ import {
 import { Media } from '../media/media.entity';
 import { User } from '../user/user.entity';
 import { Comment } from './comment/comment.entity';
+import { PhotoLike } from './photoLike/photoLike.entity';
 
 @Entity()
 export class Photo {
@@ -23,6 +24,9 @@ export class Photo {
 
   @OneToMany(() => Comment, (comment) => comment.photo)
   comments?: Comment[];
+
+  @OneToMany(() => PhotoLike, (photoLike) => photoLike.photo)
+  likes?: PhotoLike[];
 
   @ManyToOne(() => User)
   user: User;

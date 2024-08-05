@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { UserModule } from '../user/user.module';
 import { MediaModule } from '../media/media.module';
 import { EmailModule } from '../email/email.module';
-import { PhotoModule } from '../photos/photo.module';
+import { PhotoModule } from '../photo/photo.module';
 import { ConfigModule } from '@nestjs/config';
 import { getConfigMConfig } from '../config/configM.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
