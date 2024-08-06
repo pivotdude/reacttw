@@ -8,7 +8,10 @@ export interface FetchProfileResponse {
   profile: {
     name?: string;
     isUserProfile: boolean;
+    isUserFollow: boolean;
     login: string;
+    subscriptionsCount: number;
+    subscribersCount: number;
     avatar: {
       url: string;
     };
@@ -31,7 +34,10 @@ export const fetchProfile = async (
       profile(login: $login) {
         name
         isUserProfile
+        isUserFollow
         login
+        subscriptionsCount
+        subscribersCount
         avatar {
           url
         }

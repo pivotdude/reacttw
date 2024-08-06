@@ -2,6 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { MediaModel } from 'src/modules/media/media.model';
 import { PhotoModel } from 'src/modules/photo/input/photo.model';
 import { PhotoLikeModel } from 'src/modules/photo/photoLike/photoLike.model';
+import { SubscriptionModel } from 'src/modules/subscription/subscription.model';
 
 @ObjectType()
 export class ProfileInput {
@@ -20,6 +21,18 @@ export class ProfileInput {
   @Field(() => [PhotoLikeModel], { nullable: true })
   photosLikes?: PhotoLikeModel[];
 
+  @Field(() => [SubscriptionModel], { nullable: true })
+  subscriptions?: SubscriptionModel[];
+
+  @Field(() => [SubscriptionModel], { nullable: true })
+  subscribers?: SubscriptionModel[];
+
+  @Field(() => Int)
+  subscriptionsCount?: number;
+
+  @Field(() => Int)
+  subscribersCount?: number;
+
   @Field()
   login: string;
 
@@ -31,6 +44,9 @@ export class ProfileInput {
 
   @Field()
   isUserProfile: boolean;
+
+  @Field()
+  isUserFollow: boolean;
 
   @Field()
   createdAt: Date;

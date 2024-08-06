@@ -6,6 +6,7 @@ import { Photo } from '../photo/photo.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Comment } from '../photo/comment/comment.entity';
 import { PhotoLike } from '../photo/photoLike/photoLike.entity';
+import { Subscription } from '../subscription/subscription.entity';
 
 export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   return {
@@ -15,7 +16,16 @@ export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     username: 'postgres',
     password: 'postgres',
     database: 'test',
-    entities: [User, Media, EmailType, Email, Comment, Photo, PhotoLike],
+    entities: [
+      Subscription,
+      User,
+      Media,
+      EmailType,
+      Email,
+      Comment,
+      Photo,
+      PhotoLike,
+    ],
     synchronize: true,
   };
 };

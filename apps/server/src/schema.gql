@@ -48,16 +48,29 @@ type PhotoModel {
   dislikeCount: Int
 }
 
+type SubscriptionModel {
+  id: Int!
+  author: UserModel!
+  user: UserModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type ProfileInput {
   id: Int!
   photos: [PhotoModel!]
   name: String
   avatar: MediaModel
   photosLikes: [PhotoLikeModel!]
+  subscriptions: [SubscriptionModel!]
+  subscribers: [SubscriptionModel!]
+  subscriptionsCount: Int!
+  subscribersCount: Int!
   login: String!
   email: String!
   isActive: Boolean!
   isUserProfile: Boolean!
+  isUserFollow: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -83,11 +96,12 @@ type LoginAnswerModel {
 }
 
 type Query {
-  photos: [PhotoModel!]!
-  photo(id: Int!): PhotoModel!
+  subscriptions: [SubscriptionModel!]!
   users: [UserModel!]!
   profile(login: String!): ProfileInput!
   account: UserModel!
+  photos: [PhotoModel!]!
+  photo(id: Int!): PhotoModel!
   comments(input: CommentsInput!): [CommentModel!]!
 }
 
@@ -102,7 +116,6 @@ input PaginationInput {
 }
 
 type Mutation {
-  createUserPhotos(input: CreateUserPhotoInput!): [PhotoModel!]!
   sendLoginCode(input: SendLoginCodeInput!): AuthAnswer!
   sendRegisterCode(input: SendRegisterCodeInput!): AuthAnswer!
   confirmLogin(input: ConfirmLoginCodeInput!): LoginAnswerModel!
@@ -110,15 +123,11 @@ type Mutation {
   createUser(input: UserCreateInput!): UserModel!
   updateUser(input: UpdateUserInput!): UserModel!
   delete(id: Float!): UserModel!
+  createUserPhotos(input: CreateUserPhotoInput!): [PhotoModel!]!
   addPhotoLike(input: addPhotoLikeInput!): PhotoLikeModel!
   addPhotoDislike(input: addPhotoLikeInput!): PhotoLikeModel!
   deletePhotoLike(input: addPhotoLikeInput!): PhotoLikeModel!
   createComment(input: CreateCommentInput!): CommentModel!
-}
-
-input CreateUserPhotoInput {
-  """Array of photo IDs"""
-  photoIds: [Float!]!
 }
 
 input SendLoginCodeInput {
@@ -156,6 +165,11 @@ input UpdateUserInput {
   isActive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input CreateUserPhotoInput {
+  """Array of photo IDs"""
+  photoIds: [Float!]!
 }
 
 input addPhotoLikeInput {

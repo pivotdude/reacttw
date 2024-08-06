@@ -11,6 +11,7 @@ import {
 import { Photo } from '../photo/photo.entity';
 import { Media } from '../media/media.entity';
 import { PhotoLike } from '../photo/photoLike/photoLike.entity';
+import { Subscription } from '../subscription/subscription.entity';
 
 @Entity()
 export class User {
@@ -38,6 +39,16 @@ export class User {
 
   @Column({ default: true })
   isActive?: boolean;
+
+  @OneToMany(() => Subscription, (subscription) => subscription.user, {
+    nullable: true,
+  })
+  subscriptions?: Subscription[];
+
+  @OneToMany(() => Subscription, (subscription) => subscription.author, {
+    nullable: true,
+  })
+  subscribers?: Subscription[];
 
   @CreateDateColumn()
   createdAt?: Date;

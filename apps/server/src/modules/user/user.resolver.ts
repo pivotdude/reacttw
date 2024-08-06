@@ -16,6 +16,8 @@ import { AuthGuard } from '../auth/guard/AuthGuard';
 import { GraphQLResolveInfo } from 'graphql';
 import { UpdateUserInput } from './input/UpdateUserInput';
 import { getRelations } from 'src/utils/getRelations';
+import { Relations } from 'src/core/decorators/Relations';
+import { AuthUserId } from 'src/core/decorators/AuthUserId';
 
 @Resolver((of) => UserModel)
 export class UserResolver {
@@ -37,10 +39,10 @@ export class UserResolver {
   @Query((returns) => ProfileInput)
   async profile(
     @Args('login') login: string,
-    @Context('req') req: any,
-    @Info() info: GraphQLResolveInfo,
+    @AuthUserId() userId: number,
+    @Relations() relations: any,
   ) {
-    return this.userService.findByLogin(login, req?.user?.id, info);
+    return this.userService.findByLogin(login, userId, relations);
   }
 
   @UseGuards(AuthGuard)

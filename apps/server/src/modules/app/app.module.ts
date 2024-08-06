@@ -12,6 +12,7 @@ import { getTypeOrmConfig } from '../config/typeOrm.config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { getGraphqlConfig } from '../config/graphql.config';
 import { AuthModule } from '../auth/auth.module';
+import { SubscriptionModule } from '../subscription/subscription.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from '../auth/auth.module';
     MediaModule,
     UserModule,
     PhotoModule,
+    SubscriptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,11 +2,13 @@ import { exceptionCodes } from 'src/data/exceptionCodes';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { GraphQLResolveInfo } from 'graphql';
-import { getRelations } from '../../utils/getRelations';
+import { count } from 'console';
 
 export interface IUserProfile extends User {
   isUserProfile?: boolean;
+  isUserFollow: boolean;
+  subscribersCount: number;
+  subscriptionsCount: number;
 }
 
 @Injectable()
@@ -20,32 +22,35 @@ export class UserService {
     return this.userRepository.update(id, { avatar: data.avatarId });
   }
 
-  // async findByInput(
-  //   input: UserInput,
-  //   userId: number,
-  // ): Promise<IUserProfile | null> {
-  //   if (input?.id) {
-  //     return this.userRepository.findById(input.id);
-  //   }
-  //   if (input?.login) {
-  //   }
-  //   throw new Error('wasd');
-  // }
-
   async findByLogin(
     login: string,
     userId: number,
-    info: GraphQLResolveInfo,
+    relations: any,
   ): Promise<IUserProfile> {
-    const relations = getRelations(info);
     const user = await this.userRepository.findByLogin(login, relations);
 
     if (!user) {
       throw new NotFoundException(exceptionCodes.notFound);
     }
 
+    const subscribers = await this.userRepository.checkSubscribe(
+      user.id,
+      userId,
+    );
+    const counts = await this.userRepository.getSubscribeCounts(user.id);
+
     const isUserProfile = userId ? userId === user.id : false;
-    return { ...user, isUserProfile };
+    console.log(counts);
+    const isUserFollow = !!subscribers;
+    return {
+      ...user,
+      isUserProfile,
+      isUserFollow,
+      // @ts-expect-error ts(2322)
+      subscribersCount: counts.subscribersCount || 0,
+      // @ts-expect-error ts(2322)
+      subscriptionsCount: counts.subscriptionsCount || 0,
+    };
   }
 
   async findById(id: number, relations?: any) {

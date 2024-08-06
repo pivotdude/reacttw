@@ -3,34 +3,23 @@ import { Button } from '@/shared/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { FollowButton } from './FollowButton';
 import { StartDialogButton } from '@/features/startDialog';
+import { useProfileStore } from '@/pages/profile/store/useProfileStore';
+import { LoadingSpinner } from '@/shared/components/Loader';
 
-interface ProfileHeaderProps {
-  profile: {
-    login: string;
-    name?: string;
-    avatar?: {
-      url: string;
-    };
-    counts: {
-      posts: number;
-      followers: number;
-      following: number;
-    };
-    isUserProfile: boolean;
-  };
-}
-
-export function ProfileHeader({ profile }: ProfileHeaderProps) {
+export function ProfileHeader() {
+  const profile = useProfileStore((store) => store.profile);
   const navigate = useNavigate();
+  if (!profile) {
+    return <LoadingSpinner />;
+  }
   return (
     <UserProfileHeader
       user={{
         name: profile.login,
         fullName: profile?.name || '',
         avatar: profile?.avatar?.url || '',
-        posts: 0,
-        followers: 0,
-        following: 0,
+        followers: profile.subscribersCount,
+        following: profile.subscriptionsCount,
       }}
       actions={
         profile.isUserProfile ? (

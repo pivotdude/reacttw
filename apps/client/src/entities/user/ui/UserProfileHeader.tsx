@@ -4,7 +4,6 @@ interface UserProfileHeaderProps {
   user: {
     name: string;
     avatar: string;
-    posts: number;
     followers: number;
     following: number;
     fullName: string;
@@ -25,7 +24,6 @@ export function UserProfileHeader({ user, actions }: UserProfileHeaderProps) {
       <div className="space-y-4 col-span-4 md:col-span-2">
         <h1 className="text-3xl font-bold">{user.name}</h1>
         <div className="flex space-x-2">
-          <p>{user.posts} posts</p>
           <p>{user.followers} followers</p>
           <p>{user.following} following</p>
         </div>
