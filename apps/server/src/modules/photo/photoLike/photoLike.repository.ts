@@ -29,8 +29,7 @@ export class PhotoLikeRepository extends LikeRepository<
     console.log('el2', existingLike);
 
     if (existingLike) {
-      const result = await this.model.delete(existingLike.id);
-      console.log(existingLike);
+      await this.model.delete(existingLike.id);
       return existingLike;
     }
     return null;

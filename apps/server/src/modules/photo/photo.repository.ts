@@ -23,13 +23,27 @@ export class PhotoRepository extends BaseRepository<IPhotoRepository, Photo> {
 
     if (hasLikes > 0) {
       // Если likes существуют, выполняем запрос с присоединением likes
-      return this.model
+      const result = await this.model
         .createQueryBuilder('photo')
         .leftJoinAndSelect('photo.likes', 'likes')
         .leftJoinAndSelect('likes.user', 'user')
         .where('photo.id = :id', { id })
         .andWhere('user.id = :userId', { userId })
+        .loadRelationCountAndMap(
+          'photo.likeCount',
+          'photo.likes',
+          'likes',
+          (qb) => qb.where('likes.isLike = :isLike', { isLike: true }),
+        )
+        .loadRelationCountAndMap(
+          'photo.dislikeCount',
+          'photo.likes',
+          'likes',
+          (qb) => qb.where('likes.isLike = :isLike', { isLike: false }),
+        )
         .getOne();
+      console.log('result', result);
+      return result;
     } else {
       // Если likes отсутствуют, выполняем запрос без присоединения likes
       return this.model

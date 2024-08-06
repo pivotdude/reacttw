@@ -20,7 +20,6 @@ export class PhotoService {
       relations,
       userId,
     );
-    console.log('photo', photo);
     return photo;
   }
 

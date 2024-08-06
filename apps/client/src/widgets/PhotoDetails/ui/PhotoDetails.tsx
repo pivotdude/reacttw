@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { LoadingSpinner } from '@/shared/components/Loader';
 import { UserCard } from '@/entities/user/ui/UserCard';
 import { CommentsBlock } from './CommentsBlock';
-import { useFetchComments } from '../hooks/useFetchComments';
 import { useCommentsStore } from '../store/useCommentsStore';
 import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
 import { LikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/LikeImageButton';
@@ -14,7 +13,6 @@ import { DislikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButton
 import Viewer from 'viewerjs';
 import { SaveImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/SaveImageButton';
 import { useFetchPhotoDetails } from '../hooks/useFetchPhotoDetails';
-import { date } from 'zod';
 
 interface PhotoDetailsProps {
   src: string;
@@ -108,8 +106,14 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
                 />
                 <div className="flex space-x-2">
                   <SaveImageButton imageId={id} />
-                  <LikeImageButton imageId={id} likeCount={0} />
-                  <DislikeImageButton imageId={id} dislikeCount={0} />
+                  <LikeImageButton
+                    imageId={id}
+                    likeCount={data?.likeCount || 0}
+                  />
+                  <DislikeImageButton
+                    imageId={id}
+                    dislikeCount={data?.dislikeCount || 0}
+                  />
                 </div>
               </div>
 

@@ -22,4 +22,10 @@ export class PhotoModel {
 
   @Field(() => [PhotoLikeModel], { nullable: true })
   likes: PhotoLikeModel;
+
+  @Field(() => Int, { nullable: true })
+  likeCount: number;
+
+  @Field(() => Int, { nullable: true })
+  dislikeCount: number;
 }

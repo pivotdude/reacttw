@@ -16,7 +16,7 @@ export function useFetchPhotoDetails(): useFetchImagesReturn {
   const fetchData = (photoId: number) => {
     // setLoading(true);
     fetchPhotoDetails(photoId).then((result) => {
-      setData(result);
+      setData(result.photo);
     });
     // .catch((e) => {
     //   setError(e.response.errors[0].message);

@@ -19,10 +19,9 @@ export function LikeImageButton(props: LikeImageButtonProps) {
   const data = usePhotoDetailsStore((store) => store.data);
 
   useEffect(() => {
-    if (data?.photo?.likes?.[0]?.isLike === true) {
+    if (data?.likes?.[0]?.isLike === true) {
       setIsActive(true);
-    }
-    if (data?.photo?.likes === null) {
+    } else {
       setIsActive(false);
     }
   }, [data, imageId]);
@@ -31,13 +30,11 @@ export function LikeImageButton(props: LikeImageButtonProps) {
     console.log('submit', props.imageId);
 
     if (!isActive) {
-      const like = await putLike(props.imageId);
-      fetchData(imageId);
+      await putLike(props.imageId);
     } else {
-      const result = await deleteLike(props.imageId);
-      console.log('deleted', result);
-      fetchData(imageId);
+      await deleteLike(props.imageId);
     }
+    fetchData(imageId);
   };
   return (
     <Button

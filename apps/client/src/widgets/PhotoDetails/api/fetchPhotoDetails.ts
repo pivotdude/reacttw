@@ -6,7 +6,12 @@ import gql from 'graphql-tag';
 
 export interface FetchPhotoDetailsResponse {
   photo: {
-    id: number;
+    likeCount: number;
+    dislikeCount: number;
+    likes: {
+      id: number;
+      isLike: boolean;
+    };
   };
   errors?: IGraphqlError[];
 }
@@ -17,6 +22,8 @@ export const fetchPhotoDetails = async (
   const query = gql`
     query FetchPhotoDetails($id: Int!) {
       photo(id: $id) {
+        likeCount
+        dislikeCount
         likes {
           id
           isLike

@@ -44,6 +44,8 @@ type PhotoModel {
   media: MediaModel
   user: UserModel!
   likes: [PhotoLikeModel!]
+  likeCount: Int
+  dislikeCount: Int
 }
 
 type ProfileInput {
