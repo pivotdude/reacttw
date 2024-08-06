@@ -27,8 +27,6 @@ export function DislikeImageButton(props: LikeImageButtonProps) {
   }, [data, imageId]);
 
   const onClick = async () => {
-    console.log('submit', props.imageId);
-
     if (!isActive) {
       await putDislike(props.imageId);
     } else {
@@ -36,6 +34,7 @@ export function DislikeImageButton(props: LikeImageButtonProps) {
     }
     fetchData(imageId);
   };
+
   return (
     <Button
       variant={isActive ? 'default' : 'ghost'}

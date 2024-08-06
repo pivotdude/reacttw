@@ -1,9 +1,10 @@
-import { MessageCircle } from "lucide-react";
+import { Button } from '@/shared/ui/button';
+import { MessageCircle } from 'lucide-react';
 
 export function StartDialogButton() {
   return (
-    <div className="flex items-center justify-center col-span-1 cursor-pointer mx-2 group">
+    <Button variant="ghost" className="cursor-pointer group">
       <MessageCircle className="group-hover:text-gray-400" />
-    </div>
+    </Button>
   );
 }

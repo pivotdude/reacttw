@@ -1,7 +1,8 @@
 import { UserProfileHeader } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
-import { HeartIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { FollowButton } from './FollowButton';
+import { StartDialogButton } from '@/features/startDialog';
 
 interface ProfileHeaderProps {
   profile: {
@@ -37,10 +38,9 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             <Button onClick={() => navigate('/settings')}>Edit</Button>
           </div>
         ) : (
-          <div className="space-x-2">
-            <Button className="bg-pink-600 hover:bg-pink-400">
-              <HeartIcon className="mr-2" /> Follow
-            </Button>
+          <div className="flex space-x-2">
+            <FollowButton />
+            <StartDialogButton />
           </div>
         )
       }
