@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ILink } from '../data/links';
+import { ILink } from '../types';
 
 interface IconLinkProps {
   link: ILink;

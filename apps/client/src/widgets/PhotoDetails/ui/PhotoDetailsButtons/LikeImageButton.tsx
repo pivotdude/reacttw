@@ -19,6 +19,8 @@ export function LikeImageButton(props: LikeImageButtonProps) {
   const data = usePhotoDetailsStore((store) => store.data);
 
   useEffect(() => {
+    // TODO: refactor, transfer to server
+    // @ts-ignore
     if (data?.likes?.[0]?.isLike === true) {
       setIsActive(true);
     } else {

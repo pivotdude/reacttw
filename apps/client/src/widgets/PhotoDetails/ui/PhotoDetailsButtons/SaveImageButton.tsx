@@ -8,6 +8,7 @@ interface DislikeImageButtonProps {
 
 export function SaveImageButton(props: DislikeImageButtonProps) {
   const [isActive, setIsActive] = useState(false);
+  console.log(props.imageId);
   return (
     <Button
       className="space-x-1"
