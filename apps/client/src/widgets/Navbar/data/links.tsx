@@ -1,10 +1,5 @@
 import { Compass, Home } from 'lucide-react';
-import { ReactNode } from 'react';
-
-export interface ILink {
-  href: string;
-  child: ReactNode;
-}
+import { ILink } from '../types';
 
 export const links = [
   {

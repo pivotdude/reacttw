@@ -15,8 +15,8 @@ export const sendComment = async (
   photoId: number,
 ): Promise<SendCommentResponse> => {
   const query = gql`
-    mutation createComment(input: SendCommentInput!) {
-      createComment(input: input) {
+    mutation createComment($input: CreateCommentInput!) {
+      createComment(input: $input) {
         id
       }
     }

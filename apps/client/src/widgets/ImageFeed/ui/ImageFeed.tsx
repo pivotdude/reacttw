@@ -1,5 +1,5 @@
 import { ImageList } from './ImageList';
-import { useFetchImages } from '../api/useFetchImages';
+import { useFetchImages } from '../hooks/useFetchImages';
 import { useImageFeedStore } from '../store/useImageFeedStore';
 import { LoadingSpinner } from '@/shared/components/Loader';
 import { useEffect } from 'react';

@@ -1,6 +1,6 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useImageFeedStore } from '../store/useImageFeedStore';
-import { fetchImageFeed } from './fetchImageFeed';
+import { fetchImageFeed } from '../api/fetchImageFeed';
 
 interface useFetchImagesReturn {
   loading: boolean;

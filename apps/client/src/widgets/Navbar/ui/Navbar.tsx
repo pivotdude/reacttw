@@ -1,30 +1,24 @@
 import { Button } from '@/shared/ui/button';
-import { ILink, links } from '../data/links';
+import { links } from '../data/links';
 import { Input } from '@/shared/ui/input';
 import { CircleUserRound, Search } from 'lucide-react';
-import { useEffect } from 'react';
 import { useNavigationStore } from '../store/useNavigationStore';
 import { IconLink } from './IconLink';
-import { fetchAccount } from '../api/fetchAccount';
+import { ILink } from '../types';
+import { useFetchAccount } from '../hooks/useFetchAccount';
+import { useEffect } from 'react';
 
 export function Navbar() {
   const account = useNavigationStore((store) => store.account);
-  const setAccount = useNavigationStore((store) => store.setAccount);
+  const { fetchData } = useFetchAccount();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const linksElements = links.map((link: ILink) => (
     <IconLink key={link.href} link={link} />
   ));
-
-  useEffect(() => {
-    fetchAccount()
-      .then((response) => {
-        setAccount(response.account);
-      })
-      .catch((e) => {
-        console.log('ee', e.response.errors[0].message);
-        // setErrorMessage(e.response.errors[0].message);
-      });
-  }, []);
 
   return (
     <div className="flex f-full justify-between items-center">
