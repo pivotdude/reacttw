@@ -7,4 +7,10 @@ export class ConfirmRegisterCodeInput {
 
   @Field()
   email: string;
+
+  @Field({ nullable: true })
+  name: string;
+
+  @Field()
+  login: string;
 }

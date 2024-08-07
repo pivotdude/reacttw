@@ -5,5 +5,13 @@ interface InputFormFieldProps
   extends Omit<EmptyFormFieldProps<InputProps>, 'HOCElement'> {}
 
 export function InputFormField(props: InputFormFieldProps) {
-  return <EmptyFormField HOCElement={Input} {...props} />;
+  return (
+    <EmptyFormField
+      HOCElement={Input}
+      {...props}
+      HOCProps={{
+        ...props.HOCProps,
+      }}
+    />
+  );
 }

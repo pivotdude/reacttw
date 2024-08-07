@@ -12,9 +12,15 @@ export interface ConfirmRegisterCodeResponse {
   errors?: IGraphqlError[];
 }
 
+interface ConfirmRegisterCodeParams {
+  login: string;
+  code: string;
+  name: string;
+  email: string;
+}
+
 export const сonfirmRegisterCode = async (
-  email: string,
-  code: string,
+  input: ConfirmRegisterCodeParams,
 ): Promise<ConfirmRegisterCodeResponse> => {
   const query = gql`
     mutation confirmRegister($input: ConfirmRegisterCodeInput!) {
@@ -24,7 +30,6 @@ export const сonfirmRegisterCode = async (
       }
     }
   `;
-  return sendRequest<ConfirmRegisterCodeResponse>(query, {
-    input: { email, code },
-  });
+
+  return sendRequest<ConfirmRegisterCodeResponse>(query, { input });
 };

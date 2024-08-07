@@ -18,7 +18,7 @@ export function Comment({ comment }: CommentProps) {
             fallback={comment.user.login}
           />
           <div className="ml-2">
-            <p>{comment.user.login}</p>
+            <a href={`/profile/${comment.user.login}`}>{comment.user.login}</a>
             <p className="text-sm">{comment.text}</p>
             <div className="flex xl:flex-row flex-col xl:space-x-3 justify-between">
               <TypographySmall className="w-full">

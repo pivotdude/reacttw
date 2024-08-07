@@ -26,7 +26,7 @@ export function PostImage({ photo }: PostImageProps) {
           src={photo.media.url}
           user={{
             login: photo.user.login,
-            avatar: { url: photo.user.avatar.url },
+            avatar: { url: photo.user.avatar?.url || '' },
           }}
           hideModal={() => setIsModalOpen(false)}
         />

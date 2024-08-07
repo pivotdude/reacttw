@@ -15,11 +15,16 @@ import { z } from 'zod';
 import { сonfirmRegisterCode } from '../api/confirmRegisterCode';
 import { useSignUpFormStore } from '../store/useSignUpFormStore';
 import { useNavigate } from 'react-router-dom';
+import { InputFormField } from '@/shared/components/FormField/ui/InputFormField';
 
 const formSchema = z.object({
   code: z
     .string()
     .min(4, { message: 'The field must have at least 4 characters' }),
+  login: z
+    .string()
+    .min(4, { message: 'The field must have at least 4 characters' }),
+  name: z.string(),
 });
 
 export function CodeForm() {
@@ -28,6 +33,8 @@ export function CodeForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: '',
+      login: '',
       code: '',
     },
   });
@@ -41,7 +48,7 @@ export function CodeForm() {
       );
     }
 
-    const result = await сonfirmRegisterCode(data?.email, values.code);
+    const result = await сonfirmRegisterCode({ ...values, email: data.email });
 
     if (result?.errors && result.errors.length > 0) {
       return form.setError(
@@ -57,22 +64,29 @@ export function CodeForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+        <InputFormField
+          control={form.control}
+          name="name"
+          label="Name (optional)"
+          HOCProps={{
+            placeholder: 'Enter your name ',
+          }}
+        />
+        <InputFormField
+          control={form.control}
+          name="login"
+          HOCProps={{
+            placeholder: 'Enter your login',
+          }}
+        />
+        <InputFormField
           control={form.control}
           name="code"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Code</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your email code" {...field} />
-              </FormControl>
-              <FormDescription>
-                The confirmation code has been sent to your email
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+          HOCProps={{
+            placeholder: 'Enter your code, from email',
+          }}
         />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>

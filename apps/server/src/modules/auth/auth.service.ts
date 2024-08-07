@@ -55,9 +55,9 @@ export class AuthService {
   async confirmRegister(input: ConfirmRegisterCodeInput): Promise<AuthAnswer> {
     await this.checkCode(input.email, input.code);
     await this.userService.create({
-      name: 'Alex',
+      name: input.name || '',
       email: input.email,
-      login: 'wasdddd', // todo
+      login: input.login, // todo
     });
 
     return {

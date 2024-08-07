@@ -146,6 +146,8 @@ input ConfirmLoginCodeInput {
 input ConfirmRegisterCodeInput {
   code: String!
   email: String!
+  name: String
+  login: String!
 }
 
 input UserCreateInput {
