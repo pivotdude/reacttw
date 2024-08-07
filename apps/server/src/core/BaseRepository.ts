@@ -11,6 +11,14 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     return this.model.find(params);
   }
 
+  async findOne(params?: FindManyOptions<G>): Promise<G | null> {
+    return this.model.findOne(params);
+  }
+
+  async find(params?: FindManyOptions<G>): Promise<G[]> {
+    return this.model.find(params);
+  }
+
   async findById(id: number, relations?: string[]): Promise<G | null> {
     return this.model.findOne({ where: { id }, relations });
   }

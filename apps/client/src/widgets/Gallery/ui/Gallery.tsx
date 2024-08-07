@@ -1,19 +1,31 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
-import { ProfileT } from '@/pages/profile/store/useProfileStore';
 import { GalleryItem } from './GalleryItem';
+import { useEffect } from 'react';
+import { useGalleryStore } from '../store/useGalleryStore';
+import { useFetchPhotos } from '../hooks/useFetchPhotos';
+import { useParams } from 'react-router-dom';
 
-interface UserGalleryProps {
-  photos: {
-    id: number;
-    src: string;
-    alt: string;
-  }[];
-  profile: ProfileT;
-}
+export function UserGallery() {
+  const params = useParams<{ name: string }>();
+  const { fetchData } = useFetchPhotos();
+  const photos = useGalleryStore((store) => store.profilePhotos);
 
-export function UserGallery({ photos, profile }: UserGalleryProps) {
+  useEffect(() => {
+    if (params.name) {
+      fetchData(params.name);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('rawPhotos', photos);
+  }, [photos]);
+
+  if (!photos) {
+    return <div>Loading...</div>;
+  }
+
   const gallery = photos.map((photo) => (
-    <GalleryItem key={photo.src} photo={photo} user={profile} />
+    <GalleryItem key={photo.id} photo={photo} />
   ));
 
   return (

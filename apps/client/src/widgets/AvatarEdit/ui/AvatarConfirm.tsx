@@ -5,7 +5,7 @@ import { uploadFile } from '@/shared/components/UploadZone/utils/uploadFile';
 import { useAvatarEditStore } from '../store/useAvatarEditStore';
 import { useShallow } from 'zustand/react/shallow';
 import { useToast } from '@/shared/ui/use-toast';
-import { useFetchSettingsData } from '@/pages/profile/api/useFetchSettingsData';
+import { useFetchSettingsData } from '@/pages/settings/hooks/useFetchSettingsData';
 
 export function AvatarConfirm({ editorRef }: { editorRef: any }) {
   const { toast } = useToast();

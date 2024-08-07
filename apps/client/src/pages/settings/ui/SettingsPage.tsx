@@ -4,8 +4,8 @@ import { SettingsForm } from '@/widgets/SettingsForm';
 import { SettingsMenu } from '@/widgets/SettingsMenu/ui/SettingsMenu';
 import { Layout } from '@/widgets/Layout/ui/Layout';
 import { LoadingScreen } from '@/shared/components/Loader';
-import { useFetchSettingsData } from '@/pages/profile/api/useFetchSettingsData';
 import { useEffect } from 'react';
+import { useFetchSettingsData } from '../hooks/useFetchSettingsData';
 
 export function SettingsPage() {
   const { loading, fetchData } = useFetchSettingsData();

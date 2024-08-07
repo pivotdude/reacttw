@@ -116,6 +116,8 @@ input PaginationInput {
 }
 
 type Mutation {
+  follow(userId: Int!): SubscriptionModel!
+  unfollow(userId: Int!): SubscriptionModel!
   sendLoginCode(input: SendLoginCodeInput!): AuthAnswer!
   sendRegisterCode(input: SendRegisterCodeInput!): AuthAnswer!
   confirmLogin(input: ConfirmLoginCodeInput!): LoginAnswerModel!

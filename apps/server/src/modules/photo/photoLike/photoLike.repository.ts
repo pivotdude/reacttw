@@ -26,7 +26,6 @@ export class PhotoLikeRepository extends LikeRepository<
     const existingLike = await this.model.findOne({
       where: { user: { id: userId }, photo: { id: input.photoId } },
     });
-    console.log('el2', existingLike);
 
     if (existingLike) {
       await this.model.delete(existingLike.id);
@@ -41,7 +40,6 @@ export class PhotoLikeRepository extends LikeRepository<
     const existingLike = await this.model.findOne({
       where: { user: { id: userId }, photo: { id: photoId } },
     });
-    console.log('eL', existingLike);
 
     if (existingLike && existingLike?.id) {
       const updatedRow = await this.model.save({ id: existingLike.id, isLike });

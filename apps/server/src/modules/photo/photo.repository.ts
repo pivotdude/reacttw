@@ -62,7 +62,6 @@ export class PhotoRepository extends BaseRepository<IPhotoRepository, Photo> {
           (qb) => qb.where('likes.isLike = :isLike', { isLike: false }),
         )
         .getOne();
-      console.log('result2', result2);
       return result2;
     }
   }

@@ -28,17 +28,12 @@ interface PhotoDetailsProps {
 
 export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   const imageRef = useRef<HTMLImageElement>(null);
-
   const { fetchData } = useFetchPhotoDetails();
   const data = usePhotoDetailsStore((store) => store.data);
 
   useEffect(() => {
     fetchData(id);
   }, [id]);
-
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
 
   const { setImageId } = usePhotoDetailsStore((store) => ({
     setImageId: store.setImageId,
@@ -49,13 +44,6 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   }, [id]);
 
   const [isLoadingImage, setIsLoadingImage] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-  const loading = useCommentsStore((store) => store.loading);
-
-  useEffect(() => {
-    const isLoading = isLoadingImage && loading;
-    setIsLoading(isLoading);
-  }, [isLoadingImage, loading]);
 
   useEffect(() => {
     if (imageRef.current) {
@@ -92,35 +80,32 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
   return (
     <DialogContent className="p-0 overflow-hidden max-w-[92vw] max-h-[95vh]">
       <DialogHeader>
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <div className="flex h-full">
-            <div className="w-2/3 h-[90vh] flex items-center justify-center bg-gray-100">
-              {image}
-            </div>
-            <div className="w-1/3 h-[90vh] p-4 flex flex-col bg-white">
-              <div className="flex justify-between pr-10">
-                <UserCard
-                  user={{ name: user.login, avatar: user?.avatar?.url || '' }}
-                />
-                <div className="flex space-x-2">
-                  <SaveImageButton imageId={id} />
-                  <LikeImageButton
-                    imageId={id}
-                    likeCount={data?.likeCount || 0}
-                  />
-                  <DislikeImageButton
-                    imageId={id}
-                    dislikeCount={data?.dislikeCount || 0}
-                  />
-                </div>
-              </div>
-
-              <CommentsBlock />
-            </div>
+        <div className="flex h-full">
+          <div className="w-2/3 h-[90vh] flex items-center justify-center bg-gray-100">
+            {image}
+            {isLoadingImage && <LoadingSpinner />}
           </div>
-        )}
+          <div className="w-1/3 h-[90vh] p-4 flex flex-col bg-white">
+            <div className="flex justify-between pr-10">
+              <UserCard
+                user={{ name: user.login, avatar: user?.avatar?.url || '' }}
+              />
+              <div className="flex space-x-2">
+                <SaveImageButton imageId={id} />
+                <LikeImageButton
+                  imageId={id}
+                  likeCount={data?.likeCount || 0}
+                />
+                <DislikeImageButton
+                  imageId={id}
+                  dislikeCount={data?.dislikeCount || 0}
+                />
+              </div>
+            </div>
+
+            <CommentsBlock />
+          </div>
+        </div>
       </DialogHeader>
     </DialogContent>
   );

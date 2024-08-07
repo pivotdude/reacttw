@@ -17,6 +17,6 @@ export const useProfileStore = create<IProfileStore>((set) => ({
   setProfile: (profile: ProfileT) => set({ profile }),
   setErrorMessage: (error: string) => set({ error }),
   error: null,
-  loading: true,
+  loading: false,
   setLoading: (loading: boolean) => set({ loading }),
 }));

@@ -40,7 +40,6 @@ export class UserService {
     const counts = await this.userRepository.getSubscribeCounts(user.id);
 
     const isUserProfile = userId ? userId === user.id : false;
-    console.log(counts);
     const isUserFollow = !!subscribers;
     return {
       ...user,

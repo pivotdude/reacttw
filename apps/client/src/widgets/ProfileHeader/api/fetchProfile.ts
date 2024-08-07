@@ -6,7 +6,8 @@ import gql from 'graphql-tag';
 
 export interface FetchProfileResponse {
   profile: {
-    name?: string;
+    id: number;
+    name: string;
     isUserProfile: boolean;
     isUserFollow: boolean;
     login: string;
@@ -14,13 +15,6 @@ export interface FetchProfileResponse {
     subscribersCount: number;
     avatar: {
       url: string;
-    };
-    photos: {
-      id: number;
-      media: {
-        url: string;
-        name: string;
-      };
     };
   };
   errors?: IGraphqlError[];
@@ -30,8 +24,9 @@ export const fetchProfile = async (
   login: string,
 ): Promise<FetchProfileResponse> => {
   const query = gql`
-    query ($login: String!) {
+    query FetchProfile($login: String!) {
       profile(login: $login) {
+        id
         name
         isUserProfile
         isUserFollow
@@ -41,15 +36,9 @@ export const fetchProfile = async (
         avatar {
           url
         }
-        photos {
-          id
-          media {
-            url
-            name
-          }
-        }
       }
     }
   `;
+
   return sendRequest<FetchProfileResponse>(query, { login });
 };

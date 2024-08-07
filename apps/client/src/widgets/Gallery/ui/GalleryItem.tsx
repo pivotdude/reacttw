@@ -5,30 +5,37 @@ import { PhotoDetails } from '@/widgets/PhotoDetails/ui/PhotoDetails';
 interface GalleryItemProps {
   photo: {
     id: number;
-    src: string;
-    alt: string;
+    media: {
+      url: string;
+      name: string;
+    };
+    user: {
+      login: string;
+      avatar: {
+        url: string;
+      };
+    };
   };
-  user: any;
 }
 
-export function GalleryItem({ photo, user }: GalleryItemProps) {
+export function GalleryItem({ photo }: GalleryItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger>
         <img
-          key={photo.src}
-          src={photo.src + '-/preview/'}
-          alt={photo.alt}
+          key={photo.media.url}
+          src={photo.media.url + '-/preview/'}
+          alt={photo.media.name}
           className={`md:h-96 w-full object-cover`}
         />
       </DialogTrigger>
       {isModalOpen && (
         <PhotoDetails
           id={photo.id}
-          src={photo.src}
-          user={user}
+          src={photo.media.url}
+          user={photo.user}
           hideModal={() => setIsModalOpen(false)}
         />
       )}

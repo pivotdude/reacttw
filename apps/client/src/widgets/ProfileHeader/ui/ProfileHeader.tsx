@@ -1,17 +1,29 @@
 import { UserProfileHeader } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FollowButton } from './FollowButton';
 import { StartDialogButton } from '@/features/startDialog';
-import { useProfileStore } from '@/pages/profile/store/useProfileStore';
-import { LoadingSpinner } from '@/shared/components/Loader';
+import { useFetchProfile } from '../hooks/useFetchProfile';
+import { useEffect } from 'react';
+import { useProfileStore } from '../store/useProfileStore';
+import { LoadingScreen } from '@/shared/components/Loader';
 
 export function ProfileHeader() {
-  const profile = useProfileStore((store) => store.profile);
+  const params = useParams<{ name: string }>();
   const navigate = useNavigate();
+  const { fetchData } = useFetchProfile();
+  const profile = useProfileStore((store) => store.profile);
+
+  useEffect(() => {
+    if (params.name) {
+      fetchData(params.name);
+    }
+  }, [params.name]);
+
   if (!profile) {
-    return <LoadingSpinner />;
+    return <LoadingScreen />;
   }
+
   return (
     <UserProfileHeader
       user={{

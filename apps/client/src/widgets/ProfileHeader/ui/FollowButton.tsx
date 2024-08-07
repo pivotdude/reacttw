@@ -1,24 +1,34 @@
-import { useProfileStore } from '@/pages/profile/store/useProfileStore';
 import { Button } from '@/shared/ui/button';
 import { HeartIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useProfileStore } from '../store/useProfileStore';
+import { unFollow } from '../api/unFollow';
+import { follow } from '../api/follow';
+import { useFetchProfile } from '../hooks/useFetchProfile';
 
 export function FollowButton() {
   const profile = useProfileStore((store) => store.profile);
-  const [followed, setFollowed] = useState(false);
+  const { fetchData } = useFetchProfile();
+  const [followed, setFollowed] = useState(profile?.isUserFollow);
 
   useEffect(() => {
     if (profile) {
-      setFollowed(profile.isUserFollow);
+      setFollowed(profile?.isUserFollow || false);
     }
   }, [profile]);
 
+  const onClick = async () => {
+    if (!profile) return;
+    if (followed) {
+      await unFollow(profile?.id);
+    } else {
+      await follow(profile?.id);
+    }
+    await fetchData(profile?.login);
+  };
+
   return (
-    <Button
-      variant={followed ? 'default' : 'ghost'}
-      // className="bg-pink-600 hover:bg-pink-400"
-      onClick={() => setFollowed((prev) => !prev)}
-    >
+    <Button variant={followed ? 'default' : 'ghost'} onClick={onClick}>
       <HeartIcon />
     </Button>
   );
