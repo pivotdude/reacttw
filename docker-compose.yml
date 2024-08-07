@@ -1,0 +1,31 @@
+networks:
+  default:
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - /home/pivotdude/Downloads/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - server
+      - client
+    networks:
+      - default
+
+  server:
+    build:
+      context: ./apps/server
+    networks:
+      - default
+    env_file:
+      - .env.server
+
+  client:
+    build:
+      context: ./apps/client
+    networks:
+      - default
+    env_file:
+      - .env.client

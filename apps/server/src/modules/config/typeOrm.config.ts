@@ -11,11 +11,11 @@ import { Subscription } from '../subscription/subscription.entity';
 export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   return {
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'postgres',
-    database: 'test',
+    host: process.env.DATABASE_HOST,
+    port: parseInt(process.env.DATABASE_PORT),
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME,
     entities: [
       Subscription,
       User,

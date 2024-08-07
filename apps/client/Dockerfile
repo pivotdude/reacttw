@@ -13,8 +13,8 @@ COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN pnpm build
 
-FROM base as runner
-RUN npm i -g serve
-WORKDIR /app
-COPY --from=builder /app/dist ./dist
-CMD ["serve", "-s", "dist", "-p", "3000"]
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html 
+COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]
