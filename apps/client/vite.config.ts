@@ -43,7 +43,4 @@ export default defineConfig({
       '@': resolve('src/'),
     },
   },
-  optimizeDeps: {
-    exclude: ['react-infinite-scroll-component'],
-  },
 });

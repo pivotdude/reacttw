@@ -12,7 +12,7 @@ export interface FetchCommentsResponse {
 
 export const fetchComments = async (
   photoId: number,
-  pagination?: { page: number; limit: number },
+  pagination?: { offset: number; limit: number },
 ): Promise<FetchCommentsResponse> => {
   const query = gql`
     query fetchComments($input: CommentsInput!) {

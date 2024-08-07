@@ -33,16 +33,12 @@ export abstract class BaseRepository<T extends Repository<any>, G> {
     await this.model.delete(id);
   }
 
-  getPagination(pagination: { page: number; limit: number }) {
-    const { page, limit } = pagination;
+  getPagination(pagination: { offset: number; limit: number }) {
+    const { offset, limit } = pagination;
 
-    if (!page || !limit) {
-      return {};
-    }
-    const skip = (page - 1) * limit;
     return {
       take: limit,
-      skip,
+      skip: offset,
     };
   }
 }

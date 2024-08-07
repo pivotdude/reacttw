@@ -111,7 +111,7 @@ input CommentsInput {
 }
 
 input PaginationInput {
-  page: Int
+  offset: Int
   limit: Int
 }
 
