@@ -8,7 +8,7 @@ interface useFetchMoreCommentsReturn {
   fetchNewData: (offset: number, limit?: number) => Promise<void>;
 }
 
-export function useFetchMoreComments(limit = 20): useFetchMoreCommentsReturn {
+export function useFetchMoreComments(): useFetchMoreCommentsReturn {
   const imageId = usePhotoDetailsStore((store) => store.imageId);
   const { comments, setComments, setLoading } = useCommentsStore(
     useShallow((store) => ({

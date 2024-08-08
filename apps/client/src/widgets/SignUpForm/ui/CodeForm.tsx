@@ -1,14 +1,4 @@
 import { Button } from '@/shared/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/shared/ui/form';
-import { Input } from '@/shared/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -16,6 +6,7 @@ import { сonfirmRegisterCode } from '../api/confirmRegisterCode';
 import { useSignUpFormStore } from '../store/useSignUpFormStore';
 import { useNavigate } from 'react-router-dom';
 import { InputFormField } from '@/shared/components/FormField/ui/InputFormField';
+import { Form } from '@/shared/ui/form';
 
 const formSchema = z.object({
   code: z

@@ -23,7 +23,7 @@ export function UploadPhoto() {
       return;
     }
     createUserPhotos(filesIds)
-      .then((result) => {
+      .then(() => {
         fetchData(params.name as string);
         toast({
           variant: 'success',

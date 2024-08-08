@@ -1,4 +1,4 @@
-import { TypographyH2, TypographyH3 } from '@/shared/ui/Typography';
+import { TypographyH3 } from '@/shared/ui/Typography';
 import { Navbar } from '@/widgets/Navbar/ui/Navbar';
 import { Layout } from '@/widgets/Layout/ui/Layout';
 import { ProfileHeader } from '@/widgets/ProfileHeader';

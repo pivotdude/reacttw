@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { LoadingSpinner } from '@/shared/components/Loader';
 import { UserCard } from '@/entities/user/ui/UserCard';
 import { CommentsBlock } from './CommentsBlock';
-import { useCommentsStore } from '../store/useCommentsStore';
 import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
 import { LikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/LikeImageButton';
 import { DislikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/DislikeImageButton';

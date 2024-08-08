@@ -3,7 +3,6 @@ import { useFetchFollowersList } from '../hook/useFetchFollowersList';
 import { useEffect } from 'react';
 import { useFollowersListStore } from '../store/useFollowersListStore';
 import { LoadingSpinner } from '@/shared/components/Loader';
-import { FollowerList } from '@/entities/followers/ui/FollowerList';
 import { FollowerItem } from '@/entities/followers/ui/FollowerItem';
 
 export function FollowersList() {

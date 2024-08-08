@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useFetchFollowingList } from '../hook/useFetchFollowingList';
 import { useEffect } from 'react';
 import { LoadingSpinner } from '@/shared/components/Loader';
-import { FollowerList } from '@/entities/followers/ui/FollowerList';
 import { useFollowingListStore } from '../store/useFollowingListStore';
 import { FollowerItem } from '@/entities/followers/ui/FollowerItem';
 

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { FetchProfileResponse } from '../api/fetchProfile';
 
-export type ProfileT = FetchProfileResponse['profile'];
+export type ProfileT = FetchProfileResponse['user'];
 
 interface IProfileStore {
   profile: ProfileT | null;

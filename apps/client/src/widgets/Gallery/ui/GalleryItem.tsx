@@ -29,6 +29,7 @@ export function GalleryItem({ photo }: GalleryItemProps) {
           src={photo.media.url + '-/preview/'}
           alt={photo.media.name}
           className={`md:h-96 w-full object-cover`}
+          loading="lazy"
         />
       </DialogTrigger>
       {isModalOpen && (
