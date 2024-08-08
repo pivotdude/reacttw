@@ -13,6 +13,7 @@ export function FollowButton() {
 
   useEffect(() => {
     if (profile) {
+      console.log(profile);
       setFollowed(profile?.isUserFollow || false);
     }
   }, [profile]);

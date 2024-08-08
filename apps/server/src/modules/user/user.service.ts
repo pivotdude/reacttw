@@ -33,14 +33,19 @@ export class UserService {
       throw new NotFoundException(exceptionCodes.notFound);
     }
 
-    const subscribers = await this.userRepository.checkSubscribe(
-      user.id,
-      userId,
-    );
-    const counts = await this.userRepository.getSubscribeCounts(user.id);
+    let isUserFollow = false;
+    let isUserProfile = false;
 
-    const isUserProfile = userId ? userId === user.id : false;
-    const isUserFollow = !!subscribers;
+    if (userId) {
+      const subscribers = await this.userRepository.checkSubscribe(
+        user.id,
+        userId,
+      );
+      isUserFollow = !!subscribers;
+      isUserProfile = userId ? userId === user.id : false;
+    }
+
+    const counts = await this.userRepository.getSubscribeCounts(user.id);
     return {
       ...user,
       isUserProfile,

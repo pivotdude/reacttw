@@ -2,10 +2,10 @@ import { useShallow } from 'zustand/react/shallow';
 import { useFollowingListStore } from '../store/useFollowingListStore';
 import { fetchFollowingList } from '../api/fetchFollowingList';
 
-export function useFetchFollowersList() {
-  const { setFollowers, setIsLoading } = useFollowingListStore(
+export function useFetchFollowingList() {
+  const { setFollowings, setIsLoading } = useFollowingListStore(
     useShallow((store) => ({
-      setFollowers: store.setFollowers,
+      setFollowings: store.setFollowings,
       setIsLoading: store.setIsLoading,
     })),
   );
@@ -13,7 +13,7 @@ export function useFetchFollowersList() {
   const fetchData = (login: string) => {
     setIsLoading(true);
     fetchFollowingList(login)
-      .then((profile) => setFollowers(profile.user.subscribers))
+      .then((profile) => setFollowings(profile.user.subscriptions))
       .finally(() => {
         setIsLoading(false);
       });

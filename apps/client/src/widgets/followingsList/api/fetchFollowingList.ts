@@ -5,23 +5,23 @@ import {
 import gql from 'graphql-tag';
 import { IFollowing } from '../store/useFollowingListStore';
 
-export interface FetchFollowersListResponse {
+export interface FetchFollowingListResponse {
   user: {
-    subscribers: IFollowing[];
+    subscriptions: IFollowing[];
   };
   errors?: IGraphqlError[];
 }
 
 export const fetchFollowingList = async (
   login: string,
-): Promise<FetchFollowersListResponse> => {
+): Promise<FetchFollowingListResponse> => {
   const query = gql`
     query FetchFollowersList($login: String!) {
       user(login: $login) {
         subscriptions {
           id
           createdAt
-          user {
+          author {
             name
             login
             avatar {
@@ -33,5 +33,5 @@ export const fetchFollowingList = async (
     }
   `;
 
-  return sendRequest<FetchFollowersListResponse>(query, { login });
+  return sendRequest<FetchFollowingListResponse>(query, { login });
 };

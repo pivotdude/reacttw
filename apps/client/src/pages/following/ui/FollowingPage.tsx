@@ -12,7 +12,7 @@ export function FollowingPage() {
         <div className="px-0 md:px-10 xl:px-48 2xl:px-[23%]">
           <ProfileHeader />
           <div className="mt-20">
-            <TypographyH3>Followers list</TypographyH3>
+            <TypographyH3>Following list</TypographyH3>
             <div className="mt-8">
               <FollowingList />
             </div>

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useFollowersListStore } from '../store/useFollowersListStore';
 import { LoadingSpinner } from '@/shared/components/Loader';
 import { FollowerList } from '@/entities/followers/ui/FollowerList';
+import { FollowerItem } from '@/entities/followers/ui/FollowerItem';
 
 export function FollowersList() {
   const params = useParams<{ name: string }>();
@@ -24,6 +25,13 @@ export function FollowersList() {
   if (followers.length === 0) {
     return <p className="text-md">No followers</p>;
   }
+  const followingsList = followers.map((following) => (
+    <FollowerItem
+      key={following.id}
+      createdAt={following.createdAt}
+      user={following.user}
+    />
+  ));
 
-  return <FollowerList followers={followers} />;
+  return <div className="space-y-8">{followingsList}</div>;
 }

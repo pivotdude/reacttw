@@ -3,7 +3,7 @@ import { create } from 'zustand';
 export interface IFollowing {
   id: number;
   createdAt: string;
-  user: {
+  author: {
     name: string;
     login: string;
     avatar: {
