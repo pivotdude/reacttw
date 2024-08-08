@@ -3,18 +3,34 @@ import { useUploadStore } from '@/shared/components/UploadZone/store/useUploadSt
 import { Button } from '@/shared/ui/button';
 import { checkAllHaveResultId } from '../utils/checkAllHaveResultId';
 import { createUserPhotos } from '../api/createUserPhotos';
+import { useToast } from '@/shared/ui/use-toast';
+import { useFetchPhotos } from '@/widgets/Gallery/hooks/useFetchPhotos';
+import { useParams } from 'react-router-dom';
 
 export function UploadPhoto() {
   const files = useUploadStore((store) => store.files);
+  const params = useParams<{ name: string }>();
+  const { toast } = useToast();
 
   const filesIds = files.map((file) => file?.result?.id as number);
   const allFilesOk = checkAllHaveResultId(files);
+  const clear = useUploadStore((store) => store.clear);
+
+  const { fetchData } = useFetchPhotos();
 
   const onContinue = () => {
+    if (!params.name) {
+      return;
+    }
     createUserPhotos(filesIds)
       .then((result) => {
-        alert(JSON.stringify(result));
-        // setProfile(result.profile);
+        fetchData(params.name as string);
+        toast({
+          variant: 'success',
+          title: 'Phoot uploaded',
+          description: 'Your photos have been uploaded',
+        });
+        clear();
       })
       .catch((e) => {
         // @ts-ignore

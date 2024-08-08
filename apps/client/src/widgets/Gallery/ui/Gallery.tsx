@@ -16,10 +16,6 @@ export function UserGallery() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log('rawPhotos', photos);
-  }, [photos]);
-
   if (!photos) {
     return <div>Loading...</div>;
   }

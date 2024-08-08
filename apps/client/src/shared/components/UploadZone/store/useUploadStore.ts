@@ -5,6 +5,7 @@ interface IUploadStore {
   files: IUploadedFile[];
   setFiles: (files: IUploadedFile[]) => void;
   updateFile: (id: number, updatedFile: Partial<IUploadedFile>) => void;
+  clear: () => void;
 }
 
 export const useUploadStore = create<IUploadStore>((set) => ({
@@ -16,4 +17,5 @@ export const useUploadStore = create<IUploadStore>((set) => ({
         file.id === id ? { ...file, ...updatedFile } : file,
       ),
     })),
+  clear: () => set({ files: [] }),
 }));
