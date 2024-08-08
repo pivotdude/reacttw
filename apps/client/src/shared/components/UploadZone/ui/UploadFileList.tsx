@@ -38,9 +38,9 @@ export function UploadFileList() {
             key={index}
             className="flex items-center justify-between bg-gray-100 p-2 rounded"
           >
-            <span className="flex items-center">
+            <div className="flex items-center w-full overflow-hidden">
               {getStatusMessage(file.status, file.name, file?.result?.url)}
-            </span>
+            </div>
             <Button
               type="button"
               variant="ghost"
