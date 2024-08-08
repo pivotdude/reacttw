@@ -14,7 +14,7 @@ export function UserGallery() {
     if (params.name) {
       fetchData(params.name);
     }
-  }, []);
+  }, [params]);
 
   if (!photos) {
     return <div>Loading...</div>;

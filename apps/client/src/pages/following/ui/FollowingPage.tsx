@@ -7,7 +7,7 @@ import { FollowingList } from '@/widgets/followingsList/ui/FollowingList';
 export function FollowingPage() {
   return (
     <Layout>
-      <div className="px-4 md:px-8 lg:px-10 w-full">
+      <div className="px-2 md:px-8 lg:px-10 w-full">
         <Navbar />
         <div className="px-0 md:px-10 xl:px-48 2xl:px-[23%]">
           <ProfileHeader />
