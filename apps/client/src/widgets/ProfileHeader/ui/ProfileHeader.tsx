@@ -6,7 +6,7 @@ import { StartDialogButton } from '@/features/startDialog';
 import { useFetchProfile } from '../hooks/useFetchProfile';
 import { useEffect } from 'react';
 import { useProfileStore } from '../store/useProfileStore';
-import { LoadingScreen } from '@/shared/components/Loader';
+import { LoadingScreen, LoadingSpinner } from '@/shared/components/Loader';
 
 export function ProfileHeader() {
   const params = useParams<{ name: string }>();
@@ -21,7 +21,7 @@ export function ProfileHeader() {
   }, [params.name]);
 
   if (!profile) {
-    return <LoadingScreen />;
+    return <LoadingSpinner />;
   }
 
   return (

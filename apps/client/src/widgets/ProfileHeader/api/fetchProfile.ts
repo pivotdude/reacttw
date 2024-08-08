@@ -5,7 +5,7 @@ import {
 import gql from 'graphql-tag';
 
 export interface FetchProfileResponse {
-  profile: {
+  user: {
     id: number;
     name: string;
     isUserProfile: boolean;
@@ -25,7 +25,7 @@ export const fetchProfile = async (
 ): Promise<FetchProfileResponse> => {
   const query = gql`
     query FetchProfile($login: String!) {
-      profile(login: $login) {
+      user(login: $login) {
         id
         name
         isUserProfile

@@ -15,7 +15,7 @@ export function useFetchProfile() {
     setLoading(true);
     fetchProfile(login)
       .then((result) => {
-        setProfile(result.profile);
+        setProfile(result.user);
       })
       .catch((e) => {
         console.error('ee', e.response.errors[0].message);

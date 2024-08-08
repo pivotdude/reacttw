@@ -5,7 +5,7 @@ export interface IFriendsListState {
   friends: IFriend[];
 }
 
-export const useFriendsList = create<IFriendsListState>(() => ({
+export const useFriendsListStore = create<IFriendsListState>(() => ({
   friends: [
     {
       name: 'terylucas',

@@ -29,15 +29,9 @@ export class UserResolver {
     return this.userService.getAll();
   }
 
-  // @UseGuards(AuthGuard)
-  // @Query((returns) => UserModel)
-  // async user(@Context('req') req: any) {
-  //   return this.userService.findByInput(input, req.user.id);
-  // }
-
   @UseGuards(TokenGuard)
   @Query((returns) => ProfileInput)
-  async profile(
+  async user(
     @Args('login') login: string,
     @AuthUserId() userId: number,
     @Relations() relations: any,

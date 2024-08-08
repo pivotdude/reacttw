@@ -98,7 +98,7 @@ type LoginAnswerModel {
 type Query {
   subscriptions: [SubscriptionModel!]!
   users: [UserModel!]!
-  profile(login: String!): ProfileInput!
+  user(login: String!): ProfileInput!
   account: UserModel!
   photos: [PhotoModel!]!
   photo(id: Int!): PhotoModel!

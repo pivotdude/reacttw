@@ -8,10 +8,10 @@ interface TypographySmallProps {
 
 export function TypographySmall({ children, className }: TypographySmallProps) {
   return (
-    <small
+    <p
       className={twMerge('text-sm font-medium leading-5 opacity-45', className)}
     >
       {children}
-    </small>
+    </p>
   );
 }

@@ -13,7 +13,7 @@ export function useFetchPhotos() {
   const fetchData = (login: string) => {
     setIsLoading(true);
     fetchPhotos(login)
-      .then((profile) => setProfilePhotos(profile.profile.photos))
+      .then((profile) => setProfilePhotos(profile.user.photos))
       .finally(() => {
         setIsLoading(false);
       });

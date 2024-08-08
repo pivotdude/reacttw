@@ -6,6 +6,8 @@ import { SignUpPageLazy } from '@/pages/signup';
 import { ErrorBoundary } from '@/shared/components/errorBoundary/ui/ErrorBoundary';
 import { SettingsPageLazy } from '@/pages/settings/ui/SettingsPageLazy';
 import { SuspenseLoadingScreen } from '@/shared/components/Loader';
+import { FollowingPageLazy } from '@/pages/following';
+import { FollowersPageLazy } from '@/pages/followers';
 
 export function AppRouter() {
   const router = createBrowserRouter([
@@ -23,6 +25,22 @@ export function AppRouter() {
       element: (
         <SuspenseLoadingScreen>
           <ProfilePageLazy />
+        </SuspenseLoadingScreen>
+      ),
+    },
+    {
+      path: '/profile/:name/followers',
+      element: (
+        <SuspenseLoadingScreen>
+          <FollowersPageLazy />
+        </SuspenseLoadingScreen>
+      ),
+    },
+    {
+      path: '/profile/:name/following',
+      element: (
+        <SuspenseLoadingScreen>
+          <FollowingPageLazy />
         </SuspenseLoadingScreen>
       ),
     },

@@ -1,9 +1,9 @@
-import { UserCardWithButton } from "@/entities/user";
-import { StartDialogButton } from "@/features/startDialog";
-import { useFriendsList } from "../store/useFriendsList";
+import { UserCardWithButton } from '@/entities/user';
+import { StartDialogButton } from '@/features/startDialog';
+import { useFriendsListStore } from '../store/useFriendsListStore';
 
 export function FriendsList() {
-  const friends = useFriendsList(state => state.friends)
+  const friends = useFriendsListStore((state) => state.friends);
 
   return (
     <>

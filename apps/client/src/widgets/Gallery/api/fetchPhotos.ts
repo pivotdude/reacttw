@@ -5,7 +5,7 @@ import {
 import gql from 'graphql-tag';
 
 export interface FetchPhotosResponse {
-  profile: {
+  user: {
     photos: {
       id: number;
       media: {
@@ -18,7 +18,7 @@ export interface FetchPhotosResponse {
           url: string;
         };
       };
-    };
+    }[];
   };
   errors?: IGraphqlError[];
 }
@@ -28,7 +28,7 @@ export const fetchPhotos = async (
 ): Promise<FetchPhotosResponse> => {
   const query = gql`
     query ($login: String!) {
-      profile(login: $login) {
+      user(login: $login) {
         photos {
           id
           media {
