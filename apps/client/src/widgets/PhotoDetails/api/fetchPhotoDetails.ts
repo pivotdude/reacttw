@@ -1,17 +1,13 @@
-import {
-  IGraphqlError,
-  sendRequest,
-} from '@/shared/lib/utils/graphql/sendRequest';
+import { IGraphqlError, sendRequest } from '@/shared/utils/graphql/sendRequest';
 import gql from 'graphql-tag';
 
 export interface FetchPhotoDetailsResponse {
   photo: {
     likeCount: number;
     dislikeCount: number;
-    likes: {
-      id: number;
-      isLike: boolean;
-    };
+    userSaved: boolean;
+    userLiked: boolean;
+    userDisliked: boolean;
   };
   errors?: IGraphqlError[];
 }
@@ -24,10 +20,9 @@ export const fetchPhotoDetails = async (
       photo(id: $id) {
         likeCount
         dislikeCount
-        likes {
-          id
-          isLike
-        }
+        userSaved
+        userLiked
+        userDisliked
       }
     }
   `;

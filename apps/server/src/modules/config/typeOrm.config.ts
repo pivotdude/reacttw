@@ -7,6 +7,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Comment } from '../photo/comment/comment.entity';
 import { PhotoLike } from '../photo/photoLike/photoLike.entity';
 import { Subscription } from '../subscription/subscription.entity';
+import { PhotoSaves } from '../photo/photoSaves/photoSaves.entity';
 
 export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   return {
@@ -25,6 +26,7 @@ export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
       Comment,
       Photo,
       PhotoLike,
+      PhotoSaves,
     ],
     synchronize: true,
   };

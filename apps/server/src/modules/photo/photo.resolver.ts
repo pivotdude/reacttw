@@ -16,6 +16,7 @@ import { TokenGuard } from '../auth/guard/TokenGuard';
 import { GraphQLResolveInfo } from 'graphql';
 import { AuthUserId } from 'src/core/decorators/AuthUserId';
 import { Relations } from 'src/core/decorators/Relations';
+import { findPhotoModel } from './input/findPhotoModel';
 
 @Resolver((of) => PhotoModel)
 export class PhotoResover {
@@ -31,7 +32,7 @@ export class PhotoResover {
   }
 
   @UseGuards(TokenGuard)
-  @Query(() => PhotoModel)
+  @Query(() => findPhotoModel)
   async photo(
     @Args('id', { type: () => Int }) id: number,
     @Relations() relations: any,

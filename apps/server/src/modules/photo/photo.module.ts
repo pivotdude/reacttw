@@ -8,6 +8,7 @@ import { MediaModule } from '../media/media.module';
 import { PhotoResover } from './photo.resolver';
 import { CommentModule } from './comment/comment.module';
 import { PhotoLikeModule } from './photoLike/photoLike.module';
+import { PhotoSavesModule } from './photoSaves/photoSaves.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PhotoLikeModule } from './photoLike/photoLike.module';
     MediaModule,
     CommentModule,
     PhotoLikeModule,
+    PhotoSavesModule,
   ],
   providers: [PhotoRepository, PhotoService, PhotoResover],
 })

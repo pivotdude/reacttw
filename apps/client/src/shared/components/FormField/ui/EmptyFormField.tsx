@@ -1,5 +1,5 @@
 import { Control } from 'react-hook-form';
-import { capitalizeFirstLetter } from '@/shared/lib/utils/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from '@/shared/utils/capitalizeFirstLetter';
 import {
   FormControl,
   FormField as ShadcnFormField,

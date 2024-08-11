@@ -6,6 +6,8 @@ import { Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { deleteLike } from './api/deleteLike';
 import { putDislike } from './api/putDislike';
+import { useToast } from '@/shared/ui/use-toast';
+import { getToastParams } from '@/shared/utils/getToastParams';
 
 interface LikeImageButtonProps {
   imageId: number;
@@ -17,11 +19,10 @@ export function DislikeImageButton(props: LikeImageButtonProps) {
   const { fetchData } = useFetchPhotoDetails();
   const imageId = usePhotoDetailsStore((store) => store.imageId);
   const data = usePhotoDetailsStore((store) => store.data);
+  const { toast } = useToast();
 
   useEffect(() => {
-    // TODO: refactor, transfer to server
-    // @ts-ignore
-    if (data?.likes?.[0]?.isLike === false) {
+    if (data?.userDisliked) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -30,7 +31,9 @@ export function DislikeImageButton(props: LikeImageButtonProps) {
 
   const onClick = async () => {
     if (!isActive) {
-      await putDislike(props.imageId);
+      await putDislike(props.imageId).catch((e) => {
+        toast(getToastParams(e.response.errors[0].message));
+      });
     } else {
       await deleteLike(props.imageId);
     }

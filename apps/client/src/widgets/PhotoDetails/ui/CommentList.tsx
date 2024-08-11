@@ -14,13 +14,13 @@ export function CommentList() {
 
   return (
     <>
-      {loading && <LoadingSpinner />}
       <div ref={scrollEl} className="flex-grow overflow-y-auto mb-2 mt-4">
         {comments.map((comment) => (
           <div key={comment.id} className="mb-3">
             <Comment comment={comment} />
           </div>
         ))}
+        {loading && <LoadingSpinner />}
       </div>
     </>
   );

@@ -12,57 +12,21 @@ export class PhotoRepository extends BaseRepository<IPhotoRepository, Photo> {
     super(model);
   }
   async findByIdAuthUser(id: number, relations: string[], userId: number) {
-    // Проверяем наличие likes для данной фотографии и пользователя
-    const hasLikes = await this.model
-      .createQueryBuilder('photo')
-      .leftJoinAndSelect('photo.likes', 'likes')
-      .leftJoinAndSelect('likes.user', 'user')
-      .where('photo.id = :id', { id })
-      .andWhere('user.id = :userId', { userId })
-      .getCount();
+    const photo = await this.model.query(
+      `
+        SELECT p.*,
+       (SELECT count(*) FROM "photo_like" WHERE "photoId" = p.id AND "isLike" = 'true') as "likeCount",
+       (SELECT count(*) FROM "photo_like" WHERE "photoId" = p.id AND "isLike" = 'false') as "dislikeCount",
+       EXISTS (SELECT 1 FROM "photo_like" WHERE "photoId" = p.id AND "userId" = $1 AND "isLike" = 'true') as "userLiked",
+       EXISTS (SELECT 1 FROM "photo_like" WHERE "photoId" = p.id AND "userId" = $1 AND "isLike" = 'false') as "userDisliked",
+       EXISTS (SELECT 1 FROM "photo_saves" WHERE "photoId" = p.id AND "userId" = $1) as "userSaved"
+FROM photo p
+JOIN media m ON m.id = p."mediaId"
+WHERE p.id = $2;
+      `,
+      [userId, id],
+    );
 
-    if (hasLikes > 0) {
-      // Если likes существуют, выполняем запрос с присоединением likes
-      const result = await this.model
-        .createQueryBuilder('photo')
-        .leftJoinAndSelect('photo.likes', 'likes')
-        .leftJoinAndSelect('likes.user', 'user')
-        .where('photo.id = :id', { id })
-        .andWhere('user.id = :userId', { userId })
-        .loadRelationCountAndMap(
-          'photo.likeCount',
-          'photo.likes',
-          'likes',
-          (qb) => qb.where('likes.isLike = :isLike', { isLike: true }),
-        )
-        .loadRelationCountAndMap(
-          'photo.dislikeCount',
-          'photo.likes',
-          'likes',
-          (qb) => qb.where('likes.isLike = :isLike', { isLike: false }),
-        )
-        .getOne();
-      return result;
-    } else {
-      // Если likes отсутствуют, выполняем запрос без присоединения likes
-      const result2 = await this.model
-        .createQueryBuilder('photo')
-        .where('photo.id = :id', { id })
-        .leftJoin('photo.likes', 'likes')
-        .loadRelationCountAndMap(
-          'photo.likeCount',
-          'photo.likes',
-          'likes',
-          (qb) => qb.where('likes.isLike = :isLike', { isLike: true }),
-        )
-        .loadRelationCountAndMap(
-          'photo.dislikeCount',
-          'photo.likes',
-          'likes',
-          (qb) => qb.where('likes.isLike = :isLike', { isLike: false }),
-        )
-        .getOne();
-      return result2;
-    }
+    return photo[0];
   }
 }

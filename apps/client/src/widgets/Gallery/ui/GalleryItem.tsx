@@ -3,6 +3,7 @@ import { Dialog, DialogTrigger } from '@/shared/ui/dialog';
 import { PhotoDetails } from '@/widgets/PhotoDetails/ui/PhotoDetails';
 
 interface GalleryItemProps {
+  onUpdateSavePhoto?: () => void;
   photo: {
     id: number;
     media: {
@@ -18,7 +19,7 @@ interface GalleryItemProps {
   };
 }
 
-export function GalleryItem({ photo }: GalleryItemProps) {
+export function GalleryItem({ photo, onUpdateSavePhoto }: GalleryItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -38,6 +39,7 @@ export function GalleryItem({ photo }: GalleryItemProps) {
           src={photo.media.url}
           user={photo.user}
           hideModal={() => setIsModalOpen(false)}
+          onUpdateSavePhoto={onUpdateSavePhoto}
         />
       )}
     </Dialog>

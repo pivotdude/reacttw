@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthService } from '../auth.service';
+import { ErrorEnum } from 'src/constants/errors';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -17,7 +18,7 @@ export class AuthGuard implements CanActivate {
     const token = req.headers.authorization;
 
     if (!token || token === 'undefined') {
-      throw new ForbiddenException('NOT_AUTH');
+      throw new ForbiddenException(ErrorEnum.NOT_AUTH);
     }
 
     try {
@@ -25,7 +26,7 @@ export class AuthGuard implements CanActivate {
       req.user = { id: userId };
       return true;
     } catch (error) {
-      throw new ForbiddenException('NOT_AUTH');
+      throw new ForbiddenException(ErrorEnum.NOT_AUTH);
     }
   }
 }

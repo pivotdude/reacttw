@@ -6,6 +6,8 @@ import { usePhotoDetailsStore } from '@/widgets/PhotoDetails/store/usePhotoDetai
 import { Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { deleteLike } from './api/deleteLike';
+import { useToast } from '@/shared/ui/use-toast';
+import { getToastParams } from '@/shared/utils/getToastParams';
 
 interface LikeImageButtonProps {
   imageId: number;
@@ -17,11 +19,10 @@ export function LikeImageButton(props: LikeImageButtonProps) {
   const { fetchData } = useFetchPhotoDetails();
   const imageId = usePhotoDetailsStore((store) => store.imageId);
   const data = usePhotoDetailsStore((store) => store.data);
+  const { toast } = useToast();
 
   useEffect(() => {
-    // TODO: refactor, transfer to server
-    // @ts-ignore
-    if (data?.likes?.[0]?.isLike === true) {
+    if (data?.userLiked) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -29,10 +30,10 @@ export function LikeImageButton(props: LikeImageButtonProps) {
   }, [data, imageId]);
 
   const onClick = async () => {
-    console.log('submit', props.imageId);
-
     if (!isActive) {
-      await putLike(props.imageId);
+      await putLike(props.imageId).catch((e) => {
+        toast(getToastParams(e.response.errors[0].message));
+      });
     } else {
       await deleteLike(props.imageId);
     }

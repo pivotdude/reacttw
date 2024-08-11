@@ -10,13 +10,15 @@ interface useFetchMoreCommentsReturn {
 
 export function useFetchMoreComments(): useFetchMoreCommentsReturn {
   const imageId = usePhotoDetailsStore((store) => store.imageId);
-  const { comments, setComments, setLoading } = useCommentsStore(
-    useShallow((store) => ({
-      comments: store.comments,
-      setComments: store.setComments,
-      setLoading: store.setLoading,
-    })),
-  );
+  const { comments, setComments, setLoading, setIsNewCommentsLoading } =
+    useCommentsStore(
+      useShallow((store) => ({
+        comments: store.comments,
+        setComments: store.setComments,
+        setLoading: store.setLoading,
+        setIsNewCommentsLoading: store.setIsNewCommentsLoading,
+      })),
+    );
 
   const fetchData = async (offset: number, limit = 20) => {
     setLoading(true);
@@ -28,12 +30,12 @@ export function useFetchMoreComments(): useFetchMoreCommentsReturn {
   };
 
   const fetchNewData = async (offset: number, limit = 20) => {
-    setLoading(true);
+    setIsNewCommentsLoading(true);
     fetchComments(imageId, { offset, limit })
       .then((result) => {
         setComments(result.comments);
       })
-      .finally(() => setLoading(false));
+      .finally(() => setIsNewCommentsLoading(false));
   };
 
   return { fetchData, fetchNewData };

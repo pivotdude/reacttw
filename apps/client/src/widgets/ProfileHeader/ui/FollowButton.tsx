@@ -5,15 +5,17 @@ import { useProfileStore } from '../store/useProfileStore';
 import { unFollow } from '../api/unFollow';
 import { follow } from '../api/follow';
 import { useFetchProfile } from '../hooks/useFetchProfile';
+import { useToast } from '@/shared/ui/use-toast';
+import { getToastParams } from '@/shared/utils/getToastParams';
 
 export function FollowButton() {
   const profile = useProfileStore((store) => store.profile);
   const { fetchData } = useFetchProfile();
   const [followed, setFollowed] = useState(profile?.isUserFollow);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (profile) {
-      console.log(profile);
       setFollowed(profile?.isUserFollow || false);
     }
   }, [profile]);
@@ -23,7 +25,9 @@ export function FollowButton() {
     if (followed) {
       await unFollow(profile?.id);
     } else {
-      await follow(profile?.id);
+      await follow(profile?.id).catch((e) => {
+        toast(getToastParams(e.response.errors[0].message));
+      });
     }
     await fetchData(profile?.login);
   };

@@ -23,9 +23,16 @@ interface PhotoDetailsProps {
     };
   };
   hideModal: () => void;
+  onUpdateSavePhoto?: () => void;
 }
 
-export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
+export function PhotoDetails({
+  src,
+  hideModal,
+  user,
+  id,
+  onUpdateSavePhoto,
+}: PhotoDetailsProps) {
   const imageRef = useRef<HTMLImageElement>(null);
   const { fetchData } = useFetchPhotoDetails();
   const data = usePhotoDetailsStore((store) => store.data);
@@ -90,7 +97,7 @@ export function PhotoDetails({ src, hideModal, user, id }: PhotoDetailsProps) {
                 user={{ name: user.login, avatar: user?.avatar?.url || '' }}
               />
               <div className="flex space-x-2">
-                <SaveImageButton imageId={id} />
+                <SaveImageButton imageId={id} onUpdate={onUpdateSavePhoto} />
                 <LikeImageButton
                   imageId={id}
                   likeCount={data?.likeCount || 0}

@@ -16,6 +16,7 @@ rectangle UserModule
 rectangle EmailModule
 rectangle EmailTypeModule
 rectangle MailerModule
+rectangle PhotoSavesModule
 ' Comments
 ' Define relationships
 AppModule --> MediaModule
@@ -26,6 +27,7 @@ AppModule --> AuthModule
 AppModule --> "Service modules"
 PhotoModule --> MediaModule
 PhotoModule --> CommentModule : SubModule
+PhotoModule --> PhotoSavesModule : SubModule
 EmailModule --> EmailTypeModule : SubModule
 EmailModule --> MailerModule
 ' Forward references (red arrows)

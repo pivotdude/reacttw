@@ -48,6 +48,14 @@ type PhotoModel {
   dislikeCount: Int
 }
 
+type PhotoSavesModel {
+  id: Int!
+  photo: PhotoModel!
+  user: UserModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type SubscriptionModel {
   id: Int!
   author: UserModel!
@@ -61,6 +69,7 @@ type ProfileInput {
   photos: [PhotoModel!]
   name: String
   avatar: MediaModel
+  savedPhotos: [PhotoSavesModel!]
   photosLikes: [PhotoLikeModel!]
   subscriptions: [SubscriptionModel!]
   subscribers: [SubscriptionModel!]
@@ -73,6 +82,19 @@ type ProfileInput {
   isUserFollow: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type findPhotoModel {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  media: MediaModel
+  user: UserModel!
+  likeCount: Int!
+  dislikeCount: Int!
+  userLiked: Boolean!
+  userDisliked: Boolean!
+  userSaved: Boolean!
 }
 
 type CommentModel {
@@ -100,8 +122,9 @@ type Query {
   users: [UserModel!]!
   user(login: String!): ProfileInput!
   account: UserModel!
+  saves: PhotoSavesModel!
   photos: [PhotoModel!]!
-  photo(id: Int!): PhotoModel!
+  photo(id: Int!): findPhotoModel!
   comments(input: CommentsInput!): [CommentModel!]!
 }
 
@@ -125,6 +148,8 @@ type Mutation {
   createUser(input: UserCreateInput!): UserModel!
   updateUser(input: UpdateUserInput!): UserModel!
   delete(id: Float!): UserModel!
+  createPhotoSaves(input: PhotoSavesInput!): PhotoSavesModel!
+  deletePhotoSaves(input: PhotoSavesInput!): PhotoSavesModel!
   createUserPhotos(input: CreateUserPhotoInput!): [PhotoModel!]!
   addPhotoLike(input: addPhotoLikeInput!): PhotoLikeModel!
   addPhotoDislike(input: addPhotoLikeInput!): PhotoLikeModel!
@@ -169,6 +194,10 @@ input UpdateUserInput {
   isActive: Boolean
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input PhotoSavesInput {
+  photo: Int!
 }
 
 input CreateUserPhotoInput {

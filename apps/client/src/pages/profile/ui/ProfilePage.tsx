@@ -4,9 +4,15 @@ import { UploadPhoto } from '@/widgets/UploadPhoto/ui/UploadPhoto';
 import { Layout } from '@/widgets/Layout/ui/Layout';
 import { UserGallery } from '@/widgets/Gallery';
 import { useProfileStore } from '@/widgets/ProfileHeader/store/useProfileStore';
+import { NotFoundPage } from '@/pages/notFound/ui/NotFoundPage';
 
 export function ProfilePage() {
   const profile = useProfileStore((store) => store.profile);
+  const error = useProfileStore((store) => store.error);
+
+  if (error === 'NOT_FOUND') {
+    return <NotFoundPage />;
+  }
 
   return (
     <Layout>

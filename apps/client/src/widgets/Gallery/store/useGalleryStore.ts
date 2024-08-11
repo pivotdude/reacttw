@@ -1,29 +1,20 @@
 import { create } from 'zustand';
-
-interface IPhoto {
-  id: number;
-  media: {
-    url: string;
-    name: string;
-  };
-  user: {
-    login: string;
-    avatar: {
-      url: string;
-    };
-  };
-}
+import { IPhoto, ISavedPhoto } from '../types';
 
 interface IGaleryStore {
-  profilePhotos: IPhoto[] | null;
+  profilePhotos: IPhoto[];
   setProfilePhotos: (profilePhotos: IPhoto[]) => void;
+  savedPhotos: ISavedPhoto[];
+  setSavedPhotos: (savedPhotos: ISavedPhoto[]) => void;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
 }
 
 export const useGalleryStore = create<IGaleryStore>((set) => ({
-  profilePhotos: null,
+  profilePhotos: [],
   setProfilePhotos: (profilePhotos: IPhoto[]) => set({ profilePhotos }),
+  savedPhotos: [],
+  setSavedPhotos: (savedPhotos: ISavedPhoto[]) => set({ savedPhotos }),
   isLoading: false,
   setIsLoading: (isLoading: boolean) => set({ isLoading }),
 }));

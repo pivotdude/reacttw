@@ -24,13 +24,13 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @UseGuards()
-  @Query((returns) => [UserModel])
+  @Query(() => [UserModel])
   async users() {
     return this.userService.getAll();
   }
 
   @UseGuards(TokenGuard)
-  @Query((returns) => ProfileInput)
+  @Query(() => ProfileInput)
   async user(
     @Args('login') login: string,
     @AuthUserId() userId: number,
@@ -40,19 +40,19 @@ export class UserResolver {
   }
 
   @UseGuards(AuthGuard)
-  @Query((returns) => UserModel)
+  @Query(() => UserModel)
   async account(@Context('req') req: any, @Info() info: GraphQLResolveInfo) {
     const relations = getRelations(info);
     return this.userService.findById(req?.user?.id, relations);
   }
 
-  @Mutation((returns) => UserModel)
+  @Mutation(() => UserModel)
   async createUser(@Args('input') input: UserCreateInput) {
     return this.userService.create(input);
   }
 
   @UseGuards(AuthGuard)
-  @Mutation((returns) => UserModel)
+  @Mutation(() => UserModel)
   async updateUser(
     @Args('input') input: UpdateUserInput,
     @Context('req') req: any,
@@ -60,7 +60,7 @@ export class UserResolver {
     return this.userService.update(req.user.id, input);
   }
 
-  @Mutation((returns) => UserModel)
+  @Mutation(() => UserModel)
   async delete(@Args('id') id: number) {
     return this.userService.delete(id);
   }

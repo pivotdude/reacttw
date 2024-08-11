@@ -1,24 +1,10 @@
-import {
-  IGraphqlError,
-  sendRequest,
-} from '@/shared/lib/utils/graphql/sendRequest';
+import { IGraphqlError, sendRequest } from '@/shared/utils/graphql/sendRequest';
 import gql from 'graphql-tag';
+import { IPhoto } from '../types';
 
 export interface FetchPhotosResponse {
   user: {
-    photos: {
-      id: number;
-      media: {
-        url: string;
-        name: string;
-      };
-      user: {
-        login: string;
-        avatar: {
-          url: string;
-        };
-      };
-    }[];
+    photos: IPhoto[];
   };
   errors?: IGraphqlError[];
 }

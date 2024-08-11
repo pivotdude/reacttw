@@ -1,7 +1,4 @@
-import {
-  IGraphqlError,
-  sendRequest,
-} from '@/shared/lib/utils/graphql/sendRequest';
+import { IGraphqlError, sendRequest } from '@/shared/utils/graphql/sendRequest';
 import gql from 'graphql-tag';
 
 export interface FetchSettingsInfoResponse {

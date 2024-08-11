@@ -1,6 +1,5 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { SubscriptionRepository } from './subscription.repository';
-import { UserService } from '../user/user.service';
 import { UserRepository } from '../user/user.repository';
 
 @Injectable()

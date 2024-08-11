@@ -1,6 +1,6 @@
 import { UserAvatar } from '@/entities/user';
 import { TypographySmall } from '@/shared/ui/Typography';
-import { formatDate } from '@/shared/lib/utils/dateFormatter';
+import { formatDate } from '@/shared/utils/dateFormatter';
 
 interface FollowerItemProps {
   createdAt: string;

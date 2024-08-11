@@ -2,6 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { MediaModel } from 'src/modules/media/media.model';
 import { PhotoModel } from 'src/modules/photo/input/photo.model';
 import { PhotoLikeModel } from 'src/modules/photo/photoLike/photoLike.model';
+import { PhotoSavesModel } from 'src/modules/photo/photoSaves/photoSaves.model';
 import { SubscriptionModel } from 'src/modules/subscription/subscription.model';
 
 @ObjectType()
@@ -17,6 +18,9 @@ export class ProfileInput {
 
   @Field(() => MediaModel, { nullable: true })
   avatar?: MediaModel;
+
+  @Field(() => [PhotoSavesModel], { nullable: true })
+  savedPhotos?: PhotoSavesModel[];
 
   @Field(() => [PhotoLikeModel], { nullable: true })
   photosLikes?: PhotoLikeModel[];
