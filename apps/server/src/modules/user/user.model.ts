@@ -4,13 +4,13 @@ import { MediaModel } from '../media/media.model';
 
 @ObjectType()
 export class UserModel implements User {
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @Field({ nullable: true })
   name?: string;
 
-  @Field((type) => MediaModel, { nullable: true })
+  @Field(() => MediaModel, { nullable: true })
   avatar?: MediaModel;
 
   @Field()

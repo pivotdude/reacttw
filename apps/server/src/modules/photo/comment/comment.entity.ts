@@ -1,4 +1,3 @@
-import { User } from 'src/modules/user/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,6 +6,7 @@ import {
   ManyToOne,
   Column,
 } from 'typeorm';
+import { User } from '@m/user/user.entity';
 import { Photo } from '../photo.entity';
 
 @Entity()

@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { MediaModel } from 'src/modules/media/media.model';
-import { UserModel } from 'src/modules/user/user.model';
+import { MediaModel } from '@m/media/media.model';
+import { UserModel } from '@m/user/user.model';
 
 @ObjectType()
 export class findPhotoModel {

@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { PaginationInput } from 'src/core/input/pagination.input';
+import { PaginationInput } from '@/core/input/pagination.input';
 
 @InputType()
 export class CommentsInput {

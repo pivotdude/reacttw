@@ -1,25 +1,14 @@
-import { UserService } from './user.service';
-import {
-  Args,
-  Context,
-  Info,
-  Mutation,
-  Query,
-  Resolver,
-} from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 import { UserModel } from './user.model';
 import { UserCreateInput } from './input/UserCreateInput';
-import { UseGuards } from '@nestjs/common';
+import { UserService } from './user.service';
 import { ProfileInput } from './input/ProfileInput';
-import { TokenGuard } from '../auth/guard/TokenGuard';
-import { AuthGuard } from '../auth/guard/AuthGuard';
-import { GraphQLResolveInfo } from 'graphql';
 import { UpdateUserInput } from './input/UpdateUserInput';
-import { getRelations } from 'src/utils/getRelations';
-import { Relations } from 'src/core/decorators/Relations';
-import { AuthUserId } from 'src/core/decorators/AuthUserId';
+import { AuthUserId, Relations } from '@/core/decorators';
+import { AuthGuard, TokenGuard } from '@/core/guards';
 
-@Resolver((of) => UserModel)
+@Resolver(() => UserModel)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
@@ -41,9 +30,8 @@ export class UserResolver {
 
   @UseGuards(AuthGuard)
   @Query(() => UserModel)
-  async account(@Context('req') req: any, @Info() info: GraphQLResolveInfo) {
-    const relations = getRelations(info);
-    return this.userService.findById(req?.user?.id, relations);
+  async account(@AuthUserId() userId: number, @Relations() relations: any) {
+    return this.userService.findById(userId, relations);
   }
 
   @Mutation(() => UserModel)
@@ -55,9 +43,9 @@ export class UserResolver {
   @Mutation(() => UserModel)
   async updateUser(
     @Args('input') input: UpdateUserInput,
-    @Context('req') req: any,
+    @AuthUserId() userId: number,
   ) {
-    return this.userService.update(req.user.id, input);
+    return this.userService.update(userId, input);
   }
 
   @Mutation(() => UserModel)

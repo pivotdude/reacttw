@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PhotoRepository } from './photo.repository';
-import { UserService } from '../user/user.service';
-import { MediaService } from '../media/media.service';
+import { UserService } from '@m/user/user.service';
+import { MediaService } from '@m/media/media.service';
 import { Photo } from './photo.entity';
-import { getRelations } from '../../utils/getRelations';
-import { GraphQLResolveInfo } from 'graphql';
 
 @Injectable()
 export class PhotoService {
@@ -24,16 +22,7 @@ export class PhotoService {
     return photo;
   }
 
-  async findAll({
-    info,
-    userId,
-  }: {
-    info: GraphQLResolveInfo;
-    userId: number;
-  }) {
-    const relations = getRelations(info);
-    // const user = await this.userService.findById(userId);
-
+  async findAll({ relations }: { relations: any; userId: number }) {
     return this.photoRepository.getAll({
       relations,
     });

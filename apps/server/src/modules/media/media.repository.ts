@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BaseRepository } from 'src/core/BaseRepository';
-import { Media } from './media.entity';
 import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { BaseRepository } from '@/core/BaseRepository';
+import { Media } from './media.entity';
 
 type IMediaRepository = Repository<Media>;
 

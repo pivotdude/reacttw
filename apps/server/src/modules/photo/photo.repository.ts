@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BaseRepository } from 'src/core/BaseRepository';
 import { Repository } from 'typeorm';
+import { BaseRepository } from '@/core/BaseRepository';
 import { Photo } from './photo.entity';
 
 type IPhotoRepository = Repository<Photo>;

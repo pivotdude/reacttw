@@ -1,18 +1,21 @@
 import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+//
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from '../user/user.module';
-import { MediaModule } from '../media/media.module';
-import { EmailModule } from '../email/email.module';
-import { PhotoModule } from '../photo/photo.module';
-import { ConfigModule } from '@nestjs/config';
+//
+import { UserModule } from '@m/user/user.module';
+import { MediaModule } from '@m/media/media.module';
+import { EmailModule } from '@m/email/email.module';
+import { PhotoModule } from '@m/photo/photo.module';
+import { AuthModule } from '@m/auth/auth.module';
+import { SubscriptionModule } from '@m/subscription/subscription.module';
+//
 import { getConfigMConfig } from '../config/configM.config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { getTypeOrmConfig } from '../config/typeOrm.config';
-import { GraphQLModule } from '@nestjs/graphql';
 import { getGraphqlConfig } from '../config/graphql.config';
-import { AuthModule } from '../auth/auth.module';
-import { SubscriptionModule } from '../subscription/subscription.module';
 
 @Module({
   imports: [

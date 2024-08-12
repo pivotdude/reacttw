@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthService } from '../auth.service';
-import { ErrorEnum } from 'src/constants/errors';
+import { ErrorEnum } from '@/constants/errors';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

@@ -8,11 +8,11 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Photo } from '../photo/photo.entity';
-import { Media } from '../media/media.entity';
-import { PhotoLike } from '../photo/photoLike/photoLike.entity';
-import { Subscription } from '../subscription/subscription.entity';
-import { PhotoSaves } from '../photo/photoSaves/photoSaves.entity';
+import { Photo } from '@m/photo/photo.entity';
+import { Media } from '@m/media/media.entity';
+import { PhotoLike } from '@m/photo/photoLike/photoLike.entity';
+import { Subscription } from '@m/subscription/subscription.entity';
+import { PhotoSaves } from '@m/photo/photoSaves/photoSaves.entity';
 
 @Entity()
 export class User {

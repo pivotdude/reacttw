@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { EmailRepository } from './email.repository';
 import { MailerService } from '@nestjs-modules/mailer';
+import { EmailRepository } from './email.repository';
 import { EmailTypeService } from './emailType/emailType.service';
 
 type ITemplates = 'confirmLogin' | 'confirmRegistration';

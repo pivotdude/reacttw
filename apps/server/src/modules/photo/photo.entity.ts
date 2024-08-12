@@ -8,8 +8,8 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
-import { Media } from '../media/media.entity';
-import { User } from '../user/user.entity';
+import { Media } from '@m/media/media.entity';
+import { User } from '@m/user/user.entity';
 import { Comment } from './comment/comment.entity';
 import { PhotoLike } from './photoLike/photoLike.entity';
 import { PhotoSaves } from './photoSaves/photoSaves.entity';

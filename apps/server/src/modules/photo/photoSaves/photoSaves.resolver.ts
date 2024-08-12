@@ -1,12 +1,11 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { PhotoSavesService } from './photoSaves.service';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { TokenGuard } from '../../auth/guard/TokenGuard';
+import { PhotoSavesService } from './photoSaves.service';
 import { PhotoSaves } from './photoSaves.entity';
 import { PhotoSavesModel } from './photoSaves.model';
-import { AuthGuard } from 'src/modules/auth/guard/AuthGuard';
-import { AuthUserId } from 'src/core/decorators/AuthUserId';
 import { PhotoSavesInput } from './inputs/photoSaves.input';
+import { AuthGuard, TokenGuard } from '@/core/guards';
+import { AuthUserId } from '@/core/decorators';
 
 @Resolver(() => PhotoSavesModel)
 export class PhotoSavesResolver {

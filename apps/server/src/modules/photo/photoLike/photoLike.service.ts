@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LikeService } from 'src/core/classes/Like/like.service';
+import { LikeService } from '@/core/classes/Like/like.service';
 import { PhotoLikeRepository } from './photoLike.repository';
 import { addPhotoLikeInput } from 'src/core/classes/Like/input/addPhotoLike.input';
 

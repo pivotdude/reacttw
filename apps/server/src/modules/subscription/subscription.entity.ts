@@ -5,7 +5,7 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from 'typeorm';
-import { User } from '../user/user.entity';
+import { User } from '@m/user/user.entity';
 
 @Entity()
 export class Subscription {

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Email } from './email.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { BaseRepository } from '../../core/BaseRepository';
+import { Email } from './email.entity';
+import { BaseRepository } from '@/core/BaseRepository';
 
 type IEmailRepository = Repository<Email>;
 

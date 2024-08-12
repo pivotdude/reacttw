@@ -1,8 +1,7 @@
-import { exceptionCodes } from 'src/data/exceptionCodes';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { exceptionCodes } from '@/data/exceptionCodes';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { count } from 'console';
 
 export interface IUserProfile extends User {
   isUserProfile?: boolean;

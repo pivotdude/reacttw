@@ -6,34 +6,37 @@ import {
   Query,
   Resolver,
 } from '@nestjs/graphql';
-import { CreateCommentInput } from './dto/inputs/CreateCommentInput';
-import { CommentService } from './comment.service';
-import { CommentModel } from './dto/models/comment.model';
-import { TokenGuard } from 'src/modules/auth/guard/TokenGuard';
-import { UseGuards } from '@nestjs/common';
-import { Comment } from './comment.entity';
-import { CommentsInput } from './dto/inputs/CommentsInput';
 import { GraphQLResolveInfo } from 'graphql';
+import { UseGuards } from '@nestjs/common';
+//
+import { CommentService } from './comment.service';
+import { Comment } from './comment.entity';
+import { CreateCommentInput } from './dto/inputs/CreateCommentInput';
+import { CommentModel } from './dto/models/comment.model';
+import { TokenGuard } from '@/core/guards';
+import { CommentsInput } from './dto/inputs/CommentsInput';
+import { Relations } from '@/core/decorators/Relations';
+import { AuthUserId } from '@/core/decorators/AuthUserId';
 
-@Resolver((of) => CommentModel)
+@Resolver(() => CommentModel)
 export class CommentResolver {
   constructor(private readonly commentService: CommentService) {}
 
   @UseGuards(TokenGuard)
-  @Mutation((returns) => CommentModel)
+  @Mutation(() => CommentModel)
   async createComment(
     @Args('input') input: CreateCommentInput,
-    @Context('req') req: any,
-    @Info() info: GraphQLResolveInfo,
+    @AuthUserId() userId: number,
+    @Relations() relations: any,
   ): Promise<Comment> {
-    return this.commentService.create({ input, userId: req?.user?.id, info });
+    return this.commentService.create({ input, userId, relations });
   }
 
-  @Query((returns) => [CommentModel])
+  @Query(() => [CommentModel])
   async comments(
     @Args('input') input: CommentsInput,
-    @Info() info: GraphQLResolveInfo,
+    @Relations() relations: any,
   ) {
-    return this.commentService.getAll({ input, info });
+    return this.commentService.getAll({ input, relations });
   }
 }

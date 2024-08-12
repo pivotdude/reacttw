@@ -1,11 +1,10 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { PhotoLikeService } from './photoLike.service';
 import { PhotoLikeModel } from './photoLike.model';
-import { addPhotoLikeInput } from 'src/core/classes/Like/input/addPhotoLike.input';
-import { AuthUserId } from 'src/core/decorators/AuthUserId';
+import { addPhotoLikeInput } from '@/core/classes/Like/input/addPhotoLike.input';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/modules/auth/guard/AuthGuard';
-import { Relations } from 'src/core/decorators/Relations';
+import { AuthGuard } from '@/core/guards';
+import { AuthUserId, Relations } from '@/core/decorators';
 
 @Resolver(() => PhotoLikeModel)
 export class PhotoLikeResolver {

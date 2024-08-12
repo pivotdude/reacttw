@@ -1,6 +1,6 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { SubscriptionRepository } from './subscription.repository';
-import { UserRepository } from '../user/user.repository';
+import { UserRepository } from '@m/user/user.repository';
 
 @Injectable()
 export class SubscriptionService {
@@ -21,24 +21,24 @@ export class SubscriptionService {
       },
     });
 
-    if (!exists) {
-      const author = await this.userRepository.findOne({
-        where: { id: userId },
-      });
-      const user = await this.userRepository.findOne({
-        where: { id: authUserId },
-      });
-      const subscription = await this.subscriptionRepository.save({
-        author,
-        user,
-      });
-      return this.subscriptionRepository.findOne({
-        where: { id: subscription.id },
-        relations,
-      });
-    } else {
+    if (exists) {
       throw new NotAcceptableException('Already subscribed');
     }
+
+    const author = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+    const user = await this.userRepository.findOne({
+      where: { id: authUserId },
+    });
+    const subscription = await this.subscriptionRepository.save({
+      author,
+      user,
+    });
+    return this.subscriptionRepository.findOne({
+      where: { id: subscription.id },
+      relations,
+    });
   }
 
   async unfollow(userId: number, authUserId: number, relations: any[]) {
@@ -50,11 +50,11 @@ export class SubscriptionService {
       relations,
     });
 
-    if (subscription) {
-      await this.subscriptionRepository.delete(subscription.id);
-      return subscription;
-    } else {
+    if (!subscription) {
       throw new NotAcceptableException('Already unsubscribed');
     }
+
+    await this.subscriptionRepository.delete(subscription.id);
+    return subscription;
   }
 }

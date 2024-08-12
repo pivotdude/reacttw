@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BaseRepository } from 'src/core/BaseRepository';
 import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+//
+import { BaseRepository } from '@/core/BaseRepository';
 import { Comment } from './comment.entity';
 
 type ICommentRepository = Repository<Comment>;

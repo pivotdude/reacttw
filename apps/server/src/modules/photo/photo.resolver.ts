@@ -1,24 +1,14 @@
-import {
-  Args,
-  Context,
-  Info,
-  Int,
-  Mutation,
-  Query,
-  Resolver,
-} from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { PhotoModel } from './input/photo.model';
 import { CreateUserPhotoInput } from './input/CreateUserPhotoInput';
 import { Photo } from './photo.entity';
-import { UseGuards } from '@nestjs/common';
-import { TokenGuard } from '../auth/guard/TokenGuard';
-import { GraphQLResolveInfo } from 'graphql';
-import { AuthUserId } from 'src/core/decorators/AuthUserId';
-import { Relations } from 'src/core/decorators/Relations';
 import { findPhotoModel } from './input/findPhotoModel';
+import { AuthUserId, Relations } from '@/core/decorators';
+import { TokenGuard } from '@/core/guards';
 
-@Resolver((of) => PhotoModel)
+@Resolver(() => PhotoModel)
 export class PhotoResover {
   constructor(private readonly photoService: PhotoService) {}
 
@@ -26,9 +16,9 @@ export class PhotoResover {
   @Query(() => [PhotoModel])
   async photos(
     @AuthUserId() userId: number,
-    @Info() info: GraphQLResolveInfo,
+    @Relations() relations: any,
   ): Promise<Photo[]> {
-    return this.photoService.findAll({ userId, info });
+    return this.photoService.findAll({ userId, relations });
   }
 
   @UseGuards(TokenGuard)

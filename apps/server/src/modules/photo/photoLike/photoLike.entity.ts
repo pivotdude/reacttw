@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Photo } from '../photo.entity';
-import { User } from 'src/modules/user/user.entity';
+import { User } from '@m/user/user.entity';
 
 @Entity()
 export class PhotoLike {

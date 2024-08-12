@@ -1,12 +1,14 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { UserModule } from '../user/user.module';
-import { EmailService } from './email.service';
-import { EmailRepository } from './email.repository';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Email } from './email.entity';
-import { EmailTypeModule } from './emailType/emailType.module';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { getMailerConfig } from '../config/mailer.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+//
+import { EmailService } from './email.service';
+import { Email } from './email.entity';
+import { EmailRepository } from './email.repository';
+//
+import { UserModule } from '@m/user/user.module';
+import { EmailTypeModule } from './emailType/emailType.module';
+import { getMailerConfig } from '@m/config/mailer.config';
 
 @Module({
   imports: [

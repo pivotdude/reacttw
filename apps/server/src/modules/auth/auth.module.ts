@@ -1,10 +1,10 @@
 import { forwardRef, Global, Module } from '@nestjs/common';
-import { UserModule } from '../user/user.module';
+import { UserModule } from '@m/user/user.module';
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { EmailModule } from '../email/email.module';
 import { JwtModule } from '@nestjs/jwt';
-import { getJwtConfig } from '../config/jwt.config';
+import { getJwtConfig } from '@m/config/jwt.config';
 import { AuthGuard } from './guard/AuthGuard';
 import { TokenGuard } from './guard/TokenGuard';
 

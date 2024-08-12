@@ -1,14 +1,15 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
+//
+import { UserService } from '@m/user/user.service';
+import { EmailService } from '@m/email/email.service';
+import { ErrorEnum } from '@/constants/errors';
 import { SendLoginCodeInput } from './input/SendLoginCodeInput';
-import { EmailService } from '../email/email.service';
 import { SendRegisterCodeInput } from './input/SendRegisterCodeInput';
 import { ConfirmLoginCodeInput } from './input/ConfirmLoginCodeInput';
 import { ConfirmRegisterCodeInput } from './input/ConfirmRegisterCodeInput';
 import { AuthAnswer } from './input/authAnswer.model';
 import { LoginAnswerModel } from './input/loginAnswer.model';
-import { ErrorEnum } from 'src/constants/errors';
 
 @Injectable()
 export class AuthService {

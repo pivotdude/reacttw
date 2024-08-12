@@ -1,9 +1,9 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { MediaModel } from 'src/modules/media/media.model';
-import { PhotoModel } from 'src/modules/photo/input/photo.model';
-import { PhotoLikeModel } from 'src/modules/photo/photoLike/photoLike.model';
-import { PhotoSavesModel } from 'src/modules/photo/photoSaves/photoSaves.model';
-import { SubscriptionModel } from 'src/modules/subscription/subscription.model';
+import { MediaModel } from '@m/media/media.model';
+import { PhotoModel } from '@m/photo/input/photo.model';
+import { PhotoLikeModel } from '@m/photo/photoLike/photoLike.model';
+import { PhotoSavesModel } from '@m/photo/photoSaves/photoSaves.model';
+import { SubscriptionModel } from '@m/subscription/subscription.model';
 
 @ObjectType()
 export class ProfileInput {

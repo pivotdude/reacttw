@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from '../../user/user.module';
+import { UserModule } from '@m/user/user.module';
 import { PhotoSavesRepository } from './photoSaves.repository';
 import { PhotoSavesService } from './photoSaves.service';
 import { PhotoSavesResolver } from './photoSaves.resolver';

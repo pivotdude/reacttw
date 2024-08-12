@@ -1,21 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CommentRepository } from './comment.repository';
-import { getRelations } from 'src/utils/getRelations';
 import { CommentsInput } from './dto/inputs/CommentsInput';
-import { GraphQLResolveInfo } from 'graphql';
 
 @Injectable()
 export class CommentService {
   constructor(private readonly commentRepository: CommentRepository) {}
 
-  async getAll({
-    info,
-    input,
-  }: {
-    input: CommentsInput;
-    info: GraphQLResolveInfo;
-  }) {
-    const relations = getRelations(info);
+  async getAll({ relations, input }: { input: CommentsInput; relations: any }) {
     return this.commentRepository.getByPhotoId({
       relations,
       pagination: input.pagination,
@@ -23,8 +14,7 @@ export class CommentService {
     });
   }
 
-  async create({ input, userId, info }) {
-    const relations = getRelations(info);
+  async create({ input, userId, relations }) {
     return this.commentRepository.create({ ...input, user: userId }, relations);
   }
 }

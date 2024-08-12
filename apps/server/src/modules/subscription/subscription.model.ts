@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { UserModel } from 'src/modules/user/user.model';
+import { UserModel } from '@m/user/user.model';
 
 @ObjectType()
 export class SubscriptionModel {

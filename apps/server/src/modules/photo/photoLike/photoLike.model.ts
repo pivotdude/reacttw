@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { PhotoLike } from './photoLike.entity';
 import { PhotoModel } from '../input/photo.model';
 import { Photo } from '../photo.entity';
-import { UserModel } from 'src/modules/user/user.model';
+import { UserModel } from '@m/user/user.model';
 
 @ObjectType()
 export class PhotoLikeModel implements PhotoLike {
