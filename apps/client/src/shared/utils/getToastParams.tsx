@@ -22,12 +22,3 @@ export function getToastParams(errorType: string | undefined): Toast {
       };
   }
 }
-
-type IErrorType =
-  | 'GENERIC_ERROR'
-  | 'NOT_AUTH'
-  | 'USER_NOT_FOUND'
-  | 'EMAIL_USED'
-  | 'CODE_NOT_FOUND'
-  | 'CODE_EXPIRED'
-  | 'CODE_INCORRECT';

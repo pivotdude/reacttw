@@ -1,5 +1,4 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
 import { UserModule } from '@m/user/user.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { AuthModule } from '@m/auth/auth.module';
@@ -10,7 +9,7 @@ import { PhotoSavesModule } from '@m/photo/photoSaves/photoSaves.module';
 export const getGraphqlConfig = (): ApolloDriverConfig => {
   return {
     driver: ApolloDriver,
-    autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    autoSchemaFile: true,
     include: [
       UserModule,
       AuthModule,

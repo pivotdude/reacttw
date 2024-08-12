@@ -7,7 +7,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - /home/pivotdude/Downloads/nginx.conf:/etc/nginx/nginx.conf
+      - /home/$USER/Documents/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - server
       - client
