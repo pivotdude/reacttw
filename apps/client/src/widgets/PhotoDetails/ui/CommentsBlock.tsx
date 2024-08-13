@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
 import { useFetchMoreComments } from '../hooks/useFetchMoreComments';
 import { useCommentsStore } from '../store/useCommentsStore';
-import { LoadingSpinner } from '@/shared/components/Loader';
+import { LoadingDot } from '@/shared/components/LoadingDot';
 
 export function CommentsBlock() {
   const imageId = usePhotoDetailsStore((store) => store.imageId);
@@ -18,7 +18,7 @@ export function CommentsBlock() {
   }, [imageId]);
 
   if (isNewCommentsLoading) {
-    return <LoadingSpinner />;
+    return <LoadingDot />;
   }
 
   return (

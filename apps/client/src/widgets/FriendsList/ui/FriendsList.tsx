@@ -9,8 +9,12 @@ export function FriendsList() {
     <>
       <p className="text-xl font-bold">Friends</p>
       <div className="mt-4 space-y-4">
-        {friends.map((friend) => (
-          <UserCardWithButton {...friend} button={<StartDialogButton />} />
+        {friends.map((friend, index) => (
+          <UserCardWithButton
+            key={index}
+            {...friend}
+            button={<StartDialogButton />}
+          />
         ))}
       </div>
     </>

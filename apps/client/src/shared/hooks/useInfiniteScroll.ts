@@ -31,5 +31,11 @@ export function useInfiniteScroll(
     }
   };
 
-  return { scrollEl, setOffset, offset };
+  const scrollToBottom = () => {
+    if (scrollEl.current) {
+      scrollEl.current.scrollTop = scrollEl.current.scrollHeight;
+    }
+  };
+
+  return { scrollEl, setOffset, offset, scrollToBottom };
 }

@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import 'viewerjs/dist/viewer.css';
-import { DialogContent, DialogHeader } from '@/shared/ui/dialog';
+import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/ui/dialog';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { LoadingSpinner } from '@/shared/components/Loader';
@@ -86,33 +91,34 @@ export function PhotoDetails({
   return (
     <DialogContent className="p-0 overflow-hidden max-w-[92vw] max-h-[95vh]">
       <DialogHeader>
-        <div className="flex h-full">
-          <div className="w-2/3 h-[90vh] flex items-center justify-center bg-gray-100">
-            {image}
-            {isLoadingImage && <LoadingSpinner />}
-          </div>
-          <div className="w-1/3 h-[90vh] p-4 flex flex-col bg-white">
-            <div className="flex justify-between pr-10">
-              <UserCard
-                user={{ name: user.login, avatar: user?.avatar?.url || '' }}
-              />
-              <div className="flex space-x-2">
-                <SaveImageButton imageId={id} onUpdate={onUpdateSavePhoto} />
-                <LikeImageButton
-                  imageId={id}
-                  likeCount={data?.likeCount || 0}
-                />
-                <DislikeImageButton
-                  imageId={id}
-                  dislikeCount={data?.dislikeCount || 0}
-                />
-              </div>
-            </div>
-
-            <CommentsBlock />
-          </div>
-        </div>
+        <DialogTitle className="hidden">Photo</DialogTitle>
+        <DialogDescription className="hidden">
+          Photo details info
+        </DialogDescription>
       </DialogHeader>
+      <div className="flex h-full">
+        <div className="w-2/3 h-[90vh] flex items-center justify-center bg-gray-100">
+          {image}
+          {isLoadingImage && <LoadingSpinner />}
+        </div>
+        <div className="w-1/3 h-[90vh] p-4 flex flex-col bg-white">
+          <div className="flex justify-between pr-10">
+            <UserCard
+              user={{ name: user.login, avatar: user?.avatar?.url || '' }}
+            />
+            <div className="flex space-x-2">
+              <SaveImageButton imageId={id} onUpdate={onUpdateSavePhoto} />
+              <LikeImageButton imageId={id} likeCount={data?.likeCount || 0} />
+              <DislikeImageButton
+                imageId={id}
+                dislikeCount={data?.dislikeCount || 0}
+              />
+            </div>
+          </div>
+
+          <CommentsBlock />
+        </div>
+      </div>
     </DialogContent>
   );
 }
