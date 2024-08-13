@@ -18,9 +18,11 @@ export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DATABASE,
-    ssl: {
-      rejectUnauthorized: process.env.POSTGRES_SSL === 'true',
-    },
+    ...(process.env.POSTGRES_SSL === 'true' && {
+      ssl: {
+        rejectUnauthorized: true,
+      },
+    }),
     entities: [
       Subscription,
       User,
