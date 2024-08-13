@@ -17,6 +17,7 @@ import { DislikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButton
 import Viewer from 'viewerjs';
 import { SaveImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/SaveImageButton';
 import { useFetchPhotoDetails } from '../hooks/useFetchPhotoDetails';
+import Modal from '@/shared/components/Modal/ui/Modal';
 
 interface PhotoDetailsProps {
   src: string;
@@ -58,19 +59,19 @@ export function PhotoDetails({
 
   useEffect(() => {
     if (imageRef.current) {
-      new Viewer(imageRef.current, {
+      const viewer = new Viewer(imageRef.current, {
         inline: false,
-        viewed() {
-          hideModal();
-        },
-        hidden() {
-          hideModal();
-        },
+        // viewed() {
+        // hideModal();
+        // },
+        // hidden() {
+        // hideModal();
+        // },
       });
 
-      // return () => {
-      //   viewer.destroy();
-      // };
+      return () => {
+        viewer.destroy();
+      };
     }
   }, [hideModal]);
 
@@ -89,19 +90,13 @@ export function PhotoDetails({
   );
 
   return (
-    <DialogContent className="p-0 overflow-hidden max-w-[92vw] max-h-[95vh]">
-      <DialogHeader>
-        <DialogTitle className="hidden">Photo</DialogTitle>
-        <DialogDescription className="hidden">
-          Photo details info
-        </DialogDescription>
-      </DialogHeader>
-      <div className="flex h-full">
-        <div className="w-2/3 h-[90vh] flex items-center justify-center bg-gray-100">
+    <Modal isOpen={true} onClose={hideModal} fullscreen={false}>
+      <div className="flex flex-col md:flex-row h-full">
+        <div className="w-full md:w-2/3 h-[86vh] flex items-center justify-center bg-gray-100">
           {image}
           {isLoadingImage && <LoadingSpinner />}
         </div>
-        <div className="w-1/3 h-[90vh] p-4 flex flex-col bg-white">
+        <div className="w-full md:w-1/3 h-[86vh] p-4 flex flex-col bg-white">
           <div className="flex justify-between pr-10">
             <UserCard
               user={{ name: user.login, avatar: user?.avatar?.url || '' }}
@@ -119,6 +114,6 @@ export function PhotoDetails({
           <CommentsBlock />
         </div>
       </div>
-    </DialogContent>
+    </Modal>
   );
 }
