@@ -23,16 +23,15 @@ export function GalleryItem({ photo, onUpdateSavePhoto }: GalleryItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogTrigger>
-        <img
-          key={photo.media.url}
-          src={photo.media.url + '-/preview/'}
-          alt={photo.media.name}
-          className={`md:h-96 w-full object-cover`}
-          loading="lazy"
-        />
-      </DialogTrigger>
+    <>
+      <img
+        key={photo.media.url}
+        src={photo.media.url + '-/preview/'}
+        alt={photo.media.name}
+        className={`md:h-96 w-full object-cover`}
+        loading="lazy"
+        onClick={() => setIsModalOpen(true)}
+      />
       {isModalOpen && (
         <PhotoDetails
           id={photo.id}
@@ -42,6 +41,6 @@ export function GalleryItem({ photo, onUpdateSavePhoto }: GalleryItemProps) {
           onUpdateSavePhoto={onUpdateSavePhoto}
         />
       )}
-    </Dialog>
+    </>
   );
 }

@@ -50,13 +50,14 @@ const Modal = ({
             'bg-white rounded-lg shadow-xl',
             'w-full h-full max-w-full max-h-full',
             'md:w-11/12 md:max-w-[90%] md:max-h-[90%]',
+            'relative',
             'overflow-y-auto', // Enable vertical scrolling
             className,
           ),
         )}
         onClick={(e) => e.stopPropagation()} // Prevent click event from bubbling up to the overlay
       >
-        <div className="sticky top-0 z-10 flex justify-end p-4 bg-white">
+        <div className="absolute right-0 z-10 flex justify-end p-4 bg-white">
           <CloseModalButton onClose={onClose} />
         </div>
         <div className="p-2">{children}</div>
