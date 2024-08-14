@@ -39,7 +39,7 @@ export function GalleryItem({ photo, onUpdateSavePhoto }: GalleryItemProps) {
         // loading="lazy"
         onClick={() => setIsModalOpen(true)}
         className={twMerge(
-          clsx('md:h-96 w-full object-cover', {
+          clsx('md:h-96 w-full object-cover cursor-pointer', {
             // hidden: isLoadingImage,
           }),
         )}

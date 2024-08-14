@@ -6,7 +6,7 @@ import { UserCard } from '@/entities/user/ui/UserCard';
 
 export function ImageList() {
   const photos = useImageFeedStore((store) => store.photos);
-  console.log(photos);
+
   return (
     <>
       {photos.map((photo) => (

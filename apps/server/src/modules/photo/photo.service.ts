@@ -13,13 +13,7 @@ export class PhotoService {
   ) {}
 
   async findById(id: number, relations: any, userId: number) {
-    const photo = await this.photoRepository.findByIdAuthUser(
-      id,
-      relations,
-      userId,
-    );
-    console.log(photo);
-    return photo;
+    return this.photoRepository.findByIdAuthUser(id, relations, userId);
   }
 
   async findAll({ relations }: { relations: any; userId: number }) {
