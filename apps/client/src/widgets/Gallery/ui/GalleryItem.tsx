@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Dialog, DialogTrigger } from '@/shared/ui/dialog';
 import { PhotoDetails } from '@/widgets/PhotoDetails/ui/PhotoDetails';
+import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import { LoadingSpinner } from '@/shared/components/Loader';
 
 interface GalleryItemProps {
   onUpdateSavePhoto?: () => void;
@@ -21,16 +23,27 @@ interface GalleryItemProps {
 
 export function GalleryItem({ photo, onUpdateSavePhoto }: GalleryItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (
     <>
+      {/* {isLoadingImage && (
+        <div className="h-96">
+          <LoadingSpinner />
+        </div>
+      )} */}
       <img
         key={photo.media.url}
         src={photo.media.url + '-/preview/'}
         alt={photo.media.name}
-        className={`md:h-96 w-full object-cover`}
-        loading="lazy"
+        // loading="lazy"
         onClick={() => setIsModalOpen(true)}
+        className={twMerge(
+          clsx('md:h-96 w-full object-cover', {
+            // hidden: isLoadingImage,
+          }),
+        )}
+        // onLoad={() => setIsLoadingImage(false)}
       />
       {isModalOpen && (
         <PhotoDetails

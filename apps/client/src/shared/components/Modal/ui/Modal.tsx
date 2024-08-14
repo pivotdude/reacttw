@@ -47,10 +47,9 @@ const Modal = ({
         ref={modalRef}
         className={twMerge(
           clsx(
-            'bg-white rounded-lg shadow-xl',
+            'relative bg-white rounded-lg shadow-xl',
             'w-full h-full max-w-full max-h-full',
             'md:w-11/12 md:max-w-[90%] md:max-h-[90%]',
-            'relative',
             'overflow-y-auto', // Enable vertical scrolling
             className,
           ),

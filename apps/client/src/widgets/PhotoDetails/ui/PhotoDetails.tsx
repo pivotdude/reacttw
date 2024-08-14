@@ -91,12 +91,12 @@ export function PhotoDetails({
 
   return (
     <Modal isOpen={true} onClose={hideModal} fullscreen={false}>
-      <div className="flex flex-col md:flex-row h-full">
+      <div className="flex flex-col md:flex-row h-full pt-2">
         <div className="w-full md:w-2/3 h-[86vh] flex items-center justify-center bg-gray-100">
           {image}
           {isLoadingImage && <LoadingSpinner />}
         </div>
-        <div className="w-full md:w-1/3 h-[86vh] p-4 flex flex-col bg-white">
+        <div className="w-full md:w-1/3 h-[86vh] pl-2 flex flex-col bg-white">
           <div className="flex justify-between pr-10">
             <UserCard
               user={{ name: user.login, avatar: user?.avatar?.url || '' }}
