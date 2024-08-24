@@ -22,8 +22,6 @@ export function CommentList({imageId}: {imageId: number}) {
     }
   }, [loading]);
 
-  console.log('comments', comments)
-
   return (
     <>
       <div
