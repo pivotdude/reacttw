@@ -17,6 +17,10 @@ export const fetchComments = async (
         id
         text
         createdAt
+        userLiked
+        userDisliked
+        likeCount
+        dislikeCount
         user {
           login
           avatar {

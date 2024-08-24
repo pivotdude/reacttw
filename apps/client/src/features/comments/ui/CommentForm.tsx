@@ -3,17 +3,19 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form } from '@/shared/ui/form';
-import { sendComment } from '../api/sendComment';
 import { TextAreaFormField } from '@/shared/components/FormField/ui/TextAreaFormField';
+import { sendComment } from '../api/sendComment';
 import { useCommentsStore } from '../store/useCommentsStore';
-import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
+
+interface ICommentFormProps {
+  imageId: number;
+}
 
 const formSchema = z.object({
   text: z.string(),
 });
 
-export function CommentForm() {
-  const imageId = usePhotoDetailsStore((store) => store.imageId);
+export function CommentForm({ imageId }: ICommentFormProps) {
   const { comments, setComments } = useCommentsStore((store) => ({
     comments: store.comments,
     setComments: store.setComments,

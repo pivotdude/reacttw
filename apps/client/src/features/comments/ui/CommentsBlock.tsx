@@ -1,14 +1,16 @@
 import { CommentList } from './CommentList';
 import { CommentForm } from './CommentForm';
 import { useEffect } from 'react';
-import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
 import { useFetchMoreComments } from '../hooks/useFetchMoreComments';
-import { useCommentsStore } from '../store/useCommentsStore';
 import { LoadingDot } from '@/shared/components/LoadingDot';
+import { useCommentsStore } from '../store/useCommentsStore';
 
-export function CommentsBlock() {
-  const imageId = usePhotoDetailsStore((store) => store.imageId);
-  const { fetchNewData } = useFetchMoreComments();
+interface ICommentsBlockProps {
+  imageId: number;
+}
+
+export function CommentsBlock({ imageId }: ICommentsBlockProps) {
+  const { fetchNewData } = useFetchMoreComments(imageId);
   const isNewCommentsLoading = useCommentsStore(
     (store) => store.isNewCommentsLoading,
   );
@@ -23,8 +25,8 @@ export function CommentsBlock() {
 
   return (
     <>
-      <CommentList />
-      <CommentForm />
+      <CommentList imageId={imageId} />
+      <CommentForm imageId={imageId} />
     </>
   );
 }

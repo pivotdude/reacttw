@@ -10,7 +10,7 @@ export function UserAvatar({ src, fallback, className }: UserAvatarProps) {
   return (
     <Avatar className={className}>
       <AvatarImage src={src} />
-      <AvatarFallback>{fallback}</AvatarFallback>
+      <AvatarFallback>{fallback.charAt(0)}</AvatarFallback>
     </Avatar>
   );
 }

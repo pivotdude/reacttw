@@ -17,7 +17,7 @@ export function ImageFeed() {
   }
 
   return (
-    <div className="space-y-4">
+    <div>
       <ImageList />
     </div>
   );

@@ -32,19 +32,28 @@ export class User {
   @JoinColumn()
   avatar?: Media;
 
+  @Column({ default: true })
+  isActive?: boolean;
+
+  @CreateDateColumn()
+  createdAt?: Date;
+
+  @UpdateDateColumn()
+  updatedAt?: Date;
+
   @OneToMany(() => Photo, (photo) => photo.user, { nullable: true })
   photos?: Photo[];
 
   @OneToMany(() => PhotoLike, (photoLike) => photoLike.user, { nullable: true })
   photosLikes?: PhotoLike[];
 
-  @Column({ default: true })
-  isActive?: boolean;
-
   @OneToMany(() => PhotoSaves, (photoSaves) => photoSaves.user, {
     nullable: true,
   })
   savedPhotos?: PhotoSaves[];
+
+  @OneToMany(() => PhotoLike, (photoLike) => photoLike.user, { nullable: true })
+  commentsLikes?: PhotoLike[];
 
   @OneToMany(() => Subscription, (subscription) => subscription.user, {
     nullable: true,
@@ -55,10 +64,4 @@ export class User {
     nullable: true,
   })
   subscribers?: Subscription[];
-
-  @CreateDateColumn()
-  createdAt?: Date;
-
-  @UpdateDateColumn()
-  updatedAt?: Date;
 }

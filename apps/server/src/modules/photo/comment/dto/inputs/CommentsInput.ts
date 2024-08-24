@@ -3,9 +3,9 @@ import { PaginationInput } from '@/core/input/pagination.input';
 
 @InputType()
 export class CommentsInput {
-  @Field((type) => Int)
+  @Field(() => Int)
   photoId: number;
 
-  @Field((type) => PaginationInput, { nullable: true })
+  @Field(() => PaginationInput, { nullable: true })
   pagination?: PaginationInput;
 }

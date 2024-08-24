@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IComment } from '../models';
+import { IComment, PartialIComment } from '../models';
 
 interface IPhotoDetails {
   comments: IComment[];
@@ -10,6 +10,7 @@ interface IPhotoDetails {
   setError: (error: any) => void;
   isNewCommentsLoading: boolean;
   setIsNewCommentsLoading: (loading: boolean) => void;
+  updateComment: (commentId: number, updateFn: (comment: IComment) => PartialIComment) => void;
 }
 
 export const useCommentsStore = create<IPhotoDetails>((set) => ({
@@ -22,4 +23,18 @@ export const useCommentsStore = create<IPhotoDetails>((set) => ({
     set({ isNewCommentsLoading: loading }),
   error: null,
   setError: (error: any) => set({ error }),
+
+  updateComment: (commentId: number, updateFn: (comment: IComment) => PartialIComment) =>
+    set((state) => {
+      const updatedComments = state.comments.map((comment: IComment) => {
+        if (comment.id === commentId) {
+          return {
+            ...comment,
+            ...updateFn(comment)
+          };
+        }
+        return comment;
+      });
+      return { comments: updatedComments };
+    }),
 }));

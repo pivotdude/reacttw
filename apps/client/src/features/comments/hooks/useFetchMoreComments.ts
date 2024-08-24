@@ -1,15 +1,13 @@
 import { useShallow } from 'zustand/react/shallow';
 import { fetchComments } from '../api/fetchComments';
 import { useCommentsStore } from '../store/useCommentsStore';
-import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
 
 interface useFetchMoreCommentsReturn {
   fetchData: (offset: number, limit?: number) => Promise<void>;
   fetchNewData: (offset: number, limit?: number) => Promise<void>;
 }
 
-export function useFetchMoreComments(): useFetchMoreCommentsReturn {
-  const imageId = usePhotoDetailsStore((store) => store.imageId);
+export function useFetchMoreComments(imageId: number): useFetchMoreCommentsReturn {
   const { comments, setComments, setLoading, setIsNewCommentsLoading } =
     useCommentsStore(
       useShallow((store) => ({

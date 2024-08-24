@@ -5,9 +5,11 @@ import {
   UpdateDateColumn,
   ManyToOne,
   Column,
+  OneToMany,
 } from 'typeorm';
 import { User } from '@m/user/user.entity';
 import { Photo } from '../photo.entity';
+import { CommentLike } from './commentLike/commentLike.entity';
 
 @Entity()
 export class Comment {
@@ -28,4 +30,7 @@ export class Comment {
 
   @UpdateDateColumn()
   updatedAt?: Date;
+
+  @OneToMany(() => CommentLike, (commentLike) => commentLike.comment)
+  likes?: CommentLike[];
 }

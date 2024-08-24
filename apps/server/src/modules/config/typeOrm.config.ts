@@ -9,6 +9,7 @@ import { Comment } from '@m/photo/comment/comment.entity';
 import { PhotoLike } from '@m/photo/photoLike/photoLike.entity';
 import { Subscription } from '@m/subscription/subscription.entity';
 import { PhotoSaves } from '@m/photo/photoSaves/photoSaves.entity';
+import { CommentLike } from '@m/photo/comment/commentLike/commentLike.entity';
 
 export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   return {
@@ -33,6 +34,7 @@ export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
       Photo,
       PhotoLike,
       PhotoSaves,
+      CommentLike,
     ],
     synchronize: true,
   };

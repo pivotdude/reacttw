@@ -1,27 +1,29 @@
 import { UserAvatar } from '@/entities/user';
 import { IComment } from '../models';
 import { TypographySmall } from '@/shared/ui/Typography';
-import { DislikeCommentButton } from '@/features/commentDislike/ui/DislikeCommentButton';
 import { LikeCommentButton } from '@/features/commentLike/ui/LikeCommentButton';
+import { formatDateTime } from '@/shared/utils/dateFormatter';
+import { DislikeCommentButton } from '@/features/commentLike/ui/DislikeCommentButton';
 
 interface CommentProps {
   comment: IComment;
 }
 
 export function Comment({ comment }: CommentProps) {
+  console.log(comment.user);
   return (
-    <div className="flex w-full flex-col xl:flex-row justify-between p-2">
+    <div className="flex w-full justify-between p-2">
       <div className="flex">
         <UserAvatar
-          src={comment.user.avatar.url}
+          src={comment.user.avatar?.url || ""}
           fallback={comment.user.login}
         />
         <div className="ml-2">
           <a href={`/profile/${comment.user.login}`}>{comment.user.login}</a>
           <p className="text-sm">{comment.text}</p>
-          <div className="flex xl:flex-row flex-col xl:space-x-3 justify-between">
+          <div className="flex space-x-3 justify-between">
             <TypographySmall className="w-full">
-              {new Date(comment.createdAt).toLocaleString()}
+              {formatDateTime(comment.createdAt)}
             </TypographySmall>
             <TypographySmall className="cursor-pointer">
               replies
@@ -31,8 +33,8 @@ export function Comment({ comment }: CommentProps) {
         </div>
       </div>
       <div className="flex space-x-4">
-        <LikeCommentButton commentId={comment.id} likeCount={0} />
-        <DislikeCommentButton commentId={comment.id} dislikeCount={0} />
+        <LikeCommentButton commentId={comment.id} likeCount={comment.likeCount} isLiked={comment.userLiked} />
+        <DislikeCommentButton commentId={comment.id} dislikeCount={comment.dislikeCount} isDisliked={comment.userDisliked} />
       </div>
     </div>
   );

@@ -1,23 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import 'viewerjs/dist/viewer.css';
-import {
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/shared/ui/dialog';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import { LoadingSpinner } from '@/shared/components/Loader';
 import { UserCard } from '@/entities/user/ui/UserCard';
-import { CommentsBlock } from './CommentsBlock';
+import { CommentsBlock } from '../../../features/comments/ui/CommentsBlock';
 import { usePhotoDetailsStore } from '../store/usePhotoDetailsStore';
-import { LikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/LikeImageButton';
-import { DislikeImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/DislikeImageButton';
 import Viewer from 'viewerjs';
-import { SaveImageButton } from '@/widgets/PhotoDetails/ui/PhotoDetailsButtons/SaveImageButton';
 import { useFetchPhotoDetails } from '../hooks/useFetchPhotoDetails';
 import Modal from '@/shared/components/Modal/ui/Modal';
+import { PhotoDetailsButtons } from './PhotoDetailsButtons';
 
 interface PhotoDetailsProps {
   src: string;
@@ -91,27 +83,25 @@ export function PhotoDetails({
 
   return (
     <Modal isOpen={true} onClose={hideModal} fullscreen={false}>
-      <div className="flex flex-col md:flex-row h-full pt-2">
+      <div className="flex flex-col md:flex-row h-full">
         <div className="w-full md:w-2/3 h-[86vh] flex items-center justify-center bg-gray-100">
           {image}
           {isLoadingImage && <LoadingSpinner />}
         </div>
-        <div className="w-full md:w-1/3 h-[86vh] pl-2 flex flex-col bg-white">
-          <div className="flex justify-between pr-10">
+        <div className="w-full md:w-1/3 h-[86vh] pl-2 pt-2 flex flex-col bg-white">
+          <div className="flex xl:flex-row flex-col justify-end xl:justify-between">
             <UserCard
               user={{ name: user.login, avatar: user?.avatar?.url || '' }}
             />
-            <div className="flex space-x-2">
-              <SaveImageButton imageId={id} onUpdate={onUpdateSavePhoto} />
-              <LikeImageButton imageId={id} likeCount={data?.likeCount || 0} />
-              <DislikeImageButton
-                imageId={id}
-                dislikeCount={data?.dislikeCount || 0}
-              />
-            </div>
+            <PhotoDetailsButtons
+              imageId={id}
+              onUpdateSavePhoto={onUpdateSavePhoto}
+              dislikeCount={data?.dislikeCount}
+              likeCount={data?.likeCount}
+            />
           </div>
 
-          <CommentsBlock />
+          <CommentsBlock imageId={id} />
         </div>
       </div>
     </Modal>

@@ -1,12 +1,4 @@
-import {
-  Args,
-  Context,
-  Info,
-  Mutation,
-  Query,
-  Resolver,
-} from '@nestjs/graphql';
-import { GraphQLResolveInfo } from 'graphql';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 //
 import { CommentService } from './comment.service';
@@ -23,6 +15,15 @@ export class CommentResolver {
   constructor(private readonly commentService: CommentService) {}
 
   @UseGuards(TokenGuard)
+  @Query(() => [CommentModel])
+  async comments(
+    @Args('input') input: CommentsInput,
+    @AuthUserId() userId: number,
+  ) {
+    return this.commentService.getAll({ input, userId });
+  }
+
+  @UseGuards(TokenGuard)
   @Mutation(() => CommentModel)
   async createComment(
     @Args('input') input: CreateCommentInput,
@@ -30,13 +31,5 @@ export class CommentResolver {
     @Relations() relations: any,
   ): Promise<Comment> {
     return this.commentService.create({ input, userId, relations });
-  }
-
-  @Query(() => [CommentModel])
-  async comments(
-    @Args('input') input: CommentsInput,
-    @Relations() relations: any,
-  ) {
-    return this.commentService.getAll({ input, relations });
   }
 }

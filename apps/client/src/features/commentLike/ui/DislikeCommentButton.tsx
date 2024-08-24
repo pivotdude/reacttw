@@ -2,55 +2,56 @@ import { Button } from '@/shared/ui/button';
 import { TypographySmall } from '@/shared/ui/Typography';
 import { Heart } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { putLike } from '../api/putLike';
 import { getToastParams } from '@/shared/utils/getToastParams';
 import { useToast } from '@/shared/ui/use-toast';
 import { deleteLike } from '../api/deleteLike';
 import { useCommentsStore } from '@/features/comments/store/useCommentsStore';
 import { IComment } from '@/features/comments/models';
+import { putDislike } from '../api/putDislike';
 
 interface LikeCommentButtonProps {
   commentId: number;
-  likeCount: number;
-  isLiked: boolean;
+  dislikeCount: number;
+  isDisliked: boolean;
 }
 
-export function LikeCommentButton({ isLiked, commentId, likeCount }: LikeCommentButtonProps) {
-  const [isActive, setIsActive] = useState(isLiked);
+export function DislikeCommentButton({ isDisliked, commentId, dislikeCount }: LikeCommentButtonProps) {
+  const [isActive, setIsActive] = useState(isDisliked);
   const {toast} = useToast();
   const updateComment = useCommentsStore((state) => state.updateComment);
 
   useEffect(() => {
-    setIsActive(isLiked)
-  }, [isLiked])
+    setIsActive(isDisliked)
+  }, [isDisliked])
 
   const onClick = async () => {
     if (!isActive) {
-      await putLike(commentId).catch((e) => {
+      await putDislike(commentId).catch((e) => {
         toast(getToastParams(e.response.errors[0].message));
       });
       // setIsActive(true);
       updateComment(commentId, (comment: IComment) => {
-        if (comment.dislikeCount) {
+        if (comment.userLiked) {
           return {
-            dislikeCount: comment.dislikeCount - 1,
-            likeCount: comment.likeCount + 1,
-            userDisliked: false,
-            userLiked: true,
+            dislikeCount: comment.dislikeCount + 1,
+            likeCount: comment.likeCount - 1,
+            userDisliked: true,
+            userLiked: false,
           } 
         } else {
           return {
-            likeCount: comment.likeCount + 1,
-            userLiked: true,
+            dislikeCount: comment.dislikeCount + 1,
+            userDisliked: true,
           }
         }
+
       });
     } else {
       await deleteLike(commentId);
       // setIsActive(false);
       updateComment(commentId, (comment: IComment) => ({
-        likeCount: comment.likeCount - 1,
-        userLiked: false
+        dislikeCount: comment.dislikeCount - 1,
+        userDisliked: false,
       }));
     }
   };
@@ -62,7 +63,7 @@ export function LikeCommentButton({ isLiked, commentId, likeCount }: LikeComment
       variant={isActive ? 'default' : 'ghost'}
       onClick={onClick}
     >
-      <TypographySmall>{likeCount}</TypographySmall>
+      <TypographySmall>{dislikeCount}</TypographySmall>
       <Heart width={16} />
     </Button>
   );

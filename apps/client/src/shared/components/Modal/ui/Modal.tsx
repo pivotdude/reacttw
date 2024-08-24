@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { CloseModalButton } from './CloseModalButton';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
+import { CloseModalButton } from './CloseModalButton';
 
 interface ModalProps {
   isOpen: boolean;
@@ -56,7 +56,7 @@ const Modal = ({
         )}
         onClick={(e) => e.stopPropagation()} // Prevent click event from bubbling up to the overlay
       >
-        <div className="absolute right-0 z-10 flex justify-end p-4 bg-white">
+        <div className="absolute md:hidden right-0 z-10 flex justify-end p-4 bg-white">
           <CloseModalButton onClose={onClose} />
         </div>
         <div className="p-2">{children}</div>
