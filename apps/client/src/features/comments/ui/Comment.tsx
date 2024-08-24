@@ -10,7 +10,6 @@ interface CommentProps {
 }
 
 export function Comment({ comment }: CommentProps) {
-  console.log(comment.user);
   return (
     <div className="flex w-full justify-between p-2">
       <div className="flex">
