@@ -15,6 +15,7 @@ const Modal = ({
   isOpen,
   onClose,
   children,
+  // @ts-ignore
   fullscreen = false,
   className,
 }: ModalProps) => {

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { PhotoDetails } from '@/widgets/PhotoDetails/ui/PhotoDetails';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { LoadingSpinner } from '@/shared/components/Loader';
 
 interface GalleryItemProps {
   onUpdateSavePhoto?: () => void;

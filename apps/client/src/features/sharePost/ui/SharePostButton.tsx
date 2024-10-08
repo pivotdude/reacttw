@@ -8,6 +8,7 @@ interface SharePostButtonProps {
   postId: number;
 }
 
+// @ts-ignore
 export function SharePostButton({ postId }: SharePostButtonProps) {
   const [isActive, setIsActive] = useState(false);
 
