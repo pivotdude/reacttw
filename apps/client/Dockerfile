@@ -17,6 +17,6 @@ RUN ls
 COPY . . 
 RUN pnpm build
 
-FROM prod-deps as production
+FROM builder as production
 EXPOSE 4173
 CMD ["pnpm", "start"]
