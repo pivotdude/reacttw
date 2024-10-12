@@ -1,7 +1,22 @@
 import { GraphQLClient } from 'graphql-request';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-console.log('backend url', BACKEND_URL);
+function getBackendUrl() {
+  console.log('envs', process.env, import.meta.env);
+
+  const backendUrlVite = import.meta.env.VITE_BACKEND_URL;
+  if (backendUrlVite && backendUrlVite !== 'undefined') {
+    return backendUrlVite;
+  }
+
+  const processEnvUrl = process.env.VITE_BACKEND_URL;
+  if (processEnvUrl && processEnvUrl !== 'undefined') {
+    return process.env.VITE_BACKEND_URL;
+  }
+
+  throw new Error('VITE_BACKEND_URL is not defined');
+}
+
+const BACKEND_URL = getBackendUrl();
 
 const client = new GraphQLClient(
   `${BACKEND_URL}/graphql`,
