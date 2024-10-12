@@ -95,6 +95,9 @@ importers:
       viewerjs:
         specifier: ^1.11.6
         version: 1.11.6
+      vite:
+        specifier: ^5.2.11
+        version: 5.3.5(terser@5.31.3)
       vite-plugin-pwa:
         specifier: ^0.20.0
         version: 0.20.1(vite@5.3.5(terser@5.31.3))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
@@ -159,9 +162,6 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.5.4
-      vite:
-        specifier: ^5.2.11
-        version: 5.3.5(terser@5.31.3)
 
 packages:
 
