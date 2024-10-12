@@ -14,7 +14,6 @@ FROM deps as builder
 WORKDIR /app
 RUN ls
 COPY . . 
-#todo
 RUN pnpm build
 
 FROM prod-deps as production
