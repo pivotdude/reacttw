@@ -1,18 +1,22 @@
 FROM node:21-alpine as base
+COPY package.json pnpm-lock.yaml ./
 RUN npm i -g pnpm
 
-FROM base as deps
+FROM base as prod-deps
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
+RUN pnpm install --production --frozen-lockfile
 
-FROM base as builder
+FROM prod-deps as deps
+WORKDIR /app
+RUN pnpm install --frozeen-lockfile
+
+FROM deps as builder
 WORKDIR /app
 RUN ls
-COPY . .
-COPY --from=deps /app/node_modules ./node_modules
+COPY . . 
+#todo
 RUN pnpm build
 
-FROM builder as production
+FROM prod-deps as production
 EXPOSE 4173
 CMD ["pnpm", "start"]
