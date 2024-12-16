@@ -22,3 +22,11 @@ describe('AppController (e2e)', () => {
       .expect('Hello World!');
   });
 });
+
+// postgres:
+// id, text, createdAt, updatedAt, photoId, userId, parentId
+//  1	"beee"	"2024-08-25 16:57:27.407431"	"2024-08-25 16:57:27.407431"	1	1
+// 2	"beeeeee"	"2024-08-25 16:57:30.549841"	"2024-08-25 16:57:30.549841"	1	1	1
+// 3	"this is flower"	"2024-08-25 17:00:13.117058"	"2024-08-25 17:00:13.117058"	1	1	2
+
+// how get 20 comments where

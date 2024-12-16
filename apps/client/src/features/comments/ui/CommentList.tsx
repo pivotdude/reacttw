@@ -7,7 +7,7 @@ import { useCommentsStore } from '../store/useCommentsStore';
 
 const PORTION_OF_ITEMS = 20;
 
-export function CommentList({imageId}: {imageId: number}) {
+export function CommentList({ imageId }: { imageId: number }) {
   const comments = useCommentsStore((store) => store.comments);
   const { fetchData } = useFetchMoreComments(imageId);
   const { scrollEl, scrollToBottom } = useInfiniteScroll(

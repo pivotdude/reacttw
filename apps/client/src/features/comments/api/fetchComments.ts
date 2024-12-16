@@ -21,6 +21,25 @@ export const fetchComments = async (
         userDisliked
         likeCount
         dislikeCount
+        parrent {
+          id
+        }
+        # comments {
+        #   id
+        #   text
+        #   createdAt
+        #   userLiked
+        #   userDisliked
+        #   likeCount
+        #   dislikeCount
+        #   user {
+        #     login
+        #     avatar {
+        #       name
+        #       url
+        #     }
+        #   }
+        # }
         user {
           login
           avatar {

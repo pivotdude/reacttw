@@ -32,6 +32,7 @@ export function CommentForm({ imageId }: ICommentFormProps) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const result = await sendComment(imageId, values.text);
     const comment = result.createComment;
+    console.log('comment 221', comment);
     setComments([...comments, comment]);
     form.reset();
   }

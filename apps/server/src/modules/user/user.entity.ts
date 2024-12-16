@@ -13,6 +13,7 @@ import { Media } from '@m/media/media.entity';
 import { PhotoLike } from '@m/photo/photoLike/photoLike.entity';
 import { Subscription } from '@m/subscription/subscription.entity';
 import { PhotoSaves } from '@m/photo/photoSaves/photoSaves.entity';
+import { Comment } from '../photo/comment/comment.entity';
 
 @Entity()
 export class User {
@@ -59,6 +60,11 @@ export class User {
     nullable: true,
   })
   subscriptions?: Subscription[];
+
+  @OneToMany(() => Comment, (comment) => comment.replyToUserId, {
+    nullable: true,
+  })
+  replyComments?: Comment[];
 
   @OneToMany(() => Subscription, (subscription) => subscription.author, {
     nullable: true,

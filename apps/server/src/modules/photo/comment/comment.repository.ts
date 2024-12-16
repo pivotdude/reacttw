@@ -4,8 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 //
 import { BaseRepository } from '@/core/BaseRepository';
 import { Comment } from './comment.entity';
-import { IsAny } from 'typeorm';
-import { IPagination } from '@/core/models';
 
 type ICommentRepository = Repository<Comment>;
 

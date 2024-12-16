@@ -14,8 +14,16 @@ export const sendComment = async (
   const query = gql`
     mutation sendComment($input: CreateCommentInput!) {
       createComment(input: $input) {
+        id
         text
         createdAt
+        # userLiked
+        # userDisliked
+        likeCount
+        dislikeCount
+        # parrent {
+        #   id
+        # }
         user {
           login
           avatar {

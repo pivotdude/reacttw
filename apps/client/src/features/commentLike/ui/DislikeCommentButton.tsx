@@ -15,14 +15,18 @@ interface LikeCommentButtonProps {
   isDisliked: boolean;
 }
 
-export function DislikeCommentButton({ isDisliked, commentId, dislikeCount }: LikeCommentButtonProps) {
+export function DislikeCommentButton({
+  isDisliked,
+  commentId,
+  dislikeCount,
+}: LikeCommentButtonProps) {
   const [isActive, setIsActive] = useState(isDisliked);
-  const {toast} = useToast();
+  const { toast } = useToast();
   const updateComment = useCommentsStore((state) => state.updateComment);
 
   useEffect(() => {
-    setIsActive(isDisliked)
-  }, [isDisliked])
+    setIsActive(isDisliked);
+  }, [isDisliked]);
 
   const onClick = async () => {
     if (!isActive) {
@@ -37,14 +41,13 @@ export function DislikeCommentButton({ isDisliked, commentId, dislikeCount }: Li
             likeCount: comment.likeCount - 1,
             userDisliked: true,
             userLiked: false,
-          } 
+          };
         } else {
           return {
             dislikeCount: comment.dislikeCount + 1,
             userDisliked: true,
-          }
+          };
         }
-
       });
     } else {
       await deleteLike(commentId);

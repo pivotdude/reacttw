@@ -10,19 +10,19 @@ import { useCommentsStore } from '@/features/comments/store/useCommentsStore';
 import { IComment } from '@/features/comments/models';
 
 interface LikeCommentButtonProps {
-  commentId: number;
-  likeCount: number;
-  isLiked: boolean;
+  comment: IComment;
 }
 
-export function LikeCommentButton({ isLiked, commentId, likeCount }: LikeCommentButtonProps) {
-  const [isActive, setIsActive] = useState(isLiked);
-  const {toast} = useToast();
+export function LikeCommentButton({ comment }: LikeCommentButtonProps) {
+  const { likeCount, userLiked: isLiked, id: commentId } = comment;
+
+  const [isActive, setIsActive] = useState(comment.userLiked);
+  const { toast } = useToast();
   const updateComment = useCommentsStore((state) => state.updateComment);
 
   useEffect(() => {
-    setIsActive(isLiked)
-  }, [isLiked])
+    setIsActive(isLiked);
+  }, [isLiked]);
 
   const onClick = async () => {
     if (!isActive) {
@@ -30,6 +30,7 @@ export function LikeCommentButton({ isLiked, commentId, likeCount }: LikeComment
         toast(getToastParams(e.response.errors[0].message));
       });
       // setIsActive(true);
+      console.log(commentId);
       updateComment(commentId, (comment: IComment) => {
         if (comment.dislikeCount) {
           return {
@@ -37,12 +38,12 @@ export function LikeCommentButton({ isLiked, commentId, likeCount }: LikeComment
             likeCount: comment.likeCount + 1,
             userDisliked: false,
             userLiked: true,
-          } 
+          };
         } else {
           return {
             likeCount: comment.likeCount + 1,
             userLiked: true,
-          }
+          };
         }
       });
     } else {
@@ -50,7 +51,7 @@ export function LikeCommentButton({ isLiked, commentId, likeCount }: LikeComment
       // setIsActive(false);
       updateComment(commentId, (comment: IComment) => ({
         likeCount: comment.likeCount - 1,
-        userLiked: false
+        userLiked: false,
       }));
     }
   };

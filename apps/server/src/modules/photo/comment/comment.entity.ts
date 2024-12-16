@@ -25,6 +25,15 @@ export class Comment {
   @ManyToOne(() => User)
   user: User;
 
+  @OneToMany(() => Comment, (comment) => comment.parent, { nullable: true })
+  commentsLikes?: Comment[];
+
+  @ManyToOne(() => Comment, (comment) => comment.commentsLikes)
+  parent: Comment;
+
+  @ManyToOne(() => User, (user) => user.replyComments)
+  replyToUserId?: User;
+
   @CreateDateColumn()
   createdAt?: Date;
 

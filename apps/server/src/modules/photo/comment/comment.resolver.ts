@@ -1,4 +1,4 @@
-import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 //
 import { CommentService } from './comment.service';

@@ -26,6 +26,12 @@ export class CommentModel {
   @Field(() => Int, { nullable: true })
   dislikeCount: number;
 
+  @Field(() => [CommentModel], { nullable: true })
+  comments: CommentModel[];
+
+  @Field(() => CommentModel, { nullable: true })
+  parrent: CommentModel;
+
   @Field()
   userLiked: boolean;
 

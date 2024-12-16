@@ -105,6 +105,8 @@ type CommentModel {
   likes: [PhotoLikeModel!]
   likeCount: Int
   dislikeCount: Int
+  comments: [CommentModel!]
+  parrent: CommentModel
   userLiked: Boolean!
   userDisliked: Boolean!
   createdAt: DateTime!
